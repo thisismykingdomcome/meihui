@@ -1,0 +1,33 @@
+<view class="container">
+    <view class="search-view">
+        <view class="serarch-content">
+            <image class="search-icon" src="http://qn.zxsite.cn/zxsite_shop/search-pic.png"></image>
+            <input bindconfirm="toSearch" bindinput="listenerSearchInput" class="search-input" confirmType="搜索" maxlength="30" placeholder="请输入搜索商品" value="{{searchInput}}"></input>
+            <button bindtap="toSearch" class="search-btn" style="background: {{themeColor}}">搜索</button>
+        </view>
+    </view>
+    <view class="status-box">
+        <view bindtap="statusTap" class="status-label {{index==currentType?'active':''}}" data-index="{{index}}" data-order="{{item.priceOrder}}" data-type="{{item.type}}" style="border-bottom-color: {{index==currentType?themeColor:'#fff'}};color: {{index==currentType?themeColor:'#353535'}}" wx:for="{{statusType}}" wx:key="{{index}}">
+            <text>{{item.name}}</text>
+            <view class="price-view" wx:if="{{item.type=='price'}}">
+                <image class="price-flag up-flag" src="{{priceOrder=='asc'?'http://qn.zxsite.cn/zxsite_shop/arrow_up_active.png':'http://qn.zxsite.cn/zxsite_shop/arrow_up.png'}}"></image>
+                <image class="price-flag down-flag" src="{{priceOrder=='desc'?'http://qn.zxsite.cn/zxsite_shop/arrow_down_active.png':'http://qn.zxsite.cn/zxsite_shop/arrow_down.png'}}"></image>
+            </view>
+            <view class="{{tabClass[index]}}"></view>
+        </view>
+    </view>
+    <view class="goods-container">
+        <view bindtap="toDetailsTap" class="goods-box" data-id="{{item.id}}" wx:for="{{goods}}" wx:key="{{index}}">
+            <view class="img-box">
+                <image class="image" lazyLoad="true" mode="aspectFill" src="{{item.cover}}"></image>
+            </view>
+            <view class="goods-title">{{item.title}}</view>
+            <view style="display:flex;align-items:baseline">
+                <view class="goods-price">¥ <text style="font-size:38rpx">{{item.price}}</text>
+                </view>
+                <view class="goods-price" style="color:#aaa;">{{item.sales}}人已购买</view>
+            </view>
+        </view>
+    </view>
+    <view class="no-more-goods" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+</view>

@@ -1,0 +1,34 @@
+.container {
+    min-height: 100%;
+    overflow: hidden;
+    overflow-y: hidden;
+    margin-top: 20rpx;
+}
+
+.flex {
+    display: flex;
+}
+
+.my-item {
+    width: 670rpx;
+    border-bottom: 1px solid #eee;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-indent: 10rpx;
+    padding: 0 10rpx;
+    font-size: 30rpx;
+}
+
+.dir {
+    background-size: 16rpx 24rpx;
+    width: 460rpx;
+    text-align: right;
+}
+
+.all-hover {
+    background: #fff;
+}
+
+.title {
+    width: 250rpx;
+}

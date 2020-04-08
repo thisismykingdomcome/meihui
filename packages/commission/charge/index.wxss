@@ -1,0 +1,27 @@
+page {
+    background-color: #f8f8f8;
+}
+
+.total-wrapper {
+    color: #fff;
+    background-color: #e52c13;
+    padding: 15px;
+}
+
+.total-title {
+    font-size: 16px;
+}
+
+.total-label {
+    font-size: 14px;
+    padding-top: 5px;
+}
+
+.form-wrapper {
+    margin: 10px 0;
+    background-color: #ffffff;
+}
+
+.form-bottom {
+    margin: 0 15px 15px;
+}

@@ -1,0 +1,13 @@
+{
+    "navigationBarTitleText": "订单详情",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "container-block": "./../../../../components/container-block/index",
+        "van-row": "./../../../../components/row/index",
+        "van-col": "./../../../../components/col/index",
+        "van-cell": "./../../../../components/cell/index",
+        "van-steps": "./../../../../components/steps/index",
+        "van-card": "./../../../../components/card/index",
+        "van-button": "./../../../../components/button/index"
+    }
+}

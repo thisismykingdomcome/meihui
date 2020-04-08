@@ -1,0 +1,9 @@
+{
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "container-block": "./../../../../components/container-block/index",
+        "van-row": "./../../../../components/row/index",
+        "van-col": "./../../../../components/col/index",
+        "van-button": "./../../../../components/button/index"
+    }
+}

@@ -1,0 +1,16 @@
+<container-block>
+    <view class="weui-msg">
+        <view class="weui-msg__icon-area">
+            <icon size="93" type="warn"></icon>
+        </view>
+        <view class="weui-msg__text-area">
+            <view class="weui-msg__title">无权限</view>
+            <view class="weui-msg__desc">{{limitText}}</view>
+        </view>
+        <view class="weui-msg__opr-area">
+            <view class="weui-btn-area">
+                <button bindtap="onConfirm" class="weui-btn" style="background-color: {{themeColor}}" type="primary">确定</button>
+            </view>
+        </view>
+    </view>
+</container-block>

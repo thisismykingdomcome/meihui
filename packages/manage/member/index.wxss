@@ -1,0 +1,35 @@
+@import "../../../components/card/index.wxss";
+
+.search-wrapper {
+    background-color: #fff;
+    padding: 5px 0;
+}
+
+.member-wrapper {
+    font-size: 14px;
+    background-color: #fff;
+    padding: 15px 0;
+}
+
+.member {
+    background-color: #fff!important;
+}
+
+.van-card__title {
+    font-size: 14px;
+}
+
+.van-card__level {
+    color: #f44;
+}
+
+.van-card__desc {
+    color: #ff976a;
+}
+
+.no-more {
+    text-align: center;
+    font-size: 24rpx;
+    padding: 15px 0;
+    color: #999;
+}

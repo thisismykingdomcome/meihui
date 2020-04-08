@@ -1,0 +1,18 @@
+<view class="wrapper">
+    <van-tabs bind:change="onTabChange">
+        <van-tab title="7天"></van-tab>
+        <van-tab title="30天"></van-tab>
+        <van-tab title="90天"></van-tab>
+    </van-tabs>
+    <view class="pie-wrapper">
+        <canvas bindtouchstart="touchHandler" canvasId="pie-canvas" class="canvas" style="height:300px"></canvas>
+    </view>
+    <container-block padding customClass="sales-wrapper">
+        <van-cell title="{{item.name}}" value="{{item.data}}" wx:for="{{statistics}}" wx:key="key"></van-cell>
+    </container-block>
+</view>
+<van-tabbar active="{{tabbarActive}}" bind:change="onTabbarChange">
+    <van-tabbar-item icon="gold-coin">营收</van-tabbar-item>
+    <van-tabbar-item icon="exchange-record">交易</van-tabbar-item>
+    <van-tabbar-item icon="records">销量</van-tabbar-item>
+</van-tabbar>

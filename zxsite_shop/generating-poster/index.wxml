@@ -1,0 +1,7 @@
+<view class="loading" hidden="{{hideLoading}}"></view>
+<view class="container">
+    <image binderror="loadImageError" bindload="loadImageSuccess" src="{{generateImg}}" style="width:618rpx;height:1000rpx"></image>
+    <view bindtap="saveImageToPhotosAlbum" class="save-pic" style="background-color:{{themeColor}}">保存图片</view>
+</view>
+<view class="tip">保存到相册可分享至朋友圈</view>
+<view></view>

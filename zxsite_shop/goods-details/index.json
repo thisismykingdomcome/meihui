@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "商品详情",
+    "usingComponents": {
+        "van-field": "./../../components/field/index",
+        "van-tag": "./../../components/tag/index"
+    }
+}

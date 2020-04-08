@@ -1,0 +1,17 @@
+page {
+    background-color: #f8f8f8;
+}
+
+.form-wrapper {
+    margin: 15px 0;
+    background-color: #ffffff;
+    padding-bottom: 15px;
+}
+
+.form-bottom {
+    margin: 0 15px 15px;
+}
+
+.no-bottom-title {
+    padding-bottom: 0!important;
+}

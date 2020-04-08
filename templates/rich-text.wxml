@@ -1,0 +1,3 @@
+<template name="rich-text">
+    <rich-text nodes="{{data}}" style="width: {{750-style.padding*4}}rpx;background:{{style.backgroundColor}};padding:{{style.padding*2}}rpx;display:block"></rich-text>
+</template>

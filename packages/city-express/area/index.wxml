@@ -1,0 +1,1 @@
+<map showLocation id="map" latitude="{{markers[0].latitude}}" longitude="{{markers[0].longitude}}" markers="{{markers}}" polygons="{{polygons}}" scale="12" style="width: 100%; height: {{height}}px;"></map>

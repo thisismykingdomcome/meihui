@@ -1,0 +1,11 @@
+page {
+    background-color: #f8f8f8;
+}
+
+.form-wrapper {
+    background-color: #ffffff;
+}
+
+.form-bottom {
+    margin: 15px;
+}

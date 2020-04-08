@@ -1,0 +1,181 @@
+<import src="../../wxParse/wxParse.wxml"></import>
+<view class="loading" hidden="{{hideLoading}}"></view>
+<official-account wx:if="{{isOfficialAccount==0}}"></official-account>
+<view class="pullshelves-container" wx:if="{{goodsDetail.is_show==0}}">
+    <view class="pullshelves-flex-center pullshelves-position-ref pullshelves-full-height">
+        <view class="pullshelves-content">
+            <view class="pullshelves-title">活动已下架 </view>
+        </view>
+    </view>
+</view>
+<view class="container" style="background-color: {{backgroundColor}}" wx:else>
+    <view class="swiper-container">
+        <video binderror="onVideoError" controls="{{false}}" id="video" poster="{{goodsDetail.cover}}" src="{{goodsDetail.video_url}}" style="width:750rpx;height:750rpx;display:{{swiperSwitchName=='video'?'block':'none'}}"></video>
+        <swiper autoplay="{{autoplay}}" class="swiper_box" duration="1000" indicatorActiveColor="#FFFFFF" indicatorColor="rgba(255, 255, 255, .5)" indicatorDots="true" interval="3000" style="display:{{swiperSwitchName=='picture'?'block':'none'}}">
+            <swiper-item wx:for="{{goodsDetail.pictures}}" wx:key="id">
+                <image bindtap="onPreviewSwiperImage" class="slide-image" data-image="{{item}}" lazyLoad="true" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+        <cover-view class="swiper-switch" wx:if="{{goodsDetail.video_url}}">
+            <cover-view bindtap="onSwiperSwitch" class="{{swiperSwitchName=='video'?'active':''}}" data-name="video" style="background: {{swiperSwitchName=='video'?themeColor:'rgba(255,255,255,0.6)'}};color: {{swiperSwitchName=='video'?'#ffffff':themeColor}};">视频</cover-view>
+            <cover-view bindtap="onSwiperSwitch" class="{{swiperSwitchName=='picture'?'active':''}}" data-name="picture" style="background: {{swiperSwitchName=='picture'?themeColor:'rgba(255,255,255,0.6)'}};color: {{swiperSwitchName=='picture'?'#ffffff':themeColor}};">图片</cover-view>
+        </cover-view>
+    </view>
+    <view class="goods-auction">
+        <view style="font-size: 36rpx;">{{textAuction}}</view>
+        <view>距{{goodsDetail.time_status==0?'开始':'结束'}}仅剩{{goodsDetail.countdown?goodsDetail.countdown:'--天--时--分--秒'}}</view>
+    </view>
+    <view class="goods-info">
+        <view class="goods-title">{{goodsDetail.goods_title}}</view>
+        <view class="goods-sub-title" wx:if="{{goodsDetail.sub_title}}">{{goodsDetail.sub_title}}</view>
+        <image bindtap="showMask" class="share" src="http://qn.zxsite.cn/zxsite_shop/share.png"></image>
+        <view class="goods-price" style="padding-left:35rpx;">
+            <text style="font-size:26rpx">¥ </text>{{goodsDetail.current_price?goodsDetail.current_price:0}}</view>
+        <view class="goods-market-price" wx:if="{{goodsDetail.price>0}}">{{textPrice}}：¥ {{goodsDetail.price}}</view>
+        <view class="auction-desc">
+            <view>围观 {{goodsDetail.view}} 次</view>
+            <view>报名 {{goodsDetail.apply_number}} 人</view>
+            <view>设置提醒 {{goodsDetail.remind_number}} 人</view>
+        </view>
+    </view>
+    <view class="auction-info-more">
+        <view class="info-item">
+            <view class="cc-item">{{textStartPrice}}</view>
+            <view class="cc-info">¥ {{goodsDetail.start_price}}</view>
+            <view class="cc-item">{{textAddPrice}}</view>
+            <view class="cc-info">¥ {{goodsDetail.add_price}}</view>
+        </view>
+        <view class="info-item">
+            <view class="cc-item">{{textDeposit}}</view>
+            <view class="cc-info">¥ {{goodsDetail.deposit}}</view>
+            <view class="cc-item">{{textDelay}}</view>
+            <view class="cc-info">{{goodsDetail.delay}}分钟/次</view>
+        </view>
+    </view>
+    <view class="auction-info" wx:if="{{goodsDetail.participant_number>0}}">
+        <view class="label-title">
+            <text>出价记录（{{goodsDetail.participant_number}}）</text>
+        </view>
+        <view class="auction-item {{index==0?'auction-item-first':''}}" wx:for="{{auctionProcess}}" wx:key="key">
+            <view class="auction-item-left">
+                <image lazyLoad="true" mode="aspectFill" src="{{item.avatar}}"></image>
+            </view>
+            <view class="auction-item-right">
+                <view class="auction-item-nickname">{{item.nickname}}</view>
+                <view wx:if="{{index==0}}">
+                    <text wx:if="{{goodsDetail.status!=1}}">{{textSuccess}}</text>
+                    <text wx:else>领先</text>
+                </view>
+                <view wx:else>出局</view>
+                <view>¥{{item.amount}}</view>
+                <view>{{item.create_time}}</view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="bindGuiGeTap" class="row-arrow" wx:if="{{hasMoreSelect&&isWinner}}">
+      {{selectSize}}
+   </view>
+    <view class="goods-des-info">
+        <view class="status-box">
+            <view class="status-label">
+                <text class="status-text">{{textInstruction}}</text>
+            </view>
+        </view>
+        <view class="goods-text">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+        </view>
+    </view>
+    <view class="footer-box">
+        <view bindtap="goHome" class="home">
+            <view style="position:absolute;bottom:10rpx;width:100%;"> 首页 </view>
+        </view>
+        <block wx:if="{{shop_service==1}}">
+            <view bindtap="toServerUrl" class="contact" data-link="{{shop_server_url}}" wx:if="{{shop_server_url}}">
+                <view style="position:absolute;bottom:10rpx;width:100%;"> 客服 </view>
+            </view>
+            <view class="contact" wx:else>
+                <button openType="contact" sessionFrom="{\"nickName\":\"{{userInfo.memberInfo.nickname}}\",\"avatarUrl\":\"{{userInfo.memberInfo.avatar}}\"}" style="opacity:0;position:absolute;" type="default"></button>
+                <view style="position:absolute;bottom:10rpx;width:100%;"> 客服 </view>
+            </view>
+        </block>
+        <view class="remind" wx:if="{{goodsDetail.time_status==0}}">
+            <form bindsubmit="cancelAuctionRemind" data-auction_remind_id="{{goodsDetail.auction_remind_id}}" reportSubmit="true" wx:if="{{goodsDetail.remind==1}}">
+                <button class="remind" formType="submit" plain="true"></button>
+                <view style="position:absolute;bottom:10rpx;width:100%;font-size:20rpx;color:#acacb7;text-align:center;"> 已提醒 </view>
+            </form>
+            <form bindsubmit="setAuctionRemind" data-auction_id="{{goodsDetail.id}}" reportSubmit="true" wx:else>
+                <button class="remind" formType="submit" plain="true"></button>
+                <view style="position:absolute;bottom:10rpx;width:100%;font-size:20rpx;color:#acacb7;text-align:center;"> 提醒 </view>
+            </form>
+        </view>
+        <view style="height: 100%;display:flex;">
+            <view class="now-buy-left" style="background-color: {{themeSubColor}};" wx:if="{{!(goodsDetail.is_deleted==1||goodsDetail.time_status==2&&!isWinner)}}">
+                <view class="deposit-item">{{textDeposit}}¥{{goodsDetail.deposit}}</view>
+                <view class="deposit-desc">({{textFail}}全额退还)</view>
+            </view>
+            <view class="now-buy now-buy-width" style="background-color: #cdcdcd" wx:if="{{goodsDetail.is_deleted==1}}">活动已删除</view>
+            <block wx:elif="{{goodsDetail.time_status==1}}">
+                <view bindtap="toBuy" class="now-buy" style="background-color: {{themeColor}}" wx:if="{{goodsDetail.is_deposit>0||goodsDetail.deposit==0||goodsDetail.show_deposit==false}}">我要出价</view>
+                <view bindtap="toDeposit" class="now-buy" style="background-color: {{themeColor}}" wx:else>交{{textDeposit}}去报名</view>
+            </block>
+            <block wx:elif="{{goodsDetail.time_status==2}}">
+                <block wx:if="{{isWinner}}">
+                    <view bindtap="toBuy" class="now-buy" style="background-color: {{themeColor}}" wx:if="{{goodsDetail.status==3}}">立即购买</view>
+                    <view bindtap="toOrder" class="now-buy" data-order-id="{{goodsDetail.order_id}}" data-order-status="{{goodsDetail.order_status}}" style="background-color: {{themeColor}}" wx:if="{{goodsDetail.status==2}}">{{goodsDetail.order_status==1?'去付款':'查看订单'}}</view>
+                </block>
+                <view class="now-buy now-buy-width" style="background-color: #cdcdcd" wx:else>{{textAuction}}已结束</view>
+            </block>
+            <view class="now-buy" style="background-color: #cdcdcd" wx:elif="{{goodsDetail.time_status==0}}">{{textAuction}}未开始</view>
+        </view>
+    </view>
+    <view class="show-popup" hidden="{{hideShopPopup}}">
+        <view bindtap="closePopupTap" class="popup-mask"></view>
+        <view class="popup-contents">
+            <view class="pop-goods-info">
+                <view class="pop-img-box">
+                    <image class="goods-thumbnail" src="{{goodsCover}}"></image>
+                </view>
+                <view class="pop-goods-des">
+                    <view class="pop-goods-title">{{goodsDetail.title}}</view>
+                    <view class="pop-goods-price" wx:if="{{isWinner}}">差价：¥ {{payableAmount}}</view>
+                    <view class="pop-goods-price" wx:else>出价：¥ {{addPrice}}</view>
+                </view>
+                <view bindtap="closePopupTap" class="pop-goods-close"></view>
+            </view>
+            <view class="size-label-box" wx:if="{{isWinner}}">
+                <block wx:for="{{goodsDetail.properties}}" wx:for-index="idx" wx:for-item="property" wx:key="id">
+                    <view class="label">{{property.name}}</view>
+                    <view class="label-item-box">
+                        <view bindtap="labelItemTap" class="label-item {{item.active?'active':''}}" data-goodsCover="{{goodsDetail.cover}}" data-propertyCover="{{item.property_cover}}" data-propertychildid="{{item.id}}" data-propertychildindex="{{index}}" data-propertychildname="{{item.name}}" data-propertyid="{{property.id}}" data-propertyindex="{{idx}}" data-propertyname="{{property.name}}" wx:for="{{property.childs}}" wx:key="id">
+                        {{item.name}}
+                    </view>
+                    </view>
+                </block>
+            </view>
+            <view class="buy-num-box">
+                <view class="num-label">{{isWinner?'购买数量':'出价次数'}}</view>
+                <view class="num-box">
+                    <view bindtap="numJianTap" class="num-jian {{buyNumber==buyNumMin?'hui':''}}">-</view>
+                    <view class="num-input">
+                        <input bindinput="numChanageTap" type="number" value="{{buyNumber}}"></input>
+                    </view>
+                    <view bindtap="numJiaTap" class="num-jia {{buyNumber==buyNumMax?'hui':''}}">+</view>
+                </view>
+            </view>
+            <form bindsubmit="buyNow" reportSubmit="true">
+                <button class="popup-join-btn" data-send-type="1" formType="submit" style="background-color: {{themeColor}}">
+             	{{isWinner?'立即购买':'立即出价'}}
+             	</button>
+            </form>
+        </view>
+    </view>
+    <view class="mask" style="display:{{maskShow}}">
+        <view class="mask-info">
+            <button openType="share">发送给好友</button>
+            <button bindtap="openGeneratePage" wx:if="{{isWechatReview==0}}">生成海报</button>
+            <button bindtap="cancelMask" class="cancel-btn">取消</button>
+        </view>
+    </view>
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

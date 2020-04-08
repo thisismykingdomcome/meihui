@@ -1,0 +1,89 @@
+<view class="container">
+    <form bindsubmit="submitRefund" wx:if="{{orderDetail.order_refund_status==3||!orderDetail.order_refund_id}}">
+        <view class="row-box flex">
+            <view class="row-label">处理方式：</view>
+            <picker bindchange="bindChangeType" class="right-text goods-status" range="{{typeList}}" rangeKey="name" style="border-bottom:none;" value="{{selTypeIndex}}">
+                <view class="picker">
+                    <view>{{selType}}</view>
+                </view>
+            </picker>
+            <view class="dir"></view>
+        </view>
+        <view class="row-box flex">
+            <view class="row-label" wx:if="{{selTypeIndex==1||selTypeIndex==0}}">退款原因：</view>
+            <view class="row-label" wx:else>换货原因：</view>
+            <view class="right-text">
+                <input class="reason" name="reason" placeholder="请输入原因" type="text" value=""></input>
+            </view>
+        </view>
+        <view class="row-box flex" wx:if="{{selTypeIndex==0||selTypeIndex==1}}">
+            <view class="row-label">退款金额：</view>
+            <view class="money">￥</view>
+            <view class="right-text">
+                <input class="refund" name="money" type="text" value="{{orderDetail.amount}}"></input>
+            </view>
+        </view>
+        <view class="row-box money-text" wx:if="{{selTypeIndex==1||selTypeIndex==0}}">
+            最多￥{{orderDetail.amount}},包含发货邮费￥{{orderDetail.freight}}
+          </view>
+        <view class="row-box flex" wx:if="{{selTypeIndex==2}}">
+            <view class="row-label">备注：</view>
+            <view class="right-text">
+                <input class="remark" name="remark" placeholder="请输入要换货的商品的详细信息" type="text" value="{{settings.remark}}"></input>
+            </view>
+        </view>
+        <view wx:if="{{orderDetail.is_virtual==false&&(selTypeIndex==1||selTypeIndex==2)}}">
+            <view class="row-box flex">
+                <view class="row-label">收件人：</view>
+                <view class="right-text">
+                    <input disabled class="reason" type="text" value="{{settings.refund_name}}"></input>
+                </view>
+            </view>
+            <view class="row-box flex">
+                <view class="row-label">电话：</view>
+                <view class="right-text">
+                    <input disabled class="reason" type="text" value="{{settings.refund_mobile}}"></input>
+                </view>
+            </view>
+            <view class="row-box flex">
+                <view class="row-label">收货地址：</view>
+                <view class="right-text">
+                    <input disabled class="reason" type="text" value="{{settings.refund_address}}"></input>
+                </view>
+            </view>
+            <view class="row-box flex">
+                <view class="row-label">物流公司：</view>
+                <view class="right-text">
+                    <input class="reason" name="logistics_company" placeholder="填写物流公司" type="text" value=""></input>
+                </view>
+            </view>
+            <view class="row-box flex">
+                <view class="row-label">物流单号：</view>
+                <view class="right-text">
+                    <input class="reason" name="logistics_number" placeholder="填写物流单号" type="text" value=""></input>
+                </view>
+            </view>
+        </view>
+        <view class="row-box">
+            <view class="row-label  photo">上传凭证(最多三张)</view>
+            <view class="flex" style="padding-bottom:30rpx">
+                <view class="uploader-file flex" style="width:{{photoListWidth}}rpx" wx:if="{{photoList.length>0}}">
+                    <view class="photo-item" wx:for="{{photoList}}" wx:key="id">
+                        <image bindtap="previewImage" class="uploader-img" data-src="{{item}}" mode="aspectFill" src="{{item}}"></image>
+                        <view bindtap="deleteImage" class="uploader-file-cancel" data-src="{{item}}">
+                      删除
+                    </view>
+                    </view>
+                </view>
+                <view style="margin-left:30rpx">
+                    <view class="uploader-box" style="display:{{photoList.length>=3?'none':'block'}};">
+                        <view bindtap="chooseImage" class="uploader-input" data-type="front"></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="row-box submit-btn">
+            <button class="save-btn" formType="submit" style="background-color: {{themeColor}}" type="warn">保存</button>
+        </view>
+    </form>
+</view>

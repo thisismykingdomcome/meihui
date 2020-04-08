@@ -1,0 +1,75 @@
+<container-block padding customClass="block-wrapper">
+    <van-row customClass="status">
+        <van-col span="24">
+            <image src="http://qn.zxsite.cn/zxsite_shop/icon-ddgb.png" wx:if="{{orderDetail.status==0}}"></image>
+            <image src="http://qn.zxsite.cn/zxsite_shop/icon-ddfk.png" wx:elif="{{orderDetail.status==1}}"></image>
+            <image src="http://qn.zxsite.cn/zxsite_shop/icon-ddfh.png" wx:elif="{{orderDetail.status==2}}"></image>
+            <image src="http://qn.zxsite.cn/zxsite_shop/icon-ddsh.png" wx:elif="{{orderDetail.status==3}}"></image>
+            <image src="http://qn.zxsite.cn/zxsite_shop/icon-jycg.png" wx:elif="{{orderDetail.status==4||orderDetail.status==5}}"></image>
+            <image src="http://qn.zxsite.cn/zxsite_shop/icon-groups.png" wx:elif="{{orderDetail.status==6}}"></image>
+            <image src="http://qn.zxsite.cn/zxsite_shop/icon-ddsh.png" wx:elif="{{orderDetail.status==7}}"></image>
+            <text wx:if="{{orderDetail.status==0}}">已关闭</text>
+            <text wx:elif="{{orderDetail.status==1}}">待付款</text>
+            <text wx:elif="{{orderDetail.status==2}}">待发货</text>
+            <text wx:elif="{{orderDetail.status==3}}">待收货</text>
+            <text wx:elif="{{orderDetail.status==4}}">待评价</text>
+            <text wx:elif="{{orderDetail.status==5}}">已完成</text>
+            <text wx:elif="{{orderDetail.status==6}}">拼团中</text>
+            <text wx:elif="{{orderDetail.status==7&&orderDetail.refund.status==1}}">维权申请中</text>
+            <text wx:elif="{{orderDetail.status==7&&orderDetail.refund.status==2}}">维权同意</text>
+            <text wx:elif="{{orderDetail.status==7&&orderDetail.refund.status==3}}">维权拒绝</text>
+        </van-col>
+    </van-row>
+</container-block>
+<container-block customClass="block-wrapper">
+    <van-cell title="订单商品"></van-cell>
+    <van-card customClass="goods" desc="{{item.property_names}}" num="{{item.number}}" price="{{item.price}}" thumb="{{item.cover}}" title="{{item.title}}" wx:for="{{orderDetail.goods}}" wx:key="key"></van-card>
+    <van-cell border="{{false}}" customClass="no-bottom-title" title="备注" wx:if="{{orderDetail.remark}}"></van-cell>
+    <van-cell title="{{orderDetail.remark}}" wx:if="{{orderDetail.remark}}"></van-cell>
+</container-block>
+<container-block customClass="block-wrapper" wx:if="{{orderDetail.send_type==1&&orderDetail.module!='book'}}">
+    <van-cell title="收货信息"></van-cell>
+    <van-cell bind:click="onTelphoneCall" data-mobile="{{orderDetail.mobile}}" icon="contact" title="{{orderDetail.name}} - {{orderDetail.mobile}}"></van-cell>
+    <van-cell bindtap="toSetClipboard" data-content="{{orderDetail.province}} - {{orderDetail.city}} - {{orderDetail.district}} - {{orderDetail.address}}" icon="location" title="{{orderDetail.province}} - {{orderDetail.city}} - {{orderDetail.district}} - {{orderDetail.address}}"></van-cell>
+    <van-cell title="身份证号：{{orderDetail.identity_code}}" wx:if="{{orderDetail.settings.overseas_agency==1}}"></van-cell>
+    <van-cell wx:if="{{orderDetail.settings.overseas_agency==1}}">
+        <view class="uploader-file">
+            <image bindtap="previewImage" class="uploader-img" data-src="{{orderDetail.identity_photo_front}}" mode="aspectFill" src="{{orderDetail.identity_photo_front}}"></image>
+            <image bindtap="previewImage" class="uploader-img" data-src="{{orderDetail.identity_photo_back}}" mode="aspectFill" src="{{orderDetail.identity_photo_back}}"></image>
+        </view>
+    </van-cell>
+</container-block>
+<container-block wx:if="{{orderDetail.send_type==1&&orderDetail.module!='book'}}">
+    <van-cell title="物流信息" value="{{!orderDetail.shipping?'暂无':''}}"></van-cell>
+    <van-steps direction="vertical" steps="{{orderDetail.logistics.data}}"></van-steps>
+</container-block>
+<container-block customClass="block-wrapper" wx:if="{{diyForm.length>0}}">
+    <van-cell title="{{orderDetail.module=='book'?'预约':'购买'}}信息"></van-cell>
+    <van-cell>
+        <block wx:for="{{diyForm}}">
+            <view style="margin-bottom:20rpx;text-align:left;" wx:if="{{item.type=='text'}}">
+      {{item.name}}：{{item.value}}
+    </view>
+            <view style="margin-bottom:20rpx;display: flex;align-items: center;flex-wrap: wrap;" wx:if="{{item.type=='image'}}">
+      {{item.name}}：<image bindtap="bindPreviewImage" class="img-list" data-src="{{item}}" mode="aspectFill" src="{{item}}" wx:for="{{item.item}}"></image>
+            </view>
+        </block>
+    </van-cell>
+</container-block>
+<container-block customClass="block-wrapper" wx:if="{{orderDetail.send_type==2}}">
+    <van-cell title="顾客信息"></van-cell>
+    <van-cell icon="contact" title="{{orderDetail.name}} - {{orderDetail.mobile}}"></van-cell>
+    <van-cell title="商家信息"></van-cell>
+    <van-cell icon="location" title="店名:{{orderDetail.shop_name}} - 地址: {{orderDetail.shop_address}} - 电话: {{orderDetail.shop_telphone}}"></van-cell>
+</container-block>
+<container-block customClass="block-wrapper">
+    <van-cell title="订单操作记录"></van-cell>
+    <van-steps active="{{logActive}}" direction="vertical" steps="{{orderDetail.log}}"></van-steps>
+</container-block>
+<container-block customClass="form-bottom" wx:if="{{orderDetail.status==2&&(orderDetail.send_type==2||orderDetail.module=='book')&&verifyCode}}">
+    <van-row>
+        <van-col span="24">
+            <van-button bind:click="onVerify" block="true" type="primary">确认核销</van-button>
+        </van-col>
+    </van-row>
+</container-block>

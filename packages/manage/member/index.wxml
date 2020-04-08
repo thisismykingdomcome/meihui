@@ -1,0 +1,26 @@
+<container-block customClass="search-wrapper">
+    <van-search showAction bind:cancel="onSearchCancel" bind:search="onSearch" placeholder="请输入搜索会员" value="{{searchValue}}"></van-search>
+</container-block>
+<container-block customClass="member-wrapper van-hairline--bottom" wx:for="{{memberList}}" wx:for-index="idx">
+    <view class="member van-card">
+        <view class="van-card__thumb">
+            <image class="van-card__img thumb-class" mode="scaleToFill" src="{{item.avatar}}"></image>
+        </view>
+        <view class="van-card__content">
+            <view class="van-card__left">
+                <view class="van-card__title van-multi-ellipsis--l2">{{item.nickname}}</view>
+                <view class="van-card__desc van-ellipsis">积分：{{item.credit1}}</view>
+                <view class="van-card__desc van-ellipsis">余额：{{item.credit2}}</view>
+            </view>
+            <view class="van-card__right">
+                <view class="van-card__title van-card__level">{{item.level_name?item.level_name:'无等级'}}</view>
+            </view>
+        </view>
+        <view class="van-card__footer">
+            <van-button bind:click="onEdit" data-uid="{{item.uid}}" size="mini" type="primary">编辑</van-button>
+            <van-button bind:click="onCredits" customClass="margin-left-5" data-uid="{{item.uid}}" size="mini" type="warning">明细</van-button>
+            <van-button bind:click="onDelete" customClass="margin-left-5" data-index="{{idx}}" data-uid="{{item.uid}}" size="mini" type="danger">删除</van-button>
+        </view>
+    </view>
+</container-block>
+<view class="no-more" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>

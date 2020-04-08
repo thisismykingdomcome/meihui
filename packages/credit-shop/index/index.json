@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "积分商城",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "container-block": "./../../../../components/container-block/index",
+        "van-tab": "./../../../../components/tab/index",
+        "van-tabs": "./../../../../components/tabs/index"
+    }
+}

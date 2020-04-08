@@ -1,0 +1,139 @@
+.goods-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 24rpx;
+}
+
+.goods-box {
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 24rpx;
+}
+
+.goods-box .img-box {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.goods-box.list-style-3 {
+    display: flex;
+    padding: 24rpx 0;
+}
+
+.goods-box.list-style-3 .goods-image-wrapper {
+    width: 200rpx;
+    height: 200rpx;
+}
+
+.goods-box.list-style-1 {
+    width: 702rpx;
+    height: 874rpx;
+}
+
+.goods-box.list-style-2 {
+    width: 340rpx;
+    height: 504rpx;
+}
+
+.goods-box.list-style-1 .img-box {
+    height: 702rpx;
+}
+
+.goods-box.list-style-2 .img-box {
+    height: 340rpx;
+}
+
+.goods-box.list-style-1 .img-box image {
+    width: 702rpx;
+    height: 702rpx;
+}
+
+.goods-box.list-style-2 .img-box image {
+    width: 340rpx;
+    height: 340rpx;
+}
+
+.goods-box.list-style-3 .img-box image {
+    width: 200rpx;
+    height: 200rpx;
+}
+
+.goods-box.list-style-3 .goods-content-wrapper {
+    width: 480rpx;
+    margin-left: 20rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.goods-box .goods-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    padding: 24rpx 24rpx 0rpx 24rpx;
+    color: #000;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.goods-box.list-style-3 .goods-content-wrapper .goods-sales {
+    font-size: 12px;
+    color: #898989;
+    margin-top: 10rpx;
+}
+
+.goods-box .goods-price {
+    overflow: hidden;
+    font-size: 12px;
+    color: #f44;
+    display: block;
+    line-height: 12px;
+    padding-top: 10rpx;
+}
+
+.goods-bottom-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24rpx;
+    align-items: baseline;
+}
+
+.goods-box.list-style-3 .goods-bottom-wrapper {
+    padding: 0;
+}
+
+.goods-price-wrapper {
+    display: flex;
+    align-items: baseline;
+}
+
+.goods-box.list-style-3 .goods-title,.goods-box.list-style-3 .goods-price {
+    margin: 0;
+}
+
+.goods-box.list-style-3 .goods-title {
+    padding: 0;
+}
+
+.goods-buy-button {
+    border-radius: 25px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #e52c13;
+    padding: 2px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    line-height: normal;
+}
+
+.img-box {
+    display: flex;
+    justify-content: center;
+}

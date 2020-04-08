@@ -1,0 +1,37 @@
+<template name="coupon">
+    <view class="coupons" wx:if="{{data.list}}">
+        <scroll-view class="coupons-scroll" scrollX="true">
+            <view class="coupons-item" style="background-image: url({{item.background}});" wx:for="{{data.list}}" wx:for-index="idx" wx:key="id">
+                <form bindsubmit="fecthCoupon" data-id="{{item.id}}" data-index="{{idx}}" reportSubmit="true">
+                    <view style="display: flex;justify-content: space-between;position:relative;">
+                        <view style="padding-bottom: 20rpx;">
+                            <view style="display: flex;padding-bottom: 22rpx; justify-content:center;">
+                                <view style="font-size: 60rpx;display: flex;">
+                                    <block wx:if="{{item.num_length==1||item.num_length==2}}">
+                                        <text style="align-self: center;padding-right: 10rpx;color:{{style.color}};" wx:if="{{item.back_type==1}}">{{item.deduct}}</text>
+                                    </block>
+                                    <block wx:if="{{item.num_length==3}}">
+                                        <text style="align-self: center;padding-left:15rpx;padding-right:3rpx;color:{{style.color}};" wx:if="{{item.back_type==1}}">{{item.deduct}}</text>
+                                    </block>
+                                    <block wx:if="{{item.num_length==4}}">
+                                        <text style="align-self: center;padding-left:15rpx;padding-right:0rpx;color:{{style.color}};" wx:if="{{item.back_type==1}}">{{item.deduct}}</text>
+                                    </block>
+                                    <text style="align-self: center;padding-left:15rpx;padding-right: 6rpx;color:{{style.color}};" wx:if="{{item.back_type==2}}">{{item.discount}}</text>
+                                </view>
+                                <view>
+                                    <view style="font-size: 18rpx;color:{{style.color}};">满{{item.enough}}元使用</view>
+                                    <view style="font-size: 30rpx;font-weight:bold;color:{{style.color}};" wx:if="{{item.back_type==1}}">元满减券</view>
+                                    <view style="font-size: 30rpx;font-weight:bold;color:{{style.color}};" wx:if="{{item.back_type==2}}">折扣券</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view style="display: flex;position:absolute;width:100%;height:100%;">
+                            <button disabled="true" size="mini" style="width:100%;height:100%;" wx:if="{{item.disabled}}">领取</button>
+                            <button formType="submit" size="mini" style="width:100%;height:100%;" wx:else>领取</button>
+                        </view>
+                    </view>
+                </form>
+            </view>
+        </scroll-view>
+    </view>
+</template>

@@ -1,0 +1,50 @@
+<view class="container" style="background-color: {{backgroundColor}}">
+    <view class="status-box">
+        <view bindtap="statusTap" class="status-label {{index==currentType?'active':''}}" data-index="{{index}}" style="border-bottom-color: {{index==currentType?themeColor:'#fff'}};color: {{index==currentType?themeColor:'#353535'}}" wx:for="{{statusType}}" wx:key="{{index}}">
+            {{item}}
+            <view class="{{tabClass[index]}}"></view>
+        </view>
+    </view>
+    <view class="no-order" hidden="{{orderList?true:false}}">
+        <image class="no-order-img" src="http://qn.zxsite.cn/zxsite_shop/no-order.png"></image>
+        <view class="text">暂无订单</view>
+    </view>
+    <view class="order-list" hidden="{{orderList?false:true}}">
+        <view class="a-order" wx:for="{{orderList}}" wx:key="{{index}}">
+            <view bindtap="orderDetail" class="order-date" data-id="{{item.id}}">
+                <view class="date-box">下单时间：{{item.create_time}}</view>
+                <view class="status red" wx:if="{{item.status==0}}">已关闭</view>
+                <view class="status" wx:if="{{item.status==1}}">待付款</view>
+                <view class="status" wx:if="{{item.status==2}}">待使用</view>
+                <view class="status" wx:if="{{item.status==4}}">待评价</view>
+                <view class="status red" wx:if="{{item.status==5}}">已完成</view>
+                <view class="status" wx:if="{{item.status==6}}">拼团中</view>
+                <view class="status" wx:if="{{item.status==7&&item.refund.status==1}}">维权申请中</view>
+                <view class="status red" wx:if="{{item.status==7&&item.refund.status==2}}">维权同意</view>
+                <view class="status red" wx:if="{{item.status==7&&item.refund.status==3}}">维权拒绝</view>
+            </view>
+            <view bindtap="orderDetail" class="goods-info" data-id="{{item.id}}">
+                <view class="goods-des">
+                    <view catchtap="toSetClipboard" class="order-sn" data-content="{{item.sn}}">订单编号：{{item.sn}} </view>
+                    <view>预约单</view>
+                </view>
+            </view>
+            <view bindtap="orderDetail" data-id="{{item.id}}">
+                <scroll-view class="goods-img-container" scrollX="true">
+                    <view class="img-box" wx:for="{{item.goods_list}}" wx:key="{{index}}">
+                        <image class="goods-img" src="{{item.cover}}"></image>
+                    </view>
+                </scroll-view>
+            </view>
+            <view class="price-box">
+                <view class="total-price">合计：¥ {{item.total_amount}}</view>
+                <view bindtap="cancelOrderTap" class="btn cancel-btn" data-id="{{item.id}}" hidden="{{item.status==1?false:true}}">取消订单</view>
+                <view bindtap="toPayTap" class="btn topay-btn" data-id="{{item.id}}" data-money="{{item.total_amount-item.deduction_balance}}" hidden="{{item.status==1?false:true}}">马上付款</view>
+                <view bindtap="toShareTap" class="btn topay-btn" data-groupsid="{{item.groups_id}}" data-groupsorderid="{{item.groups_order_id}}" data-id="{{item.id}}" hidden="{{item.status==6?false:true}}">邀请拼团</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="no-more-goods" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

@@ -1,0 +1,5 @@
+.white-wrapper {
+    width: 750rpx;
+    display: flex;
+    justify-content: center;
+}

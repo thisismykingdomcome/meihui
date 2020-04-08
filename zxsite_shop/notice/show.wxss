@@ -1,0 +1,12 @@
+@import "../../wxParse/wxParse.wxss";
+
+.notice {
+    padding: 20rpx;
+    font-size: 26rpx;
+}
+
+.title {
+    color: chocolate;
+    font-size: 30rpx;
+    margin-bottom: 30rpx;
+}

@@ -1,0 +1,26 @@
+<view class="total-wrapper" style="background-color: {{themeColor}}" wx:if="{{charge}}">
+    <view class="total-title">累计{{textCharge}}({{textUnion}})</view>
+    <view class="total-label">{{charge.charge_total}}</view>
+</view>
+<container-block customClass="form-wrapper" wx:if="{{charge}}">
+    <van-cell icon="gold-coin" title="{{textVisibleWithdrawCharge}}" value="{{charge.withdraw_available}}{{textUnion}}"></van-cell>
+</container-block>
+<container-block customClass="form-wrapper" wx:if="{{charge}}">
+    <van-cell icon="clock" title="{{textAppliedCharge}}" value="{{charge.withdraw_applying}}{{textUnion}}"></van-cell>
+    <van-cell icon="exchange-record" title="{{textCheckedCharge}}" value="{{charge.withdraw_waiting}}{{textUnion}}"></van-cell>
+    <van-cell icon="points" title="{{textWithdrewCharge}}" value="{{charge.withdraw_success}}{{textUnion}}"></van-cell>
+    <van-cell icon="info-o" title="{{textUnsettledCharge}}" value="{{charge.charge_settling}}{{textUnion}}"></van-cell>
+    <van-cell icon="close" title="{{textInvalidCharge}}" value="{{charge.charge_invalid}}{{textUnion}}"></van-cell>
+</container-block>
+<container-block customClass="form-wrapper" wx:if="{{charge}}">
+    <van-cell label="下线买家确认收货{{settle_days>0?settle_days+'天':''}}后，分销商{{settle_days>0?'':'立刻'}}获得{{textCharge}}" title="{{textCharge}}规则"></van-cell>
+    <van-cell label="{{textCharge}}满{{withdraw_least}}{{textUnion}}后才能申请{{textWithdraw}}" title="{{textCharge}}{{textWithdraw}}"></van-cell>
+    <van-cell label="每次{{textWithdraw}}将扣除{{withdraw_charge}}%的手续费" title="{{textWithdraw}}手续费"></van-cell>
+</container-block>
+<container-block customClass="form-bottom" wx:if="{{charge}}">
+    <van-row>
+        <van-col span="24">
+            <button bindtap="onApply" class="weui-btn" disabled="{{charge.withdraw_available<withdraw_least}}" style="background-color: {{themeColor}}" type="primary">我要{{textWithdraw}}</button>
+        </van-col>
+    </van-row>
+</container-block>

@@ -1,0 +1,106 @@
+<view class="container" style="background-color: {{backgroundColor}}">
+    <view class="tab-box" wx:if="{{isNeedLogistics}}">
+        <view bindtap="bindChangeSendType" class="tab-label {{item.type==currentSendType?'active':''}}" data-type="{{item.type}}" style="border-bottom-color: {{item.type==currentSendType?themeColor:'#fff'}};color: {{item.type==currentSendType?themeColor:'#353535'}}" wx:for="{{sendType}}" wx:key="{{index}}">
+            <text class="tab-text" style="border-bottom: 2px solid {{themeColor}}" wx:if="{{item.type==currentSendType}}">{{item.name}}</text>
+            <text class="tab-text" wx:else>{{item.name}}</text>
+        </view>
+    </view>
+    <view class="form-container">
+        <form bindsubmit="createOrder" reportSubmit="true">
+            <view class="address-box" wx:if="{{isNeedLogistics&&currentSendType==1}}">
+                <view class="add-address" hidden="{{curAddressData}}">
+                    <view bindtap="addAddress" class="title">新增收货地址</view>
+                </view>
+                <view bindtap="selectAddress" class="show-address" hidden="{{!curAddressData}}">
+                    <view class="name-tel">{{curAddressData.name}}  {{curAddressData.mobile}}</view>
+                    <view class="addr-text">{{curAddressData.address}}</view>
+                </view>
+            </view>
+            <view bindtap="showMap" class="address-box" wx:if="{{isNeedLogistics&&currentSendType==2||isBook}}">
+                <view class="show-address">
+                    <view class="name-tel">{{settings.shop_name}}  {{settings.shop_telphone}}</view>
+                    <view class="addr-text">{{settings.address}}</view>
+                </view>
+            </view>
+            <view class="peisong-way" wx:if="{{isNeedLogistics&&currentSendType==2||isBook}}">
+                <view class="row-box">
+                    <view class="row-label">姓名</view>
+                    <view class="right-text">
+                        <input class="liuyan" name="name" placeholder="请输入姓名" type="text" value="{{name}}"></input>
+                    </view>
+                </view>
+                <view class="row-box">
+                    <view class="row-label">电话</view>
+                    <view class="right-text">
+                        <input class="liuyan" name="mobile" placeholder="请输入电话" type="text" value="{{mobile}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="goods-list">
+                <view class="list-title">兑换商品</view>
+                <view class="a-goods">
+                    <view class="img-box">
+                        <image class="img" src="{{goods.cover}}"></image>
+                    </view>
+                    <view class="text-box">
+                        <view class="arow arow01">
+                            <view class="goods-name">{{goods.title}}</view>
+                        </view>
+                        <view class="arow">
+                            <view class="goods-label"></view>
+                            <view class="goods-num">x {{goods.number}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="peisong-way" wx:if="{{needMoney>0}}">
+                <picker bindchange="bindChangePayType" class="row-box coupon" range="{{payTypeList}}" rangeKey="name" style="border-bottom:none;" value="{{selPayTypeIndex}}">
+                    <view class="picker">
+                        <view>{{selPayType}}</view>
+                    </view>
+                </picker>
+            </view>
+            <view class="peisong-way">
+                <view class="row-box" wx:if="{{isNeedLogistics&&currentSendType==1}}">
+                    <view class="row-label">配送方式</view>
+                    <view class="right-text" wx:if="{{freightPrice>0}}">快递</view>
+                    <view class="right-text" wx:if="{{freightPrice==0}}">包邮</view>
+                </view>
+                <view class="row-box" wx:if="{{isNeedLogistics&&currentSendType==2}}">
+                    <view class="row-label">配送方式</view>
+                    <view class="right-text">自提</view>
+                </view>
+                <view class="row-box">
+                    <view class="row-label">备注</view>
+                    <view class="right-text">
+                        <input class="liuyan" name="remark" placeholder="如需备注请输入" type="text"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="goods-info">
+                <view class="row-box">
+                    <view class="row-label">所需积分</view>
+                    <view class="right-text">{{needCredit}}</view>
+                </view>
+                <view class="row-box" wx:if="{{needMoney>0}}">
+                    <view class="row-label">所需金额</view>
+                    <view class="right-text">¥ {{needMoney}}</view>
+                </view>
+                <view class="row-box" wx:if="{{isNeedLogistics&&freightPrice>0&&currentSendType==1}}">
+                    <view class="row-label">运费</view>
+                    <view class="right-text">+ ¥ {{freightPrice}}</view>
+                </view>
+                <view class="row-box" wx:if="{{deductionBalance>0}}">
+                    <view class="row-label">账户余额</view>
+                    <view class="right-text">- ¥ {{deductionBalance}}</view>
+                </view>
+            </view>
+            <view class="jiesuan-box">
+                <view class="left-price">
+                    <view class="total">合计：¥ {{allGoodsAndFreightPrice}}</view>
+                </view>
+                <button class="to-pay-btn" data-send-type="1" disabled="{{forbidOrder}}" formType="submit" style="background-color: {{forbidOrder==true?'#ccc':themeColor}}">提交订单</button>
+            </view>
+        </form>
+    </view>
+</view>

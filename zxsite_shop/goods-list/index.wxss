@@ -1,0 +1,174 @@
+.container {
+    background-color: #f8f8f8;
+    min-height: 100%;
+    height: 100%;
+}
+
+.status-box {
+    width: 100%;
+    height: 88rpx;
+    line-height: 88rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.status-box .status-label {
+    width: 150rpx;
+    height: 100%;
+    text-align: center;
+    font-size: 30rpx;
+    color: #353535;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.status-box .status-label.active {
+    color: #f44;
+    border-bottom: 6rpx solid #f44;
+}
+
+.status-box .status-label .red-dot {
+    width: 16rpx;
+    height: 16rpx;
+    position: absolute;
+    left: 116rpx;
+    top: 23rpx;
+    background-color: #f43530;
+    border-radius: 50%;
+}
+
+.search-view {
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    flex-direction: column;
+}
+
+.serarch-content {
+    background: white;
+    width: 650rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: auto;
+    padding-left: 20rpx;
+    padding-bottom: auto;
+    margin: auto;
+    height: 70rpx;
+    border-radius: 5px 5px;
+}
+
+.search-icon {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 20rpx;
+}
+
+.search-input {
+    width: 500rpx;
+    font-size: 28rpx;
+}
+
+.search-btn {
+    width: 150rpx;
+    height: 70rpx;
+    margin-right: 0rpx;
+    background-color: #e52c13;
+    font-size: 28rpx;
+    align-items: center;
+    border-top-left-radius: 0rpx;
+    border-bottom-left-radius: 0rpx;
+    color: #fff;
+    border: none;
+    position: relative;
+}
+
+.goods-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 24rpx;
+}
+
+.goods-box {
+    width: 48%;
+    height: 500rpx;
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 24rpx;
+}
+
+.goods-box .img-box {
+    width: 100%;
+    height: 339rpx;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+}
+
+.goods-box .img-box image {
+    width: 339rpx;
+    height: 339rpx;
+}
+
+.goods-box .goods-title {
+    width: 280rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 28rpx;
+    padding: 24rpx 0 0rpx 0;
+    color: #000;
+    margin-left: 24rpx;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.goods-box .goods-price {
+    overflow: hidden;
+    font-size: 24rpx;
+    padding: 12rpx 0;
+    color: #f44;
+    margin-left: 24rpx;
+}
+
+.no-more-goods {
+    text-align: center;
+    font-size: 24rpx;
+    padding-bottom: 48rpx;
+    color: #999;
+}
+
+.price-view {
+    position: absolute;
+    right: 20rpx;
+    top: 28rpx;
+}
+
+.price-flag {
+    position: absolute;
+    width: 18rpx;
+    height: 18rpx;
+    top: 0;
+    right: 5rpx;
+}
+
+.down-flag {
+    top: 15rpx;
+}
+
+.commission-charge {
+    position: absolute;
+    bottom: 24rpx;
+    right: 0;
+    color: #fff;
+    background: #f44;
+    font-size: 26rpx;
+    padding: 8rpx 10rpx 8rpx 20rpx;
+    border-top-left-radius: 50rpx;
+    border-bottom-left-radius: 50rpx;
+}

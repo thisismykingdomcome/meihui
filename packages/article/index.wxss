@@ -1,0 +1,52 @@
+@import "../../components/card/index.wxss";
+
+page {
+    background-color: #f8f8f8;
+}
+
+.banner {
+    width: 750rpx;
+    height: 312rpx;
+}
+
+.article-wrapper {
+    font-size: 14px;
+    background-color: #fff;
+    padding: 15px 0;
+}
+
+.van-card {
+    background-color: #fff;
+    padding: 5px 115px 5px 15px;
+    height: 84px;
+}
+
+.van-card__thumb {
+    width: 93px;
+    height: 74px;
+    left: auto;
+    right: 15px;
+}
+
+.van-card__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.van-card__title {
+    font-size: 14px;
+}
+
+.van-card__desc {
+    color: #999;
+    display: flex;
+    justify-content: space-between;
+}
+
+.no-more {
+    text-align: center;
+    font-size: 24rpx;
+    padding: 15px 0;
+    color: #999;
+}

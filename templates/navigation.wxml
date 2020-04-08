@@ -1,0 +1,18 @@
+<template name="navigation">
+    <view class="navigation" style="background-color: {{style.backgroundColor}}" wx:if="{{data.list}}">
+        <block wx:for="{{data.list}}" wx:for-index="idx" wx:key="id">
+            <navigator appId="{{item.appid}}" class="navigation-box {{style.listStyle}}" openType="navigate" path="{{item.url}}" target="miniProgram" wx:if="{{item.type==5}}">
+                <view class="img-box">
+                    <image binderror="loadImageError" src="{{item.icon}}?time={{loadImageTime}}"></image>
+                </view>
+                <view class="navigation-title" style="color: {{style.color}}">{{item.name}}</view>
+            </navigator>
+            <view bindtap="toNavigationTap" class="navigation-box {{style.listStyle}}" data-id="{{item.id}}" data-type="{{item.type}}" data-url="{{item.url}}" wx:else>
+                <view class="img-box">
+                    <image binderror="loadImageError" src="{{item.icon}}?time={{loadImageTime}}"></image>
+                </view>
+                <view class="navigation-title" style="color: {{style.color}}">{{item.name}}</view>
+            </view>
+        </block>
+    </view>
+</template>

@@ -1,0 +1,4 @@
+<map showLocation bindmarkertap="markertap" bindregionchange="onRegionChange" id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" scale="14" style="width: 100%; height: 300px;"></map>
+<van-cell-group>
+    <van-cell isLink bind:click="onSelected" data-index="{{index}}" icon="location-o" label="{{item.address}}" size="large" title="{{item.name}}" wx:for="{{storeList}}" wx:key="key"></van-cell>
+</van-cell-group>

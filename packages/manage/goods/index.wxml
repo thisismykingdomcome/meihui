@@ -1,0 +1,26 @@
+<container-block customClass="search-wrapper">
+    <van-search showAction bind:cancel="onSearchCancel" bind:search="onSearch" placeholder="请输入搜索商品" value="{{searchValue}}"></van-search>
+</container-block>
+<van-tabs bind:change="onTabChange">
+    <van-tab title="出售中"></van-tab>
+    <van-tab title="已下架"></van-tab>
+    <van-tab title="已下架"></van-tab>
+    <van-tab title="已下架"></van-tab>
+    <van-tab title="已下架"></van-tab>
+    <van-tab title="已下架"></van-tab>
+    <van-tab title="已下架"></van-tab>
+</van-tabs>
+<container-block customClass="goods-wrapper van-hairline--bottom" wx:for="{{goodsList}}" wx:for-index="idx" wx:key="key">
+    <van-card customClass="goods" desc="{{item.category}}" descClass="desc" num="{{item.stores}}" price="{{item.price}}" priceClass="price" tag="{{item.is_recommend==1?'推荐':''}}" thumb="{{item.cover}}" title="{{item.title}}" titleClass="title">
+        <view slot="footer">
+            <van-button bind:click="onEdit" data-id="{{item.id}}" size="mini" type="primary">编辑</van-button>
+            <van-button bind:click="onSaleOff" customClass="margin-left-5" data-id="{{item.id}}" data-index="{{idx}}" size="mini" type="warning" wx:if="{{item.status==1}}">下架</van-button>
+            <van-button bind:click="onSaleOn" customClass="margin-left-5" data-id="{{item.id}}" data-index="{{idx}}" size="mini" type="warning" wx:if="{{item.status==0}}">上架</van-button>
+            <van-button bind:click="onDelete" customClass="margin-left-5" data-id="{{item.id}}" data-index="{{idx}}" size="mini" type="danger">删除</van-button>
+        </view>
+    </van-card>
+</container-block>
+<view class="no-more" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+<view bindtap="onAdd" class="toolbar" style="bottom: 250rpx;">
+    <image mode="aspectFit" src="../images/add.png"></image>
+</view>

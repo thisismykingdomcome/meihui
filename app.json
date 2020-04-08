@@ -1,0 +1,140 @@
+{
+  "pages": [
+    "zxsite_shop/goods-category/index",
+    "zxsite_shop/index/index",
+    "zxsite_shop/goods-details/index",
+    "zxsite_shop/seckill-list/index",
+    "zxsite_shop/groups-list/index",
+    "zxsite_shop/groups-details/index",
+    "zxsite_shop/auction-list/index",
+    "zxsite_shop/auction-details/index",
+    "zxsite_shop/shop-cart/index",
+    "zxsite_shop/to-pay-order/index",
+    "zxsite_shop/address-add/index",
+    "zxsite_shop/address-select/index",
+    "zxsite_shop/order-list/index",
+    "zxsite_shop/order-details/index",
+    "zxsite_shop/my/index",
+    "zxsite_shop/my-coupon/index",
+    "zxsite_shop/my-auction/index",
+    "zxsite_shop/my-recharge/index",
+    "zxsite_shop/recharge/index",
+    "zxsite_shop/notice/show",
+    "zxsite_shop/web-view/index",
+    "zxsite_shop/about-us/index",
+    "zxsite_shop/goods-list/index",
+    
+    "zxsite_shop/seckill-details/index",
+    "zxsite_shop/search-result/index",
+    "zxsite_shop/coupon-list/index",
+    "zxsite_shop/generating-poster/index",
+    "zxsite_shop/balance-log/index",
+    "zxsite_shop/integral-log/index",
+    "zxsite_shop/technical-support/index",
+    "zxsite_shop/order-refund/index",
+    "zxsite_shop/diy-page/index",
+    "zxsite_shop/start/start"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "以为您提供最近的服务信息"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": " ",
+    "navigationBarTextStyle": "black"
+  },
+  "subPackages": [
+    {
+      "root": "packages/manage",
+      "name": "商家管理",
+      "pages": [
+        "index/index",
+        "settings/index",
+        "goods/index",
+        "goods/edit",
+        "order/index",
+        "order/detail",
+        "order/refund-record",
+        "order/refund-item",
+        "member/index",
+        "member/edit",
+        "member/credits",
+        "statistics/revenue",
+        "statistics/exchange-record",
+        "statistics/sales"
+      ]
+    },
+    {
+      "root": "packages/commission",
+      "name": "分销中心",
+      "pages": [
+        "apply/index",
+        "apply/waiting",
+        "index/index",
+        "charge/index",
+        "order/index",
+        "withdraw/index",
+        "withdraw/apply",
+        "member/index",
+        "poster/index",
+        "ranking/index"
+      ]
+    },
+    {
+      "root": "packages/article",
+      "name": "文章营销",
+      "pages": [
+        "index",
+        "detail",
+        "limit"
+      ]
+    },
+    {
+      "root": "packages/book",
+      "name": "预约",
+      "pages": [
+        "order/index"
+      ]
+    },
+    {
+      "root": "packages/credit-shop",
+      "name": "积分商城",
+      "pages": [
+        "index/index",
+        "goods-detail/index",
+        "order-confirm/index",
+        "order-list/index",
+        "order-detail/index"
+      ]
+    },
+    {
+      "root": "packages/quick",
+      "name": "快速购买",
+      "pages": [
+        "index/index"
+      ]
+    },
+    {
+      "root": "packages/store",
+      "name": "门店",
+      "pages": [
+        "index/index"
+      ]
+    },
+    {
+      "root": "packages/city-express",
+      "name": "同城配送",
+      "pages": [
+        "area/index"
+      ]
+    }
+  ],
+  "navigateToMiniProgramAppIdList": [
+    "wx09b032349103749d",
+    "wxccbd8b344ca4807b"
+  ],
+  "sitemapLocation": "sitemap.json"
+}

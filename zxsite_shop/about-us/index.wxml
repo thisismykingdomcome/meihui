@@ -1,0 +1,27 @@
+<import src="../../wxParse/wxParse.wxml"></import>
+<view class="contont">
+    <view class="mapShow" wx:if="{{latitude&&longitude}}">
+        <map showLocation covers="{{covers}}" id="myMap" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" style="width:100%; height: 300px;"></map>
+    </view>
+    <view class="list" wx:if="{{latitude&&longitude}}">
+        <view class="show-info">
+            <view class="message">
+                <view bindtap="goLocation" class="map">
+                    <image class="left-map" src="http://qn.zxsite.cn/zxsite_shop/about-location.png"></image>
+                    <text class="showContent">地图导航</text>
+                </view>
+                <view bindtap="toTelphone" class="telephone">
+                    <image class="left-tel" src="http://qn.zxsite.cn/zxsite_shop/about-telphone.png"></image>
+                    <text class="showContent">拨打电话</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="shop">
+        <view class="show-info">
+            <template is="wxParse" data="{{wxParseData:shopInfo.nodes}}"></template>
+        </view>
+    </view>
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

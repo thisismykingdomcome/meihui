@@ -1,0 +1,41 @@
+.coupons {
+    margin-top: 10rpx;
+    width: 100%;
+    overflow: hidden;
+}
+
+.coupons~.goods-container {
+    padding-top: 10rpx;
+}
+
+.coupons-scroll {
+    white-space: nowrap;
+    width: 100%;
+}
+
+.coupons-item {
+    width: 300rpx;
+    margin: 0 10rpx;
+    padding: 10rpx 15rpx 10rpx;
+    padding-right: 0;
+    box-sizing: content-box;
+    font-size: 20rpx;
+    line-height: 35rpx;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    color: #fff;
+    display: inline-block;
+}
+
+.coupons-item button {
+    background-size: 20%;
+    font-size: 30rpx;
+    border-radius: 0;
+    padding: 0;
+    align-self: center;
+    width: 60rpx;
+    height: 80rpx;
+    opacity: 0;
+}

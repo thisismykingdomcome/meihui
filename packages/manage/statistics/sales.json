@@ -1,0 +1,12 @@
+{
+    "navigationBarTitleText": "销量统计",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "container-block": "./../../../../components/container-block/index",
+        "van-tab": "./../../../../components/tab/index",
+        "van-tabs": "./../../../../components/tabs/index",
+        "van-tabbar": "./../../../../components/tabbar/index",
+        "van-tabbar-item": "./../../../../components/tabbar-item/index",
+        "van-cell": "./../../../../components/cell/index"
+    }
+}

@@ -1,0 +1,73 @@
+<template name="form">
+    <view class="form-wrapper" style="background-color: {{style.backgroundColor}}">
+        <block wx:for="{{list}}" wx:for-index="idx" wx:for-item="field" wx:key="key">
+            <view class="form-item-wrapper" wx:if="{{field.type==1}}">
+                <view class="form-item-label {{field.required==1?'required':''}}" style="color: {{style.color}}">{{field.name}}</view>
+                <view class="form-item-value" style="color: {{style.color}}">
+                    <input bindinput="bindFormTextInput" data-index="{{idx}}" placeholder="{{field.placeholder?field.placeholder:'请输入'+field.name}}" value="{{field.value}}"></input>
+                </view>
+            </view>
+            <view class="form-item-wrapper" wx:elif="{{field.type==2}}">
+                <view class="form-item-label {{field.required==1?'required':''}}" style="color: {{style.color}}">{{field.name}}</view>
+                <view class="form-item-value" style="color: {{style.color}}">
+                    <textarea bindinput="bindFormTextInput" data-index="{{idx}}" placeholder="{{field.placeholder?field.placeholder:'请输入'+field.name}}" style="height: 3.3em" value="{{field.value}}"></textarea>
+                </view>
+            </view>
+            <view class="form-item-wrapper" wx:elif="{{field.type==3}}">
+                <view class="form-item-label {{field.required==1?'required':''}}" style="color: {{style.color}}">{{field.name}}</view>
+                <view class="form-item-value">
+                    <view bindtap="bindFormRadioTap" class="checkbox-wrapper" data-index="{{idx}}" data-value="{{item}}" style="color: {{style.color}}" wx:for="{{field.item}}" wx:key="key">
+                        <icon size="20" type="success" wx:if="{{field.value==item}}"></icon>
+                        <icon size="20" type="circle" wx:else></icon>{{item}}</view>
+                </view>
+            </view>
+            <view class="form-item-wrapper" wx:elif="{{field.type==4}}">
+                <view class="form-item-label {{field.required==1?'required':''}}" style="color: {{style.color}}">{{field.name}}</view>
+                <view class="form-item-value">
+                    <view bindtap="bindFormCheckBoxTap" class="checkbox-wrapper" data-index="{{idx}}" data-value="{{item}}" style="color: {{style.color}}" wx:for="{{field.item}}" wx:for-index="itemIndex" wx:key="key">
+                        <icon size="20" type="success" wx:if="{{item.checked}}"></icon>
+                        <icon size="20" type="circle" wx:else></icon>{{item.value}}</view>
+                </view>
+            </view>
+            <view class="form-item-wrapper" wx:elif="{{field.type==5}}">
+                <view class="form-item-label {{field.required==1?'required':''}}" style="color: {{style.color}}">{{field.name}}</view>
+                <view class="form-item-value" style="color: {{style.color}}">
+                    <picker bindchange="bindFormDateChange" data-index="{{idx}}" mode="date" value="{{field.value}}">
+                        <view class="picker">
+                            <block wx:if="{{field.value}}">{{field.value}}</block>
+                            <block wx:else>{{field.placeholder?field.placeholder:'请选择日期'}}</block>
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="form-item-wrapper" wx:elif="{{field.type==6}}">
+                <view class="form-item-label {{field.required==1?'required':''}}" style="color: {{style.color}}">{{field.name}}</view>
+                <view class="form-item-value" style="color: {{style.color}}">
+                    <picker bindchange="bindFormTimeChange" data-index="{{idx}}" mode="time" value="{{field.value}}">
+                        <view class="picker">
+                            <block wx:if="{{field.value}}">{{field.value}}</block>
+                            <block wx:else>{{field.placeholder?field.placeholder:'请选择时间'}}</block>
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="form-item-wrapper" wx:elif="{{field.type==7}}">
+                <view class="form-item-label {{field.required==1?'required':''}}" style="color: {{style.color}}">{{field.name}}</view>
+                <view class="form-item-value">
+                    <view class="uploader-file" wx:for="{{field.item}}" wx:for-index="imageIndex" wx:key="imageKey">
+                        <image bindtap="bindPreviewImage" class="uploader-img" data-src="{{item}}" mode="aspectFill" src="{{item}}"></image>
+                        <view bindtap="bindDeleteImage" class="uploader-file-cancel" data-image-index="{{imageIndex}}" data-index="{{idx}}">
+							删除
+						</view>
+                    </view>
+                    <view>
+                        <view class="uploader-box" style="display: {{field.item.length>=field.value?'none':'block'}};">
+                            <view bindtap="bindChooseImage" class="uploader-input" data-index="{{idx}}"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <button bindtap="bindFormSubmit" style="display: block;margin: 30rpx auto;border-radius: {{style.buttonBorderRadius*2}}rpx;background-color: {{style.buttonBackgroundColor}};width: {{style.buttonWidth*2}}rpx;height: {{style.buttonHeight*2}}rpx;line-height: {{style.buttonHeight*2}}rpx;color: {{style.buttonColor}};font-size: {{style.buttonFontSize*2}}rpx;">{{data.buttonText}}</button>
+    </view>
+</template>

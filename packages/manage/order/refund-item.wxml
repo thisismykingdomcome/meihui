@@ -1,0 +1,25 @@
+<container-block customClass="form-wrapper">
+    <van-cell-group>
+        <van-cell title="处理方式" value="{{refundItem.type_text}}"></van-cell>
+        <van-cell border="{{!refundItem.reason}}" customClass="{{refundItem.reason?'no-bottom-title':''}}" title="{{refundItem.type!=2?'退款':'换货'}}原因"></van-cell>
+        <van-cell title="{{refundItem.reason}}" wx:if="{{refundItem.reason}}"></van-cell>
+        <van-cell title="退款金额" value="{{refundItem.money}}" wx:if="{{refundItem.type!=2}}"></van-cell>
+        <van-cell border="{{!refundItem.remark}}" customClass="{{refundItem.remark?'no-bottom-title':''}}" title="备注"></van-cell>
+        <van-cell title="{{refundItem.remark}}" wx:if="{{refundItem.remark}}"></van-cell>
+        <van-cell title="物流公司" value="{{refundItem.logistics_company}}" wx:if="{{refundItem.type!=0&&refundItem.is_virtual==2}}"></van-cell>
+        <van-cell title="物流单号" value="{{refundItem.logistics_number}}" wx:if="{{refundItem.type!=0&&refundItem.is_virtual==2}}"></van-cell>
+        <van-cell isLink bind:click="onRefundStatusClick" title="处理结果" value="{{refundItem.status==2||refundItem.status==3?refundItem.status_text:'请选择'}}"></van-cell>
+        <van-cell border="{{false}}" customClass="no-bottom-title" title="微信支付方式：会返回到相应的支付渠道（零钱或银行卡）"></van-cell>
+        <van-cell border="{{false}}" customClass="no-bottom-title" title="如有余额，会返回金额到商城用户的余额"></van-cell>
+        <van-cell border="{{false}}" customClass="no-bottom-title" title="虚拟商品：同意后会将钱返回对应账户"></van-cell>
+        <van-cell border="{{false}}" customClass="no-bottom-title" title="实体商品：已收到货且确认无误后再进行同意或驳回操作"></van-cell>
+    </van-cell-group>
+</container-block>
+<container-block customClass="form-bottom">
+    <van-row>
+        <van-col span="24">
+            <van-button bind:click="onSubmit" block="true" type="primary">提交</van-button>
+        </van-col>
+    </van-row>
+</container-block>
+<van-action-sheet actions="{{refundStatusActions}}" bind:cancel="onRefundStatusActionsCancel" bind:close="onRefundStatusActionsCancel" bind:select="onRefundStatusActionsSelect" cancelText="取消" show="{{refundStatusActionsShow}}"></van-action-sheet>

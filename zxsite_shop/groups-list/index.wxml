@@ -1,0 +1,36 @@
+<view class="container" style="background-color: {{backgroundColor}}">
+    <view class="groups-list-image">
+        <image src="{{banner}}"></image>
+    </view>
+    <view class="groups" wx:if="{{groupsList}}">
+        <view bindtap="toGroupsDetailsTap" class="groups-goods" data-id="{{item.id}}" wx:for="{{groupsList}}" wx:key="key">
+            <view class="groups-goods-cover">
+                <image lazyLoad="true" mode="aspectFill" src="{{item.cover}}"></image>
+            </view>
+            <view class="groups-goods-content">
+                <view class="groups-goods-title">{{item.goods_title}}</view>
+                <view class="groups-goods-price-container">
+                    <view class="groups-goods-price">
+                        <view class="groups-person-number" wx:if="{{item.is_ladder!=1}}">{{item.person_number}}人团</view>
+                        <view class="groups-goods-price-left" wx:if="{{item.is_ladder!=1}}">￥<text style="font-size:38rpx;">{{item.price}}</text>
+                        </view>
+                        <view class="groups-goods-price-left" wx:else>￥<text style="font-size:38rpx;">{{item.price_max}}</text>
+                            <image class="groups-ladder" mode="scaleToFill" src="http://qn.zxsite.cn/zxsite_shop/groups-ladder.png"></image>￥<text style="font-size:38rpx;">{{item.price_min}}</text>
+                        </view>
+                        <view style="margin-top:16rpx">
+                            <text>{{item.process_person_number}}</text>人已参团</view>
+                    </view>
+                    <view class="groups-goods-price-bottom">
+                        <view>
+                            <text>单独购买￥{{item.goods_price}}</text>
+                        </view>
+                        <view class="button begin-style">立即参与</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="no-more-goods" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

@@ -1,0 +1,10 @@
+.image-wrapper {
+    width: 750rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.image-wrapper image {
+    width: 100%;
+    height: 100%;
+}

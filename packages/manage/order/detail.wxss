@@ -1,0 +1,48 @@
+@import "../../../components/checkbox-group/index.wxss";
+
+.block-wrapper {
+    margin-top: 15px;
+    background-color: #fff;
+}
+
+.status image {
+    float: left;
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.status text {
+    display: block;
+    float: left;
+    margin-left: 30rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 14px;
+    color: #f44;
+}
+
+.goods {
+    background-color: #fff!important;
+}
+
+.uploader-file {
+    position: relative;
+    width: 79px;
+    height: 79px;
+}
+
+.uploader-img {
+    display: block;
+    width: 79px;
+    height: 79px;
+}
+
+.form-bottom {
+    margin: 15px;
+}
+
+.img-list {
+    margin: 2px 5px 2px 0;
+    width: 79px;
+    height: 79px;
+}

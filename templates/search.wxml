@@ -1,0 +1,9 @@
+<template name="search">
+    <view class="search-view" style="background-color: {{style.backgroundColor}};">
+        <view class="serarch-content">
+            <image binderror="loadImageError" class="search-icon" src="http://qn.zxsite.cn/zxsite_shop/search-pic.png?time={{loadImageTime}}"></image>
+            <input bindconfirm="toSearch" bindinput="listenerSearchInput" class="search-input" confirmType="search" maxlength="30" placeholder="{{data.placeholder}}"></input>
+            <button bindtap="toSearch" class="search-btn" style="color: {{style.buttonColor}}; background-color: {{style.buttonBackgroundColor}}">搜索</button>
+        </view>
+    </view>
+</template>

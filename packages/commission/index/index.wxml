@@ -1,0 +1,75 @@
+<container-block padding customClass="overview-wrapper" wx:if="{{agent}}">
+    <view class="overview" style="background-color: {{themeColor}}">
+        <van-row>
+            <van-col span="24">今日{{textCharge}}（{{textUnion}}）</van-col>
+        </van-row>
+        <van-row customClass="overview-statistics">
+            <van-col span="16">{{agent.today_charge}}</van-col>
+            <van-col customClass="withdraw-button-wrapper" span="8">
+                <van-button round bind:click="onApply" size="small">{{textCharge}}{{textWithdraw}}</van-button>
+            </van-col>
+        </van-row>
+        <van-row>
+            <van-col span="8">可{{textWithdraw}}{{textCharge}}</van-col>
+            <van-col span="8">成功{{textWithdraw}}</van-col>
+            <van-col span="8">累计{{textCharge}}</van-col>
+            <van-col span="8">{{agent.withdraw_available}}</van-col>
+            <van-col span="8">{{agent.withdraw_success}}</van-col>
+            <van-col span="8">{{agent.charge_total}}</van-col>
+        </van-row>
+    </view>
+</container-block>
+<container-block customClass="grid-wrapper" wx:if="{{agent}}">
+    <van-row class="navloca_box">
+        <navigator url="../charge/index">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/charge.png"></image>
+                </view>
+                <view>{{textCommissionCharge}}</view>
+            </van-col>
+        </navigator>
+        <navigator url="../order/index">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/order.png"></image>
+                </view>
+                <view>{{textCommissionOrder}}</view>
+            </van-col>
+        </navigator>
+        <navigator url="../withdraw/index">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/withdraw.png"></image>
+                </view>
+                <view>{{textWithdraw}}记录</view>
+            </van-col>
+        </navigator>
+        <navigator url="../member/index">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/member.png"></image>
+                </view>
+                <view>我的{{textChild}}</view>
+            </van-col>
+        </navigator>
+        <navigator url="../poster/index" wx:if="{{posterShow==1}}">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/poster.png"></image>
+                </view>
+                <view>推广海报</view>
+            </van-col>
+        </navigator>
+        <navigator url="../ranking/index" wx:if="{{rankingShow==1}}">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/ranking.png"></image>
+                </view>
+                <view>排行榜</view>
+            </van-col>
+        </navigator>
+    </van-row>
+</container-block>
+<import src="./../../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

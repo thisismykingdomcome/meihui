@@ -1,0 +1,280 @@
+@import "../../templates/carousel.wxss";
+
+@import "../../templates/icon-group.wxss";
+
+@import "../../templates/goods.wxss";
+
+@import "../../templates/cube.wxss";
+
+@import "../../templates/coupon.wxss";
+
+@import "../../templates/notice.wxss";
+
+@import "../../templates/video.wxss";
+
+@import "../../templates/line.wxss";
+
+@import "../../templates/white.wxss";
+
+navigator {
+    font-size: 30rpx;
+}
+
+.container {
+    min-height: 100%;
+    overflow: hidden;
+    overflow-y: hidden;
+}
+
+.userinfo-wrap {
+    display: flex;
+    justify-content: space-around;
+    background: #e85654;
+    width: 750rpx;
+    height: 380rpx;
+}
+
+.userinfo-wrap view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userinfo-wrap .credit {
+    padding: 100rpx 0 0;
+}
+
+.userinfo-wrap .userinfo {
+    padding: 20rpx 0 0;
+}
+
+.credit-title {
+    color: #ffffff;
+    font-size: 30rpx;
+}
+
+.credit-value {
+    color: #ffcb31;
+    margin-top: 5rpx;
+}
+
+.credit-button {
+    margin-top: 10rpx;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    border-radius: 50rpx;
+    text-align: center;
+    font-size: 26rpx;
+    width: 100rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+}
+
+.userinfo-avatar {
+    width: 160rpx;
+    height: 160rpx;
+    margin: 20rpx;
+    overflow: hidden;
+}
+
+.userinfo-avatar.circle {
+    border-radius: 50%;
+}
+
+.userinfo-avatar.radius {
+    border-radius: 20rpx;
+}
+
+.userinfo-nickname,.userinfo-level {
+    font-size: 30rpx;
+    color: #FFF;
+}
+
+.userinfo-level-desc {
+    background: url(http://qn.zxsite.cn/zxsite_shop/icon-doubt-2.png) no-repeat right center;
+    background-size: 35rpx;
+    padding-right: 35rpx;
+}
+
+.version {
+    height: 120rpx;
+    line-height: 120rpx;
+    font-size: 26rpx;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.my-item {
+    width: 670rpx;
+    border-bottom: 1px solid #eee;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-indent: 30rpx;
+    padding: 0 10rpx;
+}
+
+.about {
+    width: 100%;
+    background: url(http://qn.zxsite.cn/zxsite_shop/arrow-right.png) no-repeat 750rpx center;
+    background-size: 16rpx auto,750rpx auto;
+    height: 90rpx;
+    line-height: 90rpx;
+    padding-left: 100rpx;
+    font-size: 30rpx;
+}
+
+.flex {
+    display: flex;
+}
+
+.box-shadow {
+    box-shadow: 1px 1px 6px #ccc;
+    background-color: #fff;
+    border-radius: 10rpx;
+    width: 100%;
+}
+
+.wrap {
+    position: absolute;
+    top: 308rpx;
+    left: 20rpx;
+    width: 710rpx;
+    z-index: 999;
+    flex-wrap: wrap;
+}
+
+.first {
+    flex-wrap: wrap;
+}
+
+.all-order {
+    justify-content: space-around;
+    width: 710rpx;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.all-order text {
+    width: 345rpx;
+    background: #fff;
+    padding-left: 20rpx;
+}
+
+.more-order {
+    text-align: right;
+    width: 315rpx;
+    padding-right: 10rpx;
+}
+
+.my-item navigator {
+    background-color: #fff;
+}
+
+.top-nav {
+    line-height: 100rpx;
+    border-radius: 14rpx;
+    display: flex;
+    width: 670rpx;
+    padding: 0 20rpx;
+}
+
+.dir {
+    background: url(http://qn.zxsite.cn/zxsite_shop/arrow-right.png) no-repeat;
+    background-size: 16rpx 24rpx;
+    width: 20rpx;
+    height: 24rpx;
+    margin-top: 38rpx;
+}
+
+.all-hover {
+    background: #fff;
+}
+
+.repay {
+    width: 100%;
+    height: 50rpx;
+    background: url(http://qn.zxsite.cn/zxsite_shop/order-pay.png) no-repeat center center;
+    background-size: 60rpx 60rpx;
+    margin-bottom: 10rpx;
+}
+
+.pending {
+    width: 100%;
+    height: 50rpx;
+    background: url(http://qn.zxsite.cn/zxsite_shop/order-send.png) no-repeat center center;
+    background-size: 60rpx 60rpx;
+    margin-bottom: 10rpx;
+}
+
+.to-reveived {
+    width: 100%;
+    height: 50rpx;
+    background: url(http://qn.zxsite.cn/zxsite_shop/order-deliver.png) no-repeat center center;
+    background-size: 50rpx 50rpx;
+    margin-bottom: 10rpx;
+}
+
+.to-evaluated {
+    width: 100%;
+    height: 50rpx;
+    background: url(http://qn.zxsite.cn/zxsite_shop/order-comment.png) no-repeat center center;
+    background-size: 60rpx 60rpx;
+    margin-bottom: 10rpx;
+}
+
+.to-refund {
+    width: 100%;
+    height: 50rpx;
+    background: url(http://qn.zxsite.cn/zxsite_shop/order-refund.png) no-repeat center center;
+    background-size: 55rpx 55rpx;
+    margin-bottom: 10rpx;
+}
+
+.five-item {
+    width: 150rpx;
+    font-size: 24rpx;
+    align-items: center;
+    text-align: center;
+    margin: 30rpx 0 20rpx;
+    position: relative;
+}
+
+.five-item view {
+    font-size: 28rpx;
+}
+
+.second {
+    margin-top: 30rpx;
+    margin-bottom: 30rpx;
+}
+
+.title {
+    width: 650rpx;
+}
+
+.second navigator {
+    width: 100%;
+}
+
+.red-dot {
+    width: 16rpx;
+    height: 16rpx;
+    position: absolute;
+    left: 110rpx;
+    background-color: #f43530;
+    border-radius: 50%;
+}
+
+.technical-href {
+    transform: rotate(90deg);
+    width: 25rpx;
+    height: 25rpx;
+}
+
+.btn-row.a-remark {
+    display: block!important;
+    font-size: 28rpx;
+    padding-left: 30rpx;
+}

@@ -1,0 +1,35 @@
+<view class="wrapper">
+    <van-tabs bind:change="onTabChange">
+        <van-tab title="7天"></van-tab>
+        <van-tab title="30天"></van-tab>
+        <van-tab title="90天"></van-tab>
+    </van-tabs>
+    <view class="line-wrapper">
+        <canvas bindtouchend="touchEndHandler" bindtouchmove="moveHandler" bindtouchstart="touchHandler" canvasId="line-canvas" class="canvas" disableScroll="true"></canvas>
+    </view>
+    <container-block padding customClass="revenue-wrapper van-hairline--bottom">
+        <van-row>
+            <van-col span="12">
+                <view class="title">总收入</view>
+                <view class="content">{{statistics.sum}}</view>
+            </van-col>
+            <van-col span="12">
+                <view class="title">单日最高</view>
+                <view class="content">{{statistics.max}}</view>
+            </van-col>
+        </van-row>
+    </container-block>
+    <container-block padding customClass="revenue-wrapper van-hairline--bottom">
+        <van-row>
+            <van-col span="12">
+                <view class="title">日均收入</view>
+                <view class="content">{{statistics.avg}}</view>
+            </van-col>
+        </van-row>
+    </container-block>
+</view>
+<van-tabbar active="{{tabbarActive}}" bind:change="onTabbarChange">
+    <van-tabbar-item icon="gold-coin">营收</van-tabbar-item>
+    <van-tabbar-item icon="exchange-record">交易</van-tabbar-item>
+    <van-tabbar-item icon="records">销量</van-tabbar-item>
+</van-tabbar>

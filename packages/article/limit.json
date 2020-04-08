@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "无权限",
+    "usingComponents": {
+        "container-block": "./../../../../components/container-block/index"
+    }
+}

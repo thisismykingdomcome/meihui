@@ -1,0 +1,11 @@
+{
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "container-block": "./../../../../components/container-block/index",
+        "van-button": "./../../../../components/button/index",
+        "van-search": "./../../../../components/search/index",
+        "van-row": "./../../../../components/row/index",
+        "van-col": "./../../../../components/col/index",
+        "van-card": "./../../../../components/card/index"
+    }
+}

@@ -1,0 +1,124 @@
+.form-wrapper {
+    padding: 30rpx 0;
+}
+
+.form-item-wrapper {
+    border-bottom: 1px solid #eee;
+    padding: 30rpx;
+    display: flex;
+    font-size: 28rpx;
+}
+
+.form-item-wrapper:last-child {
+    padding-bottom: 0;
+}
+
+.form-item-label {
+    width: 180rpx;
+    display: flex;
+    align-items: center;
+}
+
+.form-item-label.required:before {
+    content: '*';
+    color: #f44;
+    margin-right: 8rpx;
+}
+
+.form-item-value {
+    width: 510rpx;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form-item-value input,.form-item-value textarea {
+    width: 100%;
+}
+
+.form-item-value .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    height: 50rpx;
+}
+
+.form-item-value icon {
+    width: auto;
+    height: auto;
+    margin-right: 5px;
+}
+
+.form-item-value picker input,.form-item-value picker {
+    width: 100%;
+}
+
+.uploader-file {
+    margin: 2px 5px 2px 0;
+    position: relative;
+    width: 79px;
+    height: 79px;
+}
+
+.uploader-img {
+    display: block;
+    width: 79px;
+    height: 79px;
+}
+
+.uploader-file-cancel {
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    background-color: #F43530;
+    text-align: center;
+    width: 158rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    opacity: 0.8;
+}
+
+.uploader-box {
+    margin: 2px 0;
+    position: relative;
+    width: 158rpx;
+    height: 158rpx;
+    border: 1px solid #d9d9d9;
+}
+
+.uploader-box:after,.uploader-box:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #d9d9d9;
+}
+
+.uploader-box:before {
+    width: 2px;
+    height: 39.5px;
+}
+
+.uploader-box:after {
+    width: 39.5px;
+    height: 2px;
+}
+
+.uploader-box:active {
+    border-color: #999;
+}
+
+.uploader-box:active:after,.uploader-box:active:before {
+    background-color: #999;
+}
+
+.uploader-input {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}

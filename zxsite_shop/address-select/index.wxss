@@ -1,0 +1,104 @@
+.container {
+    background-color: #f8f8f8;
+}
+
+.address-list {
+    width: 100%;
+    margin-top: 20rpx;
+    padding-bottom: 100rpx;
+}
+
+.address-list .a-address {
+    width: 690rpx;
+    margin: 0 0 20rpx 0;
+    padding: 20rpx 30rpx;
+    border-bottom: 1rpx solid #eee;
+    background: #fff;
+}
+
+.a-address .left-text {
+    width: 690rpx;
+    box-sizing: border-box;
+    border-bottom: 1px dashed #cccccc;
+    padding-bottom: 20rpx;
+}
+
+.op-btn {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20rpx;
+    align-items: center;
+}
+
+.a-address .left-text.active {
+    background: url(http://qn.zxsite.cn/zxsite_shop/addr-active.png) no-repeat left center;
+    background-size: 28rpx auto;
+}
+
+.a-address .left-text .name-tel {
+    margin-bottom: 10rpx;
+}
+
+.a-address .left-text .address-box {
+    font-size: 26rpx;
+    color: #888888;
+    line-height: 36rpx;
+}
+
+.right-edit {
+    width: 100rpx;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.right-edit-btn {
+    background: url(http://qn.zxsite.cn/zxsite_shop/addr-edit.png) no-repeat;
+    background-size: 35rpx 35rpx;
+    width: 35rpx;
+    height: 35rpx;
+}
+
+.txt {
+    margin-left: 10rpx;
+    font-size: 26rpx;
+}
+
+.bottom-box {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-size: 28rpx;
+    color: #000000;
+    border-top: 1rpx solid #eee;
+    height: 100rpx;
+    line-height: 100rpx;
+    background: #fff url(http://qn.zxsite.cn/zxsite_shop/arrow-right.png) no-repeat 705rpx center;
+    background-size: 15rpx auto;
+}
+
+.bottom-box .add-btn {
+    margin-left: 30rpx;
+    padding-left: 70rpx;
+    background: url(http://qn.zxsite.cn/zxsite_shop/add-addr.png) no-repeat left center;
+    background-size: 40rpx 40rpx;
+}
+
+.radio {
+    width: 590rpx;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.radio-btn.active {
+    background: url(http://qn.zxsite.cn/zxsite_shop/checkbox-red.png) no-repeat;
+    background-size: 40rpx 40rpx;
+}
+
+.radio-btn {
+    width: 40rpx;
+    height: 40rpx;
+    background: url(http://qn.zxsite.cn/zxsite_shop/checkbox.png) no-repeat;
+    background-size: 40rpx 40rpx;
+}

@@ -1,0 +1,38 @@
+.header .van-cell__title {
+    flex: 4;
+}
+
+.header .van-cell__value {
+    flex: 1;
+}
+
+.credit {
+    margin-top: 15px;
+}
+
+.toolbar {
+    width: 70rpx;
+    height: 70rpx;
+    position: fixed;
+    right: 40rpx;
+    padding: 10rpx;
+    background-color: #f44;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.toolbar image {
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.no-bottom-title {
+    padding-bottom: 0!important;
+}
+
+.no-more {
+    text-align: center;
+    font-size: 24rpx;
+    padding: 15px 0;
+    color: #999;
+}

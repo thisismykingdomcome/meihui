@@ -1,0 +1,27 @@
+@import "../../../components/checkbox-group/index.wxss";
+
+.wrapper {
+    padding-bottom: 50px;
+}
+
+.pie-wrapper {
+    background-color: #fff;
+    margin-bottom: 15px;
+}
+
+.canvas {
+    width: 100%;
+    height: 250px;
+}
+
+.sales-wrapper {
+    background-color: #fff;
+}
+
+.van-cell__title {
+    flex: 4!important;
+}
+
+.van-cell__value {
+    flex: 1!important;
+}

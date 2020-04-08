@@ -1,0 +1,26 @@
+<view class="container" style="background-color: {{backgroundColor}}">
+    <view class="status-box">
+        <view bindtap="statusTap" class="status-label {{index==currentType?'active':''}}" data-index="{{index}}" style="border-bottom-color: {{index==currentType?themeColor:'#fff'}};color: {{index==currentType?themeColor:'#353535'}}" wx:for="{{statusType}}" wx:key="{{index}}">
+            {{item}}
+            <view class="{{tabClass[index]}}"></view>
+        </view>
+    </view>
+    <view class="no-balance" hidden="{{balanceList?true:false}}">
+        <image class="no-balance-img" src="http://qn.zxsite.cn/zxsite_shop/no-order.png"></image>
+        <view class="text">暂无余额记录</view>
+    </view>
+    <view class="balance-list" hidden="{{balanceList?false:true}}">
+        <view class="a-balance" wx:for="{{balanceList}}" wx:key="key">
+            <view class="balance-info">
+	    		{{item.remark}}
+	    		<text>{{item.createtime}}</text>
+            </view>
+            <view class="balance-num">
+	    		{{item.num>0?'+':''}}{{item.num}}
+	    	</view>
+        </view>
+    </view>
+</view>
+<view class="no-more" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

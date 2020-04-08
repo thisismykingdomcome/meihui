@@ -1,0 +1,6 @@
+<van-panel useFooterSlot footerClass="footer" headerClass="header" status="{{item.status==0?'成功':'失败'}}" title="商家单号：{{item.uniontid}}" wx:for="{{refundList}}" wx:key="key">
+    <van-cell title="退款原因：{{item.reason}}" value="¥{{item.fee}}"></van-cell>
+    <view slot="footer">
+        <van-button bind:click="onRefund" id="{{item.id}}" size="small" type="primary" wx:if="{{item.status==-1}}">退款</van-button>
+    </view>
+</van-panel>

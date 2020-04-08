@@ -1,0 +1,5 @@
+<template name="video">
+    <view class="video-wrapper" wx:if="{{data.videoSource&&hideLoading}}">
+        <video autoplay="{{style.autoplay==1?true:false}}" loop="{{style.loop==1?true:false}}" poster="{{data.poster}}" showCenterPlayBtn="false" src="{{data.videoSource}}"></video>
+    </view>
+</template>

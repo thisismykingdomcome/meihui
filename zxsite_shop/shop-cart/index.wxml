@@ -1,0 +1,6 @@
+<import src="../template-cart/template-cart.wxml"></import>
+<view class="container" style="background-color: {{backgroundColor}}">
+    <template is="{{goodsList.list.length>0?'cart-goods-list':'no-goods'}}" data="{{...goodsList}}"></template>
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

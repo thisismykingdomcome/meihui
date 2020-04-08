@@ -1,0 +1,105 @@
+@import "../../../components/card/index.wxss";
+
+.container {
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+.status-box {
+    width: 100%;
+    height: 88rpx;
+    line-height: 88rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.status-box .status-label {
+    width: 187.5rpx;
+    height: 100%;
+    text-align: center;
+    font-size: 28rpx;
+    color: #353535;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.status-box .status-label.active {
+    color: #f44;
+    border-bottom: 6rpx solid #f44;
+}
+
+.status-box .status-label .red-dot {
+    width: 16rpx;
+    height: 16rpx;
+    position: absolute;
+    left: 107rpx;
+    top: 23rpx;
+    background-color: #f43530;
+    border-radius: 50%;
+}
+
+.no-order {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    top: 88rpx;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-top: 203rpx;
+    background-color: #f8f8f8;
+}
+
+.no-order-img {
+    width: 81rpx;
+    height: 96rpx;
+    margin-bottom: 31rpx;
+}
+
+.no-order .text {
+    font-size: 28rpx;
+    color: #999999;
+    text-align: center;
+}
+
+.no-more-goods {
+    text-align: center;
+    font-size: 24rpx;
+    padding-bottom: 48rpx;
+    color: #999;
+    margin-top: 30rpx;
+}
+
+.member-wrapper {
+    font-size: 14px;
+    background-color: #fff;
+    padding: 15px 0;
+}
+
+.member {
+    background-color: #fff!important;
+    padding-left: 65px;
+}
+
+.van-card {
+    height: 50px;
+}
+
+.van-card__thumb {
+    width: 40px;
+    height: 40px;
+}
+
+.van-card__title {
+    font-size: 14px;
+}
+
+.van-card__level {
+    color: #f44;
+}
+
+.van-card__desc {
+    color: #ccc;
+}

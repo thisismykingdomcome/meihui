@@ -1,0 +1,7 @@
+.cube-wrapper {
+    background-color: #fff;
+}
+
+.cube-wrapper image {
+    width: 100%;
+}

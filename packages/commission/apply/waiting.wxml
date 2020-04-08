@@ -1,0 +1,27 @@
+<container-block wx:if="{{agent}}">
+    <view class="weui-msg">
+        <view class="weui-msg__icon-area">
+            <icon size="93" type="success" wx:if="{{agent.status==1}}"></icon>
+            <icon size="93" type="warn" wx:else></icon>
+        </view>
+        <view class="weui-msg__text-area">
+            <block wx:if="{{agent.status==0}}">
+                <view class="weui-msg__title">申请不通过</view>
+                <view class="weui-msg__desc" wx:if="{{agent.content}}">{{agent.content}}</view>
+            </block>
+            <block wx:elif="{{agent.status==1}}">
+                <view class="weui-msg__title">申请成功</view>
+                <view class="weui-msg__desc">您的申请已经提交，请耐心等待审核</view>
+            </block>
+            <block wx:elif="{{agent.status==2}}">
+                <view class="weui-msg__title">分销商被撤销</view>
+                <view class="weui-msg__desc" wx:if="{{agent.content}}">{{agent.content}}</view>
+            </block>
+        </view>
+        <view class="weui-btn-area">
+            <button bindtap="onBack" class="weui-btn" style="background-color: {{themeColor}}" type="primary">返回</button>
+        </view>
+    </view>
+</container-block>
+<import src="./../../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

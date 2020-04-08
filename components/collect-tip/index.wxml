@@ -1,0 +1,11 @@
+<view class="collect-tip" wx:if="{{!isHaveColseCollectTip&&show}}">
+    <view class="collect-tip__line">
+    点击“
+    <view class="share-icon icon-collect-gift-share-icon"></view>
+    ”添加到我的小程序，
+  </view>
+    <view class="collect-tip__line">
+    {{text}}
+  </view>
+    <van-icon bind:click="handleCollectTipClose" customClass="van-icon-clear" name="clear"></van-icon>
+</view>

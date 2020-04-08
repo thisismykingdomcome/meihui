@@ -1,0 +1,72 @@
+<container-block customClass="form-wrapper">
+    <van-cell-group>
+        <van-field bind:change="onFieldChange" border="true" id="shop_name" label="商城名称" placeholder="请输入商城名称" titleWidth="100px" value="{{settings.shop_name}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="shop_share_profile" label="分享话术" placeholder="请输入分享话术" titleWidth="100px" value="{{settings.shop_share_profile}}"></van-field>
+        <van-cell border="{{false}}" customClass="no-bottom-title" title="分享图片"></van-cell>
+        <van-cell>
+            <view class="uploader-file" wx:if="{{settings.shop_share_image}}">
+                <image bindtap="previewImage" class="uploader-img" data-src="{{settings.shop_share_image_url}}" mode="aspectFill" src="{{settings.shop_share_image_url}}"></image>
+                <view bindtap="deleteImage" class="uploader-file-cancel" data-type="shop_share_image">
+              删除
+          </view>
+            </view>
+            <view class="uploader-box" wx:else>
+                <view bindtap="chooseImage" class="uploader-input" data-type="shop_share_image"></view>
+            </view>
+        </van-cell>
+        <van-switch-cell bind:change="onSwitchChange" border="true" checked="{{settings.shop_service_telphone==1}}" id="shop_service_telphone" size="20px" title="客服电话"></van-switch-cell>
+        <van-cell border="{{false}}" customClass="no-bottom-title" title="电话图标" wx:if="{{settings.shop_service_telphone==1}}"></van-cell>
+        <van-cell wx:if="{{settings.shop_service_telphone==1}}">
+            <view class="uploader-file" wx:if="{{settings.shop_telphone_icon}}">
+                <image bindtap="previewImage" class="uploader-img" data-src="{{settings.shop_telphone_icon_url}}" mode="aspectFill" src="{{settings.shop_telphone_icon_url}}"></image>
+                <view bindtap="deleteImage" class="uploader-file-cancel" data-type="shop_telphone_icon">
+              删除
+          </view>
+            </view>
+            <view class="uploader-box" wx:else>
+                <view bindtap="chooseImage" class="uploader-input" data-type="shop_telphone_icon"></view>
+            </view>
+        </van-cell>
+        <van-field bind:change="onFieldChange" border="{{true}}" id="shop_telphone" label="电话号码" placeholder="请输入客服电话号码" titleWidth="100px" value="{{settings.shop_telphone}}"></van-field>
+        <van-switch-cell bind:change="onSwitchChange" border="true" checked="{{settings.shop_service==1}}" id="shop_service" size="20px" title="商城客服"></van-switch-cell>
+        <van-cell border="{{false}}" customClass="no-bottom-title" title="客服图标" wx:if="{{settings.shop_service==1}}"></van-cell>
+        <van-cell wx:if="{{settings.shop_service==1}}">
+            <view class="uploader-file" wx:if="{{settings.shop_service_icon}}">
+                <image bindtap="previewImage" class="uploader-img" data-src="{{settings.shop_service_icon_url}}" mode="aspectFill" src="{{settings.shop_service_icon_url}}"></image>
+                <view bindtap="deleteImage" class="uploader-file-cancel" data-type="shop_service_icon">
+              删除
+          </view>
+            </view>
+            <view class="uploader-box" wx:else>
+                <view bindtap="chooseImage" class="uploader-input" data-type="shop_service_icon"></view>
+            </view>
+        </van-cell>
+        <van-field bind:change="onFieldChange" border="true" id="shop_server_url" label="客服链接" placeholder="留空，则默认使用微信官方多客服" titleWidth="100px" value="{{settings.shop_server_url}}" wx:if="{{settings.shop_service==1}}"></van-field>
+        <van-cell isLink bind:click="onLocationClick" title="地图位置" value="{{settings.longitude}},{{settings.latitude}}"></van-cell>
+        <van-field bind:change="onFieldChange" border="true" id="address" label="详细地址" placeholder="请输入商家详细地址" titleWidth="100px" value="{{settings.address}}"></van-field>
+        <van-switch-cell bind:change="onSwitchChange" border="true" checked="{{settings.overseas_agency==1}}" id="overseas_agency" size="20px" title="海外代购"></van-switch-cell>
+        <van-cell isLink bind:click="onCategoryLevelClick" title="商品分类" value="{{settings.category_level_text}}"></van-cell>
+        <van-cell isLink bind:click="onCategoryStyleClick" title="分类样式" value="{{settings.category_style_text}}"></van-cell>
+        <van-cell isLink bind:click="onSendTypeClick" title="发货方式" value="{{settings.send_type_text}}"></van-cell>
+        <van-cell isLink bind:click="onHomeNavigationLineNumberClick" title="导航图标每行个数" value="{{settings.home_navigation_line_number_text}}"></van-cell>
+        <van-field bind:change="onFieldChange" border="true" id="default_acknowledgment_time" label="默认收货时间" placeholder="请输入默认收货时间" titleWidth="100px" value="{{settings.default_acknowledgment_time}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="default_evaluation_time" label="默认评价时间" placeholder="请输入默认评价时间" titleWidth="100px" value="{{settings.default_evaluation_time}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="auction_fail_time" label="默认流拍时间" placeholder="请输入默认流拍时间" titleWidth="100px" value="{{settings.auction_fail_time}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="video_url" label="视频地址" placeholder="请输入视频地址，支持的视频格式有mp4、m3u8或腾讯视频" titleWidth="100px" value="{{settings.video_url}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="audio_url" label="音频地址" placeholder="请输入音频地址，支持的音频格式有mp3" titleWidth="100px" value="{{settings.audio_url}}"></van-field>
+        <van-switch-cell bind:change="onSwitchChange" border="true" checked="{{settings.is_official_account==1}}" id="is_official_account" size="20px" title="公众号关注"></van-switch-cell>
+        <van-switch-cell bind:change="onSwitchChange" border="true" checked="{{settings.is_show_reputation==1}}" id="is_show_reputation" size="20px" title="是否显示评价"></van-switch-cell>
+        <van-switch-cell bind:change="onSwitchChange" border="true" checked="{{settings.is_wechat_review==1}}" id="is_wechat_review" size="20px" title="开启微信审核"></van-switch-cell>
+    </van-cell-group>
+</container-block>
+<container-block customClass="form-bottom">
+    <van-row>
+        <van-col span="24">
+            <van-button bind:click="onSave" block="true" type="primary">保存</van-button>
+        </van-col>
+    </van-row>
+</container-block>
+<van-action-sheet actions="{{categoryLevelActions}}" bind:cancel="onCategoryLevelActionsCancel" bind:close="onCategoryLevelActionsCancel" bind:select="onCategoryLevelActionsSelect" cancelText="取消" show="{{categoryLevelActionsShow}}"></van-action-sheet>
+<van-action-sheet actions="{{categoryStyleActions}}" bind:cancel="onCategoryStyleActionsCancel" bind:close="onCategoryStyleActionsCancel" bind:select="onCategoryStyleActionsSelect" cancelText="取消" show="{{categoryStyleActionsShow}}"></van-action-sheet>
+<van-action-sheet actions="{{sendTypeActions}}" bind:cancel="onSendTypeActionsCancel" bind:close="onSendTypeActionsCancel" bind:select="onSendTypeActionsSelect" cancelText="取消" show="{{sendTypeActionsShow}}"></van-action-sheet>
+<van-action-sheet actions="{{homeNavigationLineNumberActions}}" bind:cancel="onHomeNavigationLineNumberActionsCancel" bind:close="onHomeNavigationLineNumberActionsCancel" bind:select="onHomeNavigationLineNumberActionsSelect" cancelText="取消" show="{{homeNavigationLineNumberActionsShow}}"></van-action-sheet>

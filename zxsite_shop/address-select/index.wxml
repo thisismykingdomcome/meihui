@@ -1,0 +1,27 @@
+<view class="container" style="background-color: {{backgroundColor}}">
+    <view class="address-list">
+        <view class="a-address" wx:for="{{addressList}}" wx:key="{{index}}">
+            <view class="left-text {{item.isDefault?'active':''}}" data-id="{{item.id}}">
+                <view class="name-tel">
+                    {{item.name}}  {{item.mobile}}
+                 </view>
+                <view class="address-box">
+                    {{item.address}}
+                 </view>
+            </view>
+            <view class="op-btn">
+                <view class="radio">
+                    <view bindtap="radioChange" class="radio-btn {{item.is_default==1?'active':''}}" data-id="{{item.id}}"></view>
+                    <text class="txt">{{item.is_default==1?'已设为默认':'设为默认'}}</text>
+                </view>
+                <view bindtap="editAddess" class="right-edit" data-id="{{item.id}}">
+                    <view class="right-edit-btn"></view>
+                    <text class="txt">编辑</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="bottom-box">
+        <view bindtap="addAddess" class="add-btn">新增收货地址</view>
+    </view>
+</view>

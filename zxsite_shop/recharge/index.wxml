@@ -1,0 +1,15 @@
+<view class="container">
+    <image class="banner" mode="scaleToFill" src="{{banner}}" wx:if="{{banner}}"></image>
+    <view class="money-wrap">
+        <view bindtap="rechargeSelect" class="money" data-index="{{index}}" style="border-color: {{themeColor}}; color: {{index==selectIndex?'#fff':themeColor}}; background-color: {{index==selectIndex?themeColor:'#fff'}}" wx:for="{{rechargeList}}" wx:key="key">
+			{{item.enough}}元
+			<text>赠{{item.give}}元</text>
+        </view>
+    </view>
+    <button bindtap="toRecharge" style="background-color: {{themeColor}}">充值</button>
+    <view class="log">
+        <text bindtap="toBalanceLog">余额记录</text>|<text bindtap="toRechargeOrder">充值订单</text>
+    </view>
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

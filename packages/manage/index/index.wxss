@@ -1,0 +1,71 @@
+page {
+    background-color: #f8f8f8;
+}
+
+.overview-wrapper {
+    background-color: #ffffff;
+}
+
+.overview {
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #e52c13;
+    padding: 15px;
+}
+
+.overview-statistics {
+    font-size: 30px;
+    margin: 13px 0;
+}
+
+.overview-wrapper .van-col {
+    margin: 2px 0;
+}
+
+.shortcut-wrapper {
+    background-color: #ffffff;
+    margin: 20rpx 0;
+}
+
+.shortcut {
+    width: 700rpx;
+    display: flex;
+    text-align: center;
+}
+
+.shortcut .item {
+    font-size: 16px;
+    padding: 30rpx 0;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shortcut .middle {
+    width: 1px;
+    background-color: #f0f0f0;
+    margin: 20px 0;
+}
+
+.shortcut .item .text {
+    margin-left: 20rpx;
+    font-size: 38rpx;
+    font-weight: bold;
+}
+
+.grid-wrapper {
+    font-size: 14px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.grid-wrapper image {
+    width: 70rpx;
+    height: 70rpx;
+    margin: 20rpx 0;
+}
+
+.grid-wrapper .van-col {
+    padding: 20rpx;
+}

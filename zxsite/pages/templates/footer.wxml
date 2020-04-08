@@ -1,0 +1,24 @@
+<template name="goHome">
+    <navigator class="goHome" hoverClass="active" openType="redirect" url="/zxsite/pages/index/index">
+        <image mode="widthFix" src="/zxsite/resource/images/home.png"></image>
+    </navigator>
+</template>
+<template name="footerWx">
+    <block wx:if="{{list}}">
+        <view class="zxsite-bottom {{borderStyle}}" style="background-color:{{backgroundColor}};">
+            <block wx:for="{{list}}" wx:key="{{index}}">
+                <view class="zxsite-bottom-item" hoverClass="active" wx:if="{{item.pageUrl=='/'+thisurl}}">
+                    <image class="item-img" mode="widthFix" src="{{item.selectedIconPath}}"></image>
+                    <view class="item-text" style="color: {{selectedColor}};">{{item.text}}</view>
+                </view>
+                <view class="zxsite-bottom-item" hoverClass="active" wx:else>
+                    <navigator hoverClass="active" openType="redirect" url="{{item.pagePath}}">
+                        <image class="item-img" mode="widthFix" src="{{item.iconPath}}"></image>
+                        <view class="item-text" style="color: {{color}}">{{item.text}}</view>
+                    </navigator>
+                </view>
+            </block>
+        </view>
+        <view class="zxsite-bottom-placeholder"></view>
+    </block>
+</template>

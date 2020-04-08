@@ -1,0 +1,13 @@
+{
+    "navigationBarTitleText": "交易统计",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "container-block": "./../../../../components/container-block/index",
+        "van-tab": "./../../../../components/tab/index",
+        "van-tabs": "./../../../../components/tabs/index",
+        "van-tabbar": "./../../../../components/tabbar/index",
+        "van-tabbar-item": "./../../../../components/tabbar-item/index",
+        "van-row": "./../../../../components/row/index",
+        "van-col": "./../../../../components/col/index"
+    }
+}

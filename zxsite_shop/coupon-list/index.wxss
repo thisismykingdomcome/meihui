@@ -1,0 +1,142 @@
+.container {
+    background-color: #f8f8f8;
+}
+
+.coupons-list {
+    width: 100%;
+    background-color: #eee;
+    margin-top: 35rpx;
+}
+
+.bottom-box {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-size: 28rpx;
+    color: #000000;
+    border-top: 1rpx solid #eee;
+    height: 100rpx;
+    line-height: 100rpx;
+    background: #fff url(http://qn.zxsite.cn/zxsite_shop/add-addr.png) no-repeat 705rpx center;
+}
+
+.bottom-box .add-btn {
+    margin-left: 30rpx;
+    padding-left: 70rpx;
+    background: url(http://qn.zxsite.cn/zxsite_shop/add-addr.png) no-repeat left center;
+    background-size: 40rpx auto;
+}
+
+.coupons-item {
+    width: 630rpx;
+    height: 210rpx;
+    margin: 0 30rpx;
+    padding: 60rpx 30rpx 0rpx;
+    font-size: 30rpx;
+    line-height: 50rpx;
+    color: #b98409;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 50rpx;
+    background-color: #fff;
+    border-radius: 10rpx;
+}
+
+.coupon-title {
+    position: absolute;
+    top: 1rpx;
+    color: #fff;
+    font-size: 34rpx;
+}
+
+.coupon-info {
+    color: #e64240;
+    position: absolute;
+    bottom: 70rpx;
+    display: flex;
+    height: 100rpx;
+    width: 670rpx;
+}
+
+.coupon-term {
+    position: absolute;
+    bottom: 0rpx;
+    height: 50rpx;
+    font-size: 20rpx;
+}
+
+.coupon-price,.coupon-discount {
+    display: flex;
+    align-items: flex-end;
+    font-size: 80rpx;
+    line-height: 80rpx;
+    margin-right: 10rpx;
+}
+
+.coupon-temp {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30rpx;
+}
+
+.coupon-button.normal {
+    display: flex;
+    align-items: flex-end;
+    background: url(http://qn.zxsite.cn/zxsite_shop/coupon-button-red.png) no-repeat right bottom;
+    background-size: 100%;
+    color: #fff;
+    width: 180rpx;
+}
+
+.coupon-button.failure,.coupon-button.used {
+    display: flex;
+    align-items: flex-end;
+    background: url(http://qn.zxsite.cn/zxsite_shop/coupon-button-disable.png)no-repeat right bottom;
+    background-size: 100%;
+    color: #fff;
+    width: 180rpx;
+}
+
+.general-info {
+    border: 1rpx solid #fef4eb;
+    background-color: #fef4eb;
+    padding: 1rpx 10rpx;
+}
+
+.coupon-currency {
+    display: flex;
+    align-items: flex-end;
+}
+
+.coupons-item.normal {
+    background-image: url(http://qn.zxsite.cn/zxsite_shop/coupon-top-red.png);
+}
+
+.coupons-item.failure,.coupons-item.used {
+    background-image: url(http://qn.zxsite.cn/zxsite_shop/coupon-top-disable.png);
+    color: #bcbbbb;
+}
+
+.coupons-item button {
+    font-size: 30rpx;
+    border-radius: 0;
+    padding: 0;
+    align-self: center;
+    width: 60rpx;
+    height: 80rpx;
+    opacity: 0;
+    background-color: #ffffff;
+}
+
+.no-more-goods {
+    text-align: center;
+    font-size: 24rpx;
+    padding-top: 24rpx;
+    padding-bottom: 24rpx;
+    color: #999;
+}

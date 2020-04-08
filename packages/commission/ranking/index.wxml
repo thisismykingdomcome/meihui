@@ -1,0 +1,56 @@
+<container-block>
+    <view class="top-wrapper">
+        <view class="top top-2">
+            <view class="ranking">2</view>
+            <view>
+                <image mode="aspectFit" src="{{ranking[1].avatar}}"></image>
+            </view>
+            <view class="nickname">
+      {{ranking[1].nickname}}
+    </view>
+            <view class="money">
+      {{ranking[1].charge_total}}{{textUnion}}
+    </view>
+        </view>
+        <view class="top top-1">
+            <view class="ranking">1</view>
+            <view>
+                <image mode="aspectFit" src="{{ranking[0].avatar}}"></image>
+            </view>
+            <view class="nickname">
+      {{ranking[0].nickname}}
+    </view>
+            <view class="money">
+      {{ranking[0].charge_total}}{{textUnion}}
+    </view>
+        </view>
+        <view class="top top-3">
+            <view class="ranking">3</view>
+            <view>
+                <image mode="aspectFit" src="{{ranking[2].avatar}}"></image>
+            </view>
+            <view class="nickname">
+      {{ranking[2].nickname}}
+    </view>
+            <view class="money">
+      {{ranking[2].charge_total}}{{textUnion}}
+    </view>
+        </view>
+    </view>
+    <view class="ranking-wrapper">
+        <view class="ranking" wx:if="{{idx>=3}}" wx:for="{{ranking}}" wx:for-index="idx" wx:key="key">
+        <view class="idnum">
+  <view class="number">{{idx+1}}</view>
+        </view>
+          
+            <view class="avatar">
+                <image mode="aspectFit" src="{{item.avatar}}"></image>
+            </view>
+            <view class="nickname">{{item.nickname}}</view>
+            <view class="money">{{item.charge_total}}{{textUnion}}</view>
+        </view>
+    </view>
+    <view class="remark">
+  * 排名以总{{textCharge}}数为依据
+</view>
+</container-block>

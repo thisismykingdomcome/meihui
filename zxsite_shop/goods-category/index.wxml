@@ -1,0 +1,36 @@
+
+<view style="padding-bottom: 122rpx;width:100%;height:100%;box-sizing:border-box;display:flex">
+<!-- <scroll-view scroll-y="true"   bindscroll="scroll" > -->
+<!-- 左侧导航栏 -->
+  
+  <view  class="leftNav"  >
+      <view wx:for = "{{arr}}" wx:key = "index"  > 
+        <text data-index="{{index}}" data-id="{{item.id}}" bindtap="tapLeftNav" class="leftNavText {{index == globalIndex ? 'categoryActive' : ''}}">{{item.name}}</text>
+      </view>
+      
+  </view>
+  <!-- 右侧内容区 -->
+  <scroll-view  class="rightBigBox"  scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+      <!-- 子内容 -->
+      <view wx:for = "{{arr}}" wx:key = "index" class="rightSub" id="demo{{index}}">
+        <!-- 子内容标题 -->
+        <view data-id="{{item.id}}" class="subHeadline" >{{item.name}}</view>
+        <!-- 子内容的内容 -->
+       
+          <view class="subContent">
+            <navigator url="../zxsite_shop/index/index" open-type="switchTab" wx:for = "{{item.children}}" wx:for-item="itemChild" class="subConItem">
+              <image src="http://mh9.cc{{itemChild.img}}" mode="scaleToFill" webp="true" lazy-load="true" class="img"></image>
+              <text class="imgText">{{itemChild.name}}</text>
+            </navigator>
+           
+            <view class="clear"></view>
+          </view>
+          
+       
+        
+      </view>
+  </scroll-view> 
+  <!-- </scroll-view> -->
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

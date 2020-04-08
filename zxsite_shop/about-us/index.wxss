@@ -1,0 +1,90 @@
+page {
+    background: rgb(245,245,245);
+    margin-bottom: 5%;
+}
+
+.contont {
+    flex-wrap: wrap;
+}
+
+.list {
+    width: 100%;
+    background: #fff;
+    font-size: 55rpx;
+}
+
+.show-info {
+    margin: 0 auto;
+    padding: 20rpx;
+    font-size: 25rpx;
+}
+
+.aboutus-first {
+    padding: 10px 0 10px 0;
+    background: #fff;
+    font-size: 35rpx;
+    text-align: left;
+}
+
+.aboutus {
+    padding: 14px 0 10px 0;
+    background: #fff;
+    font-size: 35rpx;
+    text-align: left;
+    border-top: 1px solid rgb(245,245,245);
+}
+
+.shop {
+    padding-bottom: 1%;
+    margin-top: 2.5%;
+    width: 100%;
+    background: #fff;
+}
+
+.left-map {
+    width: 50rpx;
+    height: 55rpx;
+    position: absolute;
+    color: #f44;
+    left: 80rpx;
+}
+
+.left-tel {
+    width: 50rpx;
+    height: 55rpx;
+    position: absolute;
+    color: #f44;
+    right: 240rpx;
+}
+
+.temp {
+    height: 10rpx;
+    background: #fff;
+}
+
+.message {
+    padding: 10px 0 18px 0;
+    background: #fff;
+    font-size: 35rpx;
+    height: 35rpx;
+}
+
+.map {
+    float: left;
+    width: 49%;
+    text-align: center;
+    border-right: 1px solid #eee;
+}
+
+.telephone {
+    float: left;
+    width: 49%;
+}
+
+.showContent {
+    line-height: 55rpx;
+}
+
+.telephone .showContent {
+    margin-left: 145rpx;
+}

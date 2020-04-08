@@ -1,0 +1,23 @@
+<van-tabs active="{{tabActive}}" bind:change="onTabChange" color="{{themeColor}}">
+    <van-tab title="{{item.name}}" wx:for="{{categoryList}}" wx:key="key"></van-tab>
+</van-tabs>
+<image class="banner" mode="scaleToFill" src="{{category.banner}}" wx:if="{{category.banner}}"></image>
+<container-block bindtap="onDetail" customClass="article-wrapper van-hairline--bottom" data-id="{{item.id}}" wx:for="{{articleList}}" wx:for-index="idx">
+    <view class="van-card">
+        <view class="van-card__content">
+            <view class="van-card__left">
+                <view class="van-card__title van-multi-ellipsis--l2">{{item.title}}</view>
+                <view class="van-card__desc van-ellipsis">
+                    <view>{{item.view}}次浏览</view>
+                    <view>{{item.date}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="van-card__thumb">
+            <image class="van-card__img thumb-class" mode="scaleToFill" src="{{item.cover}}"></image>
+        </view>
+    </view>
+</container-block>
+<view class="no-more" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+<import src="./../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

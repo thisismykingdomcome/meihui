@@ -1,0 +1,95 @@
+<template name="seckill">
+    <view class="goods-container" style="background-color: {{style.backgroundColor}}" wx:if="{{style.listStyle=='list-style-1'}}">
+        <view class="goods-box {{style.listStyle}}" wx:for="{{data.list}}" wx:key="{{index}}">
+            <view bindtap="toSeckillDetailsTap" class="img-box" data-id="{{item.id}}" data-seckill-date="{{item.date}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}">
+                <image binderror="loadImageError" class="image" lazyLoad="true" mode="aspectFill" src="{{item.cover}}?time={{loadImageTime}}"></image>
+                <view style="position: absolute;bottom: 0;width:100%;background:url(http://qn.zxsite.cn/zxsite_shop/seckill-goods-countdown-bg.png);background-size:100%;display:flex;padding:34rpx 0;line-height:34rpx;justify-content:space-between;color:#fff;font-size:26rpx;">
+                    <view style="font-size: 18px;margin-left: 34rpx;">秒杀</view>
+                    <view style="margin-right: 34rpx;">{{item.seckill_status==1?'距结束仅剩':'距开始还有'}}{{item.countdown}}</view>
+                </view>
+            </view>
+            <view bindtap="toSeckillDetailsTap" class="goods-title" data-id="{{item.id}}" data-seckill-date="{{item.date}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}">{{item.goods_title}}</view>
+            <view class="goods-bottom-wrapper">
+                <view class="goods-price-wrapper">
+                    <view class="goods-price">¥ <text style="font-size:38rpx;">{{item.seckill_price}}</text>
+                    </view>
+                    <view class="goods-price" style="color:#aaa;padding-left:12rpx;text-decoration:line-through;">¥{{item.price}}</view>
+                </view>
+                <view bindtap="toSeckillDetailsTap" class="button begin-style" data-id="{{item.id}}" data-seckill-date="{{item.date}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}" wx:if="{{item.seckill_status==1}}">
+                    <view>立即抢购</view>
+                </view>
+                <form bindsubmit="setSeckillRemind" data-index="{{index}}" data-seckill-date="{{item.date}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}" reportSubmit="true" wx:if="{{item.seckill_status==2&&item.remind==0}}">
+                    <button class="button remind-set" formType="submit">
+                        <view>设置提醒</view>
+                    </button>
+                </form>
+                <form bindsubmit="cancleSeckillRemind" data-index="{{index}}" data-seckill-remind-id="{{item.remind_id}}" data-time="{{item.time}}" reportSubmit="true" wx:if="{{item.seckill_status==2&&item.remind==1}}">
+                    <button class="button remind-cancle" formType="submit">取消提醒</button>
+                </form>
+            </view>
+        </view>
+    </view>
+    <view class="goods-container" style="background-color: {{style.backgroundColor}}" wx:if="{{style.listStyle=='list-style-2'}}">
+        <view bindtap="toSeckillDetailsTap" class="goods-box {{style.listStyle}}" data-id="{{item.id}}" data-seckill-date="{{item.date}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}" wx:for="{{data.list}}" wx:key="{{index}}">
+            <view class="img-box">
+                <image binderror="loadImageError" class="image" lazyLoad="true" mode="aspectFill" src="{{item.cover}}?time={{loadImageTime}}"></image>
+                <view style="position: absolute;bottom: 0;width:100%;background:url(http://qn.zxsite.cn/zxsite_shop/seckill-goods-countdown-bg.png);background-size:100%;padding:10rpx 0;line-height:34rpx;justify-content:space-between;color:#fff;font-size:26rpx;text-align:center;">
+			{{item.seckill_status==1?'距结束仅剩':'距开始'}}{{item.countdown}}
+		  </view>
+            </view>
+            <view class="goods-title">{{item.goods_title}}</view>
+            <view class="goods-bottom-wrapper">
+                <view class="goods-price">¥ <text style="font-size:30rpx;">{{item.seckill_price}}</text>
+                </view>
+                <view class="goods-price" style="color:#aaa;text-decoration:line-through;">¥{{item.price}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="seckill" style="margin-bottom: 0" wx:elif="{{style.listStyle=='list-style-3'}}">
+        <view class="seckill-goods" wx:for="{{data.list}}" wx:key="key">
+            <view bindtap="toSeckillDetailsTap" class="seckill-goods-cover" data-id="{{item.id}}" data-seckill-date="{{item.date}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}">
+                <image binderror="loadImageError" lazyLoad="true" mode="aspectFill" src="{{item.cover}}?time={{loadImageTime}}"></image>
+                <view class="seckill-goods-countdown" wx:if="{{item.seckill_status==1}}">
+                    <view>{{item.countdown}}</view>
+                </view>
+            </view>
+            <view class="seckill-goods-content">
+                <view bindtap="toSeckillDetailsTap" class="seckill-goods-title" data-id="{{item.id}}" data-seckill-date="{{item.date}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}">{{item.goods_title}}</view>
+                <view wx:if="{{item.seckill_status==1}}">
+                    <view class="seckill-goods-progress-container">
+                        <view class="seckill-goods-progress" style="width: {{item.surplus*100/item.seckill_stores}}%;"></view>
+                    </view>
+                    <view class="seckill-goods-stores-container">
+                        <view>已抢购 {{item.seckill_stores-item.surplus}} 件</view>
+                        <view>仅剩<text> {{item.surplus}} </text>件</view>
+                    </view>
+                </view>
+                <view class="seckill-goods-price-container">
+                    <view class="play-time" wx:if="{{item.seckill_status==2}}">
+                        <view class="begin-time">
+                            <text class="timePlay">{{item.time}}:00 场</text>
+                        </view>
+                        <view class="begin-time">距开始<text style="color:#e52c13; text-decoration:none;">{{item.countdown}}</text>
+                        </view>
+                    </view>
+                    <view class="skill-bottom">
+                        <view>￥<text style="font-size:38rpx;">{{item.seckill_price}}</text>
+                            <text class="goods-price">￥{{item.price}}</text>
+                        </view>
+                        <view bindtap="toSeckillDetailsTap" class="button begin-style" data-id="{{item.id}}" data-seckill-date="{{item.date}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}" wx:if="{{item.seckill_status==1}}">
+                            <view>立即抢购</view>
+                        </view>
+                        <form bindsubmit="setSeckillRemind" data-index="{{index}}" data-seckill-date="{{item.date}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}" reportSubmit="true" wx:if="{{item.seckill_status==2&&item.remind==0}}">
+                            <button class="button remind-set" formType="submit">
+                                <view>设置提醒</view>
+                            </button>
+                        </form>
+                        <form bindsubmit="cancleSeckillRemind" data-index="{{index}}" data-seckill-remind-id="{{item.remind_id}}" data-time="{{item.time}}" reportSubmit="true" wx:if="{{item.seckill_status==2&&item.remind==1}}">
+                            <button class="button remind-cancle" formType="submit">取消提醒</button>
+                        </form>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

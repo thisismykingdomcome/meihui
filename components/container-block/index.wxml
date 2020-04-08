@@ -1,0 +1,3 @@
+<view class="custom-class container-block {{padding?'container-block--padding':''}}">
+    <slot></slot>
+</view>

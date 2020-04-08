@@ -1,0 +1,26 @@
+<view class="container" style="background-color: {{backgroundColor}}">
+    <view class="status-box">
+        <view bindtap="statusTap" class="status-label {{index==currentType?'active':''}}" data-index="{{index}}" style="border-bottom-color: {{index==currentType?themeColor:'#fff'}};color: {{index==currentType?themeColor:'#353535'}}" wx:for="{{statusType}}" wx:key="{{index}}">
+            {{item}}
+            <view class="{{tabClass[index]}}"></view>
+        </view>
+    </view>
+    <view class="no-integral" hidden="{{integralList?true:false}}">
+        <image class="no-integral-img" src="http://qn.zxsite.cn/zxsite_shop/no-order.png"></image>
+        <view class="text">暂无积分记录</view>
+    </view>
+    <view class="integral-list" hidden="{{integralList?false:true}}">
+        <view class="a-integral" wx:for="{{integralList}}" wx:key="key">
+            <view class="integral-info">
+	    		{{item.remark}}
+	    		<text>{{item.createtime}}</text>
+            </view>
+            <view class="integral-num">
+	    		{{item.num>0?'+':''}}{{item.num}}
+	    	</view>
+        </view>
+    </view>
+</view>
+<view class="no-more" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

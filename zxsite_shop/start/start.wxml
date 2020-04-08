@@ -1,0 +1,42 @@
+<view class="container" style="background: {{backgroundColor?backgroundColor:themeColor}};background-image: url({{backgroundImage}});background-repeat: no-repeat;background-size: 100% auto;">
+    <view class="remind-box" wx:if="{{remind}}">
+        <image class="remind-img" src="http://qn.zxsite.cn/zxsite_shop/loading.gif"></image>
+    </view>
+    <block wx:else>
+        <block wx:if="{{diyPage.id}}">
+            <block wx:for="{{diyPage.design}}" wx:key="key">
+                <block wx:if="{{canIUse&&item.style.avatarShow==1}}">
+                    <open-data style="position: absolute;width: {{item.style.avatarWidth*2}}rpx;height: {{item.style.avatarWidth*2}}rpx;left: {{item.style.avatarLeft*2}}rpx;top: {{item.style.avatarTop*2}}rpx;" type="userAvatarUrl" wx:if="{{item.style.avatarStyle==1}}"></open-data>
+                    <open-data style="position: absolute;width: {{item.style.avatarWidth*2}}rpx;height: {{item.style.avatarWidth*2}}rpx;left: {{item.style.avatarLeft*2}}rpx;top: {{item.style.avatarTop*2}}rpx;border-radius: 20rpx;overflow:hidden;" type="userAvatarUrl" wx:elif="{{item.style.avatarStyle==2}}"></open-data>
+                    <open-data style="position: absolute;width: {{item.style.avatarWidth*2}}rpx;height: {{item.style.avatarWidth*2}}rpx;left: {{item.style.avatarLeft*2}}rpx;top: {{item.style.avatarTop*2}}rpx;border-radius: 50%;overflow:hidden;" type="userAvatarUrl" wx:elif="{{item.style.avatarStyle==3}}"></open-data>
+                </block>
+                <view style="position: absolute;width: {{item.style.nicknameWidth*2}}rpx;left: {{item.style.nicknameLeft*2}}rpx;top: {{item.style.nicknameTop*2}}rpx;color: {{item.style.nicknameColor}};text-align: center;" wx:if="{{item.style.nicknameShow==1}}">
+                    <open-data style="font-size: 32rpx;" type="userNickName" wx:if="{{item.style.nicknameSize==1}}"></open-data>
+                    <open-data style="font-size: 28rpx;" type="userNickName" wx:elif="{{item.style.nicknameSize==2}}"></open-data>
+                    <open-data style="font-size: 24rpx;" type="userNickName" wx:elif="{{item.style.nicknameSize==3}}"></open-data>
+                </view>
+                <view style="position: absolute;width: {{item.style.buttonWidth*2}}rpx;height: {{item.style.buttonHeight*2}}rpx;left: {{item.style.buttonLeft*2}}rpx;top: {{item.style.buttonTop*2}}rpx;">
+                    <button bindgetuserinfo="updateUserInfo" openType="getUserInfo" style="border-radius: {{item.style.buttonBorderRadius*2}}rpx;background-color: {{item.style.buttonBackgroundColor}};width: {{item.style.buttonWidth*2}}rpx;height: {{item.style.buttonHeight*2}}rpx;line-height: {{item.style.buttonHeight*2}}rpx;color: {{item.style.buttonColor}};font-size: {{item.style.buttonFontSize*2}}rpx" wx:if="{{canIUse}}">{{item.data.buttonText}}</button>
+                    <view class="confirm-btn" wx:else>请升级微信版本</view>
+                </view>
+            </block>
+        </block>
+        <block wx:else>
+            <image class="title" src="http://qn.zxsite.cn/zxsite_shop/title8.png"></image>
+            <view class="content">
+                <view class="hd" style="transform:rotateZ({{angle}}deg);">
+                    <view wx:if="{{canIUse}}">
+                        <open-data class="logo" type="userAvatarUrl"></open-data>
+                    </view>
+                    <image class="wave" mode="aspectFill" src="http://qn.zxsite.cn/zxsite_shop/wave.png"></image>
+                    <image class="wave wave-bg" mode="aspectFill" src="http://qn.zxsite.cn/zxsite_shop/wave.png"></image>
+                </view>
+                <view class="bd">
+                    <image class="smalltitle" src="http://qn.zxsite.cn/zxsite_shop/confirm-word1.png"></image>
+                    <button bindgetuserinfo="updateUserInfo" class="confirm-btn" openType="getUserInfo" style="background: {{themeColor}}" wx:if="{{canIUse}}">进入商城</button>
+                    <view class="confirm-btn" wx:else>请升级微信版本</view>
+                </view>
+            </view>
+        </block>
+    </block>
+</view>

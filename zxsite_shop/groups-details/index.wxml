@@ -1,0 +1,311 @@
+<import src="../../wxParse/wxParse.wxml"></import>
+<view class="loading" hidden="{{hideLoading}}"></view>
+<official-account wx:if="{{isOfficialAccount==1}}"></official-account>
+<view class="container" style="background-color: {{backgroundColor}}">
+    <view class="swiper-container">
+        <video binderror="onVideoError" controls="{{false}}" id="video" poster="{{goodsDetail.cover}}" src="{{goodsDetail.video_url}}" style="width:750rpx;height:750rpx;display:{{swiperSwitchName=='video'?'block':'none'}}"></video>
+        <swiper autoplay="{{autoplay}}" class="swiper_box" duration="1000" indicatorActiveColor="#FFFFFF" indicatorColor="rgba(255, 255, 255, .5)" indicatorDots="true" interval="3000" style="display:{{swiperSwitchName=='picture'?'block':'none'}}">
+            <swiper-item wx:for="{{goodsDetail.pictures}}" wx:key="id">
+                <image bindtap="onPreviewSwiperImage" class="slide-image" data-image="{{item}}" lazyLoad="true" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+        <cover-view class="swiper-switch" wx:if="{{goodsDetail.video_url}}">
+            <cover-view bindtap="onSwiperSwitch" class="{{swiperSwitchName=='video'?'active':''}}" data-name="video" style="background: {{swiperSwitchName=='video'?themeColor:'rgba(255,255,255,0.6)'}};color: {{swiperSwitchName=='video'?'#ffffff':themeColor}};">视频</cover-view>
+            <cover-view bindtap="onSwiperSwitch" class="{{swiperSwitchName=='picture'?'active':''}}" data-name="picture" style="background: {{swiperSwitchName=='picture'?themeColor:'rgba(255,255,255,0.6)'}};color: {{swiperSwitchName=='picture'?'#ffffff':themeColor}};">图片</cover-view>
+        </cover-view>
+    </view>
+    <view class="goods-groups">
+        <view style="font-size: 36rpx;">拼 团</view>
+        <view>距结束仅剩{{goodsDetail.countdown?goodsDetail.countdown:'--天--时--分--秒'}}</view>
+    </view>
+    <view class="goods-info">
+        <view class="goods-title">{{goodsDetail.goods_title}}</view>
+        <image bindtap="showMask" class="share" src="http://qn.zxsite.cn/zxsite_shop/share.png"></image>
+        <view class="price-m">
+            <view class="groups-count" wx:if="{{goodsDetail.is_ladder!=1}}">{{goodsDetail.person_number}}人团</view>
+            <view class="groups-count" wx:else>阶梯团</view>
+            <view class="goods-price" style="font-size:26rpx;flex:1">¥ <text style="font-size:40rpx;margin-left:5rpx">
+                    <block wx:if="{{goodsDetail.is_ladder!=1}}">{{goodsDetail.price?goodsDetail.price:0}}</block>
+                    <block wx:else>{{goodsDetail.price_max?goodsDetail.price_max:0}}</block>
+                </text>
+                <text style="color:#999;font-size:26rpx;text-decoration:line-through;margin-left: 10rpx;">¥ {{goodsDetail.goods_price?goodsDetail.goods_price:0}}</text>
+            </view>
+            <view class="goods-price" style="color:#999;font-size:26rpx;width: 25%;text-align:right;display:block;padding-top:10rpx">
+                <text style="color:#f44"> {{goodsDetail.process_person_number}}人已参团</text>
+            </view>
+        </view>
+    </view>
+    <view class="groups-info" wx:if="{{groupsOrderId}}">
+        <view class="ladder-container" wx:if="{{goodsDetail.is_ladder==1}}">
+            <view class="ladder-step-container">
+                <block wx:for="{{goodsDetail.ladder}}" wx:key="key">
+                    <view class="ladder-step-line"></view>
+                    <view class="ladder-step-active" wx:if="{{item.active}}"></view>
+                    <view class="ladder-step" wx:else></view>
+                </block>
+            </view>
+            <view class="ladder-tooltip" style="left: {{ladderPercent-11}}%" wx:if="{{groupsOrderId}}">
+                <image class="ladder-process-dialog" mode="scaleToFill" src="http://qn.zxsite.cn/zxsite_shop/groups-ladder-tooltip.png"></image>
+                <view class="ladder-process-person-number">{{groupsParticipate.person_number-groupsParticipate.wait_number}}人已参团</view>
+            </view>
+            <view class="ladder-progress" style="width: {{ladderPercent}}%"></view>
+        </view>
+        <view class="ladder-price-container">
+            <view class="ladder-price">
+                <block wx:for="{{goodsDetail.ladder}}" wx:key="key">
+                    <view class="ladder-step-price" wx:if="{{item.active}}">
+                        <text class="ladder-step-price-text ladder-step-price-text-active">{{item.number}}人团</text>
+                        <text class="ladder-step-price-text ladder-step-price-text-active">¥{{item.price}}</text>
+                    </view>
+                    <view class="ladder-step-price" wx:else>
+                        <text class="ladder-step-price-text">{{item.number}}人团</text>
+                        <text class="ladder-step-price-text">¥{{item.price}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="groups-participator">
+            <view class="groups-items" wx:for="{{groupsParticipate.participator}}" wx:for-index="idx" wx:key="key">
+                <view style="overflow:hidden" wx:if="{{item.uid}}">
+                    <text wx:if="{{idx==0}}">团长</text>
+                    <image class="groups-head" lazyLoad="true" mode="aspectFill" src="{{item.avatar}}"></image>
+                </view>
+                <view class="groups-participator-wait" wx:else></view>
+            </view>
+        </view>
+        <view class="groups-participate-countdown" wx:if="{{!groupsParticipate.is_participate}}">
+      仅剩  {{groupsParticipate.wait_number}}  个名额，<text>{{groupsParticipate.countdown}}</text>后结束
+    </view>
+        <button class="groups-participate-button" openType="share" wx:if="{{groupsParticipate.is_participate}}">邀请好友参团 {{groupsParticipate.countdown}} 后结束</button>
+        <view bindtap="tobuy" class="groups-participate-button" data-groupsorderid="{{groupsOrderId}}" wx:else>
+      参与拼团
+    </view>
+    </view>
+    <view class="groups-info" wx:elif="{{goodsDetail.is_ladder==1}}">
+        <view class="ladder-container" style="margin-top: 50rpx;">
+            <view class="ladder-step-container">
+                <block wx:for="{{goodsDetail.ladder}}" wx:key="key">
+                    <view class="ladder-step-line"></view>
+                    <view class="ladder-step-active" wx:if="{{item.active}}"></view>
+                    <view class="ladder-step" wx:else></view>
+                </block>
+            </view>
+            <view class="ladder-tooltip" style="left: {{ladderPercent-11}}%" wx:if="{{groupsOrderId}}">
+                <image class="ladder-process-dialog" mode="scaleToFill" src="http://qn.zxsite.cn/zxsite_shop/groups-ladder-tooltip.png"></image>
+                <text class="ladder-process-person-number">{{groupsParticipate.person_number-groupsParticipate.wait_number}}人已参团</text>
+            </view>
+            <view class="ladder-progress" style="width: {{ladderPercent}}%"></view>
+        </view>
+        <view class="ladder-price-container">
+            <view class="ladder-price">
+                <block wx:for="{{goodsDetail.ladder}}" wx:key="key">
+                    <view class="ladder-step-price" wx:if="{{item.active}}">
+                        <text class="ladder-step-price-text ladder-step-price-text-active">{{item.number}}人团</text>
+                        <text class="ladder-step-price-text ladder-step-price-text-active">¥{{item.price}}</text>
+                    </view>
+                    <view class="ladder-step-price" wx:else>
+                        <text class="ladder-step-price-text">{{item.number}}人团</text>
+                        <text class="ladder-step-price-text">¥{{item.price}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <view class="groups-info" wx:if="{{groupsProcessCount>0}}">
+        <view class="label-title">
+            <text>{{groupsProcessCount}}人在开团，可直接参与</text>
+        </view>
+        <view bindtap="tobuy" class="groups-item" data-groupsorderid="{{item.id}}" wx:for="{{groupsProcess}}" wx:key="key">
+            <view class="groups-item-left">
+                <image lazyLoad="true" mode="aspectFill" src="{{item.avatar}}"></image>
+                <text>{{item.nickname}}</text>
+            </view>
+            <view class="groups-item-right">
+                <view>
+                    <view>还差<text>{{item.wait}}人</text>成团</view>
+                    <view class="groups-item-countdown">剩余{{item.countdown}}</view>
+                </view>
+                <view class="groups-item-button">去参团</view>
+            </view>
+        </view>
+    </view>
+    <view class="label-arrow" wx:if="{{goodsLabel.length>0}}">
+        <view class="label-item" wx:for="{{goodsLabel}}" wx:key="{{index}}">
+            <icon color="red" size="12" type="success"></icon>
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+    <view bindtap="bindGuiGeTap" class="row-arrow" wx:if="{{hasMoreSelect}}">
+      {{selectSize}}
+   </view>
+    <view class="goods-des-info">
+        <view class="status-box" wx:if="{{isShowReputation==1}}">
+            <view bindtap="statusTap" class="status-label {{index==currentType?'active':''}}" data-goodsId="{{goodsDetail.id}}" data-index="{{index}}" style="border-bottom-color: {{index==currentType?themeColor:'#fff'}};color: {{index==currentType?themeColor:'#353535'}}" wx:for="{{statusType}}" wx:key="{{index}}">
+                <text class="status-text" style="border-bottom: 2px solid {{themeColor}}" wx:if="{{index==currentType}}">{{item}}<block wx:if="{{index==1}}">({{all_reputation}})</block>
+                </text>
+                <text class="status-text" wx:else>{{item}}<block wx:if="{{index==1}}">({{all_reputation}})</block>
+                </text>
+                <view class="{{tabClass[index]}}"></view>
+            </view>
+        </view>
+        <block wx:else>
+            <view class="label-title">商品详情</view>
+            <view style="background-color:#f8f8f8;height:20rpx;"></view>
+        </block>
+        <view class="goods-text" wx:if="{{currentType==0}}">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+        </view>
+        <view class="rep-container" wx:else>
+            <view class="rep-item" wx:if="{{item.nickname}}" wx:for="{{reputation}}" wx:key="{{index}}">
+                <image class="avatar" src="{{item.avatar}}"></image>
+                <view class="rep-r">
+                    <view class="rep-top">
+                        <view class="nickname">{{item.nickname}}</view>
+                        <view class="time">{{item.time}}</view>
+                    </view>
+                    <view class="rep-middle">{{item.content}}</view>
+                    <view class="rep-bottom">{{item.property_names}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="footer-box">
+        <view bindtap="goHome" class="home">
+            <view style="position:absolute;bottom:10rpx;width:100%;"> 首页 </view>
+        </view>
+        <block wx:if="{{shop_service==1}}">
+            <view bindtap="toServerUrl" class="contact" data-link="{{shop_server_url}}" wx:if="{{shop_server_url}}">
+                <view style="position:absolute;bottom:10rpx;width:100%;"> 客服 </view>
+            </view>
+            <view class="contact" wx:else>
+                <button openType="contact" sessionFrom="{\"nickName\":\"{{userInfo.memberInfo.nickname}}\",\"avatarUrl\":\"{{userInfo.memberInfo.avatar}}\"}" style="opacity:0;position:absolute;" type="default"></button>
+                <view style="position:absolute;bottom:10rpx;width:100%;"> 客服 </view>
+            </view>
+        </block>
+        <view bindtap="goShopCar" class="shop-cart-btn">
+            <view class="shop-num">({{shopNum}})</view>
+            <view style="position:absolute;bottom:10rpx;width:100%;"> 购物车 </view>
+        </view>
+        <view bindtap="tobuy" class="now-buy" style="background-color:{{themeColor}}">我要开团</view>
+    </view>
+    <view class="show-popup" hidden="{{hideShopPopup}}">
+        <view bindtap="closePopupTap" class="popup-mask"></view>
+        <view class="popup-contents">
+            <view class="pop-goods-info">
+                <view class="pop-img-box">
+                    <image class="goods-thumbnail" src="{{goodsCover}}"></image>
+                </view>
+                <view class="pop-goods-des">
+                    <view class="pop-goods-title">{{goodsDetail.title}}</view>
+                    <view class="pop-goods-price" wx:if="{{goodsDetail.seckill_status==1&&goodsDetail.seckill_surplus>0}}">¥ {{goodsDetail.seckill_price}}</view>
+                    <view class="pop-goods-price" wx:else>¥ {{selectSizePrice}}</view>
+                </view>
+                <view bindtap="closePopupTap" class="pop-goods-close"></view>
+            </view>
+            <scroll-view scrollY="true" style="max-height: 600rpx">
+                <view class="size-label-box">
+                    <block wx:for="{{goodsDetail.properties}}" wx:for-index="idx" wx:for-item="property" wx:key="id">
+                        <view class="label">{{property.name}}</view>
+                        <view class="label-item-box">
+                            <view bindtap="labelItemTap" class="label-item {{item.active?'active':''}}" data-goodsCover="{{goodsDetail.cover}}" data-propertyCover="{{item.property_cover}}" data-propertychildid="{{item.id}}" data-propertychildindex="{{index}}" data-propertychildname="{{item.name}}" data-propertyid="{{property.id}}" data-propertyindex="{{idx}}" data-propertyname="{{property.name}}" wx:for="{{property.childs}}" wx:key="id">
+                    {{item.name}}
+                </view>
+                        </view>
+                    </block>
+                </view>
+                <view class="diy-form-wrapper" wx:if="{{diyForm.length>0}}">
+                    <block wx:for="{{diyForm}}" wx:for-index="idx" wx:for-item="field" wx:key="key">
+                        <view class="diy-form-item-wrapper" wx:if="{{field.type==1}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <input bindinput="bindTextInput" data-index="{{idx}}" placeholder="{{field.placeholder?field.placeholder:'请输入'+field.name}}" value="{{field.value}}"></input>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==2}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <textarea bindinput="bindTextInput" data-index="{{idx}}" placeholder="{{field.placeholder?field.placeholder:'请输入'+field.name}}" style="height: 3.3em" value="{{field.value}}"></textarea>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==3}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <view bindtap="bindRadioTap" class="checkbox-wrapper" data-index="{{idx}}" data-value="{{item}}" wx:for="{{field.item}}" wx:key="key">
+                                    <icon size="20" type="success" wx:if="{{field.value==item}}"></icon>
+                                    <icon size="20" type="circle" wx:else></icon>{{item}}</view>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==4}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <view bindtap="bindCheckBoxTap" class="checkbox-wrapper" data-index="{{idx}}" data-value="{{item}}" wx:for="{{field.item}}" wx:for-index="itemIndex" wx:key="key">
+                                    <icon size="20" type="success" wx:if="{{item.checked}}"></icon>
+                                    <icon size="20" type="circle" wx:else></icon>{{item.value}}</view>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==5}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <picker bindchange="bindDateChange" data-index="{{idx}}" mode="date" value="{{field.value}}">
+                                    <view class="picker">
+                                        <block wx:if="{{field.value}}">{{field.value}}</block>
+                                        <block wx:else>{{field.placeholder?field.placeholder:'请选择日期'}}</block>
+                                    </view>
+                                </picker>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==6}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <picker bindchange="bindTimeChange" data-index="{{idx}}" mode="time" value="{{field.value}}">
+                                    <view class="picker">
+                                        <block wx:if="{{field.value}}">{{field.value}}</block>
+                                        <block wx:else>{{field.placeholder?field.placeholder:'请选择日期'}}</block>
+                                    </view>
+                                </picker>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==7}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <view class="uploader-file" wx:for="{{field.item}}" wx:for-index="imageIndex" wx:key="imageKey">
+                                    <image bindtap="bindPreviewImage" class="uploader-img" data-src="{{item}}" mode="aspectFill" src="{{item}}"></image>
+                                    <view bindtap="bindDeleteImage" class="uploader-file-cancel" data-image-index="{{imageIndex}}" data-index="{{idx}}">
+							        删除
+							      </view>
+                                </view>
+                                <view>
+                                    <view class="uploader-box" style="display: {{field.item.length>=field.value?'none':'block'}};">
+                                        <view bindtap="bindChooseImage" class="uploader-input" data-index="{{idx}}"></view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <view class="buy-num-box">
+                    <view class="num-label">购买数量</view>
+                    <view class="num-box">
+                        <view bindtap="numJianTap" class="num-jian {{buyNumber==buyNumMin?'hui':''}}">-</view>
+                        <view class="num-input">
+                            <input bindinput="numChanageTap" type="number" value="{{buyNumber}}"></input>
+                        </view>
+                        <view bindtap="numJiaTap" class="num-jia {{buyNumber==buyNumMax?'hui':''}}">+</view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view bindtap="buyNow" class="popup-join-btn" style="background-color: {{themeColor}}">
+        {{selectGroupsOrderId?'我要参团':'我要开团'}}
+        </view>
+        </view>
+    </view>
+    <view class="mask" style="display:{{maskShow}}">
+        <view class="mask-info">
+            <button openType="share">发送给好友</button>
+            <button bindtap="openGeneratePage" wx:if="{{isWechatReview==0}}">生成海报</button>
+            <button bindtap="cancelMask" class="cancel-btn">取消</button>
+        </view>
+    </view>
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

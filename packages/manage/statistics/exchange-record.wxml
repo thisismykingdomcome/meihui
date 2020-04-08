@@ -1,0 +1,51 @@
+<view class="wrapper">
+    <van-tabs bind:change="onTabChange">
+        <van-tab title="7天"></van-tab>
+        <van-tab title="30天"></van-tab>
+        <van-tab title="90天"></van-tab>
+    </van-tabs>
+    <view class="line-wrapper">
+        <canvas bindtouchend="touchEndHandler" bindtouchmove="moveHandler" bindtouchstart="touchHandler" canvasId="line-canvas" class="canvas" disableScroll="true"></canvas>
+    </view>
+    <container-block padding customClass="exchange-record-wrapper van-hairline--bottom">
+        <van-row>
+            <van-col span="12">
+                <view class="title">下单订单数</view>
+                <view class="content">{{statistics.order_count}}</view>
+            </van-col>
+            <van-col span="12">
+                <view class="title">付款订单数</view>
+                <view class="content">{{statistics.pay_count}}</view>
+            </van-col>
+        </van-row>
+    </container-block>
+    <container-block padding customClass="exchange-record-wrapper van-hairline--bottom">
+        <van-row>
+            <van-col span="12">
+                <view class="title">下单人数</view>
+                <view class="content">{{statistics.order_number}}</view>
+            </van-col>
+            <van-col span="12">
+                <view class="title">付款人数</view>
+                <view class="content">{{statistics.pay_number}}</view>
+            </van-col>
+        </van-row>
+    </container-block>
+    <container-block padding customClass="exchange-record-wrapper van-hairline--bottom">
+        <van-row>
+            <van-col span="12">
+                <view class="title">下单金额</view>
+                <view class="content">{{statistics.order_amount}}</view>
+            </van-col>
+            <van-col span="12">
+                <view class="title">付款金额</view>
+                <view class="content">{{statistics.pay_amount}}</view>
+            </van-col>
+        </van-row>
+    </container-block>
+</view>
+<van-tabbar active="{{tabbarActive}}" bind:change="onTabbarChange">
+    <van-tabbar-item icon="gold-coin">营收</van-tabbar-item>
+    <van-tabbar-item icon="exchange-record">交易</van-tabbar-item>
+    <van-tabbar-item icon="records">销量</van-tabbar-item>
+</van-tabbar>

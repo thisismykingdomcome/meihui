@@ -1,0 +1,155 @@
+<view class="container" style="background-color: {{backgroundColor}}">
+    <view class="sec-wrap">
+        <view class="order-status">
+            <view class="icon-box">
+                <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/icon-ddgb.png" wx:if="{{orderDetail.status==0}}"></image>
+                <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/icon-ddfk.png" wx:elif="{{orderDetail.status==1}}"></image>
+                <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/icon-ddfh.png" wx:elif="{{orderDetail.status==2}}"></image>
+                <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/icon-ddsh.png" wx:elif="{{orderDetail.status==3}}"></image>
+                <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/icon-jycg.png" wx:elif="{{orderDetail.status==4}}"></image>
+            </view>
+            <view class="right-text">
+                <view class="status red" wx:if="{{orderDetail.status==0}}">已关闭</view>
+                <view class="status" wx:elif="{{orderDetail.status==1}}">待付款</view>
+                <view class="status" wx:elif="{{orderDetail.status==2}}">待发货</view>
+                <view class="status" wx:elif="{{orderDetail.status==3}}">待收货</view>
+                <view class="status red" wx:elif="{{orderDetail.status==4}}">已完成</view>
+            </view>
+        </view>
+        <view class="wuliu-box" wx:if="{{orderDetail.shipping}}">
+            <view class="icon-box">
+                <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/icon-wuliu.png"></image>
+            </view>
+            <view class="right-text">
+                <view class="order-number">物流：{{orderDetail.shipping}}<block wx:if="{{orderDetail.shipping_sn}}">，单号：{{orderDetail.shipping_sn}}</block>
+                </view>
+                <view class="wuliu-info" wx:for="{{orderDetail.logistics.data}}" wx:key="{{index}}">
+                    <block wx:if="{{index==0}}">
+                        <view class="wuliu-sign">
+                            <view class="sign_circle_end"></view>
+                        </view>
+                        <view class="wuliu-text" style="color: #74ca74">{{item.station}}<view class="wuliu-date">{{item.time}}</view>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view class="wuliu-sign">
+                            <view class="sign_circle"></view>
+                        </view>
+                        <view class="wuliu-text">{{item.station}}<view class="wuliu-date">{{item.time}}</view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <view class="address-sec" style="display:block" wx:if="{{orderDetail.name}}">
+            <view style="display:flex">
+                <view class="icon-box">
+                    <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/about-telphone.png"></image>
+                </view>
+                <view class="right-box">
+                    <view class="name-tel">{{orderDetail.name}}  {{orderDetail.mobile}}</view>
+                    <view class="text">
+                      {{orderDetail.address}}
+                  </view>
+                </view>
+            </view>
+            <view style="display:flex" wx:if="{{orderDetail.shop_name}}">
+                <view class="icon-box">
+                    <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/icon-address.png"></image>
+                </view>
+                <view class="right-box">
+                    <view class="name-tel">{{orderDetail.shop_name}}  {{orderDetail.shop_telphone}}</view>
+                    <view class="text">
+                      {{orderDetail.shop_address}}
+                  </view>
+                </view>
+            </view>
+        </view>
+        <view class="address-sec" style="border-top:1rpx solid #eee;" wx:if="{{orderDetail.goods.diy_form}}">
+            <view class="icon-box">
+                <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/icon-remark.png"></image>
+            </view>
+            <view class="right-box">
+                <view class="name-tel">兑换信息</view>
+                <view class="text">
+                  {{orderDetail.goods.diy_form}}
+              </view>
+            </view>
+        </view>
+        <view class="address-sec" style="border-top:1rpx solid #eee;" wx:if="{{orderDetail.remark}}">
+            <view class="icon-box">
+                <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/icon-remark.png"></image>
+            </view>
+            <view class="right-box">
+                <view class="name-tel">备注</view>
+                <view class="text">
+                  {{orderDetail.remark}}
+              </view>
+            </view>
+        </view>
+        <view class="address-sec" style="border-top:1rpx solid #eee;" wx:if="{{orderDetail.shipping_remark}}">
+            <view class="icon-box">
+                <image class="icon" src="http://qn.zxsite.cn/zxsite_shop/icon-remark.png"></image>
+            </view>
+            <view class="right-box">
+                <view class="name-tel">发货备注</view>
+                <view class="text">
+                  {{orderDetail.shipping_remark}}
+              </view>
+            </view>
+        </view>
+    </view>
+    <view class="verify-code-wrapper" wx:if="{{orderDetail.status==2&&orderDetail.send_type==2}}">
+        <view class="verify-title">核销码</view>
+        <view>
+            <image mode="aspectFill" src="{{orderDetail.qrcode}}"></image>
+        </view>
+        <view class="verify-code">{{orderDetail.verify_code}}</view>
+    </view>
+    <view class="goods-list">
+        <view class="list-title">兑换商品</view>
+        <view bindtap="gotoGoodsDetail" class="a-goods" data-goods-id="{{orderDetail.goods.goods_id}}">
+            <view class="img-box">
+                <image class="img" src="{{orderDetail.goods.cover}}"></image>
+            </view>
+            <view class="text-box">
+                <view class="arow arow01">
+                    <view class="goods-name">{{orderDetail.goods.title}}</view>
+                </view>
+                <view class="arow">
+                    <view class="goods-label"></view>
+                    <view class="goods-num">x {{orderDetail.goods.number}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="btn-rows">
+            <view class="btn-row">
+                <form bindsubmit="confirmBtnTap" reportSubmit="true" wx:if="{{orderDetail.status==3}}">
+                    <button class="confirm-btn order-btn" formType="submit">确认收货</button>
+                </form>
+            </view>
+        </view>
+    </view>
+    <view class="goods-info">
+        <view class="row-box">
+            <view class="row-label">消耗积分</view>
+            <view class="right-text">{{orderDetail.need_credit}}</view>
+        </view>
+        <view class="row-box" wx:if="{{orderDetail.amount>0}}">
+            <view class="row-label">消耗金额</view>
+            <view class="right-text">¥ {{orderDetail.amount}}</view>
+        </view>
+        <view class="row-box" wx:if="{{orderDetail.freight>0}}">
+            <view class="row-label">运费</view>
+            <view class="right-text">+ ¥ {{orderDetail.freight}}</view>
+        </view>
+        <view class="row-box" wx:if="{{orderDetail.deduction_balance>0}}">
+            <view class="row-label">抵扣余额</view>
+            <view class="right-text">- ¥ {{orderDetail.deduction_balance}}</view>
+        </view>
+        <view class="row-box">
+            <view class="row-label">应付总额</view>
+            <view class="right-text">¥ {{orderDetail.pay_amount}}</view>
+        </view>
+    </view>
+</view>

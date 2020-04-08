@@ -1,0 +1,38 @@
+<container-block customClass="form-wrapper">
+    <van-cell-group>
+        <van-cell isLink bind:click="onTypeClick" title="{{textWithdraw}}方式" value="{{withdraw.type_text}}"></van-cell>
+        <van-field bind:change="onFieldChange" border="true" id="real_name" label="真实姓名" placeholder="请输入您的真实姓名" titleWidth="100px" value="{{withdraw.real_name}}" wx:if="{{withdraw.type==1||withdraw.type==2}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="wechat" label="微信号" placeholder="请输入微信号" titleWidth="100px" value="{{withdraw.wechat}}" wx:if="{{withdraw.type==1}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="alipay" label="支付宝账号" placeholder="请输入支付宝账号" titleWidth="100px" value="{{withdraw.alipay}}" wx:if="{{withdraw.type==2}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="bank_name" label="银行名称" placeholder="请输入银行名称" titleWidth="100px" value="{{withdraw.bank_name}}" wx:if="{{withdraw.type==3}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="bank_account_name" label="银行卡户名" placeholder="请输入银行卡户名" titleWidth="100px" value="{{withdraw.bank_account_name}}" wx:if="{{withdraw.type==3}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="bank_account" label="银行卡账号" placeholder="请输入银行卡账号" titleWidth="100px" value="{{withdraw.bank_account}}" wx:if="{{withdraw.type==3}}"></van-field>
+    </van-cell-group>
+</container-block>
+<container-block customClass="form-wrapper">
+    <view class="charge-wrapper">
+        <van-row>
+            <van-col span="24">可{{textWithdraw}}{{textCharge}}（{{textUnion}}）</van-col>
+        </van-row>
+        <van-row customClass="charge-available" style="color: {{themeColor}}">
+            <van-col span="24">{{agent.withdraw_available}}</van-col>
+        </van-row>
+    </view>
+</container-block>
+<container-block customClass="form-wrapper">
+    <van-cell-group>
+        <van-field bind:change="onFieldChange" border="true" id="apply_money" label="{{textWithdraw}}{{textCharge}}" placeholder="请输入{{textWithdraw}}{{textCharge}}" titleWidth="100px" value="{{withdraw.apply_money}}"></van-field>
+    </van-cell-group>
+</container-block>
+<container-block customClass="form-wrapper">
+    <van-cell label="{{textCharge}}满{{withdraw_least}}{{textUnion}}后才能申请{{textWithdraw}}" title="{{textCharge}}{{textWithdraw}}"></van-cell>
+    <van-cell label="每次{{textWithdraw}}将扣除{{withdraw_charge}}%的手续费" title="{{textWithdraw}}手续费"></van-cell>
+</container-block>
+<container-block customClass="form-bottom">
+    <van-row>
+        <van-col span="24">
+            <button bindtap="onApply" class="weui-btn" disabled="{{parseFloat(agent.withdraw_available)<parseFloat(withdraw_least)}}" style="background-color: {{themeColor}}" type="primary">确认{{textWithdraw}}</button>
+        </van-col>
+    </van-row>
+</container-block>
+<van-action-sheet actions="{{typeActions}}" bind:cancel="onTypeActionsCancel" bind:close="onTypeActionsCancel" bind:select="onTypeActionsSelect" cancelText="取消" show="{{typeActionsShow}}"></van-action-sheet>

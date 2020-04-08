@@ -1,0 +1,4 @@
+<template name="title">
+    <view class="title-main" style="color: {{style.titleMainColor}};background-color: {{style.backgroundColor}}">{{data.titleMain}}</view>
+    <view class="title-sub" style="color: {{style.titleSubColor}};background-color: {{style.backgroundColor}}">{{data.titleSub}}</view>
+</template>

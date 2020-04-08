@@ -1,0 +1,13 @@
+<view class="custom-class van-tabs van-tabs--{{type}}">
+    <view class="van-tabs__wrap {{scrollable?'van-tabs__wrap--scrollable':''}} {{type==='line'&&border?'van-hairline--top-bottom':''}}" style="z-index: {{zIndex}}">
+        <scroll-view scrollWithAnimation class="van-tabs__scroll--{{type}}" scrollLeft="{{scrollLeft}}" scrollX="{{scrollable}}" style="{{color?'border-color: '+color:''}}">
+            <view class="van-tabs__nav van-tabs__nav--{{type}}">
+                <view class="van-tabs__line" style="{{lineStyle}}" wx:if="{{type==='line'}}"></view>
+                <view bind:tap="onTap" class="van-ellipsis van-tab {{index===active?'van-tab--active':''}} {{item.data.disabled?'van-tab--disabled':''}}" data-index="{{index}}" style="{{color&&index===active!==type==='card'&&!item.data.disabled?'color: '+color:''}} {{color&&index===active&&type==='card'?';background-color:'+color:''}} {{color?';border-color: '+color:''}}" wx:for="{{tabs}}" wx:key="index">
+          {{item.data.title}}
+        </view>
+            </view>
+        </scroll-view>
+    </view>
+    <slot></slot>
+</view>

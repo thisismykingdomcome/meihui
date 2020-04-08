@@ -1,0 +1,210 @@
+<view class="header">
+    <view class="content-wrapper">
+        <view class="avatar">
+            <image src="{{page.data.shopLogo}}" style="width:64px;height:64px;"></image>
+        </view>
+        <view class="content">
+            <view class="title">
+        {{page.data.shopName}}
+      </view>
+            <view class="description">
+        公告：{{page.data.shopNotice}}
+      </view>
+        </view>
+    </view>
+</view>
+<view class="goods">
+    <view class="menu-wrapper">
+        <scroll-view scrollY="true" style="height: {{windowHeight-110-48}}px;">
+            <view bindtap="selectMenu" class="menu-item {{menuIndex==index?'current':''}}" data-item-index="{{index}}" wx:for="{{page.data.list}}" wx:key="key">
+                <view class="text">
+          {{item.name}}
+        </view>
+            </view>
+        </scroll-view>
+    </view>
+    <scroll-view class="goods-wrapper" scrollIntoView="{{toView}}" scrollY="true" style="height: {{windowHeight-110-48}}px;">
+        <view class="goods-list goods-list-hook" wx:for="{{page.data.list}}" wx:for-index="parentIndex" wx:key="unique">
+            <view class="title" id="group-{{parentIndex}}">{{item.name}}</view>
+            <view catchtap="onDetail" class="goods-item" data-id="{{goods.id}}" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="key">
+                <view class="icon">
+                    <image src="{{goods.cover}}" style="width: 57px;height: 57px"></image>
+                </view>
+                <view class="content">
+                    <view class="name">{{goods.title}}</view>
+                    <view class="desc">{{goods.description}}</view>
+                    <view class="extra">
+                        <text class="count">销量{{goods.sales}}</text>
+                        <text class="count">好评{{goods.good_reputation}}</text>
+                    </view>
+                    <view class="price">
+                        <view class="now">￥{{goods.price}}</view>
+                    </view>
+                    <view class="cart-control-wrapper">
+                        <view class="cart-control">
+                            <view name="fade" style="display: flex;">
+                                <view catchtap="onDecreaseGoods" class="cart-reduce" data-item-index="{{index}}" data-parentIndex="{{parentIndex}}" wx:if="{{goods.count>0}}"></view>
+                                <view class="cart-count" wx:if="{{goods.count>0}}">{{goods.count}}</view>
+                                <view catchtap="onAddGoodsBefore" class="cart-add" data-item-index="{{index}}" data-parentIndex="{{parentIndex}}"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="shop-cart {{shopCarInfo.shopNum>0?'no-empty':''}}">
+        <view bindtap="onTogglePopupCart" class="content">
+            <view class="content-left">
+                <view class="cart-wrapper">
+                    <view class="icon-cart"></view>
+                    <view class="number" wx:if="{{shopCarInfo.shopNum>0}}">{{shopCarInfo.shopNum}}</view>
+                </view>
+                <view class="price highlight">合计：￥{{totalPrice}}</view>
+            </view>
+            <view catchtap="onSettle" class="content-right {{enough?'enough':''}}">
+                <view class="pay" style="background-color: {{enough&&totalPrice>0?themeColor:'#efefef'}}">
+          {{payDesc}}
+        </view>
+            </view>
+        </view>
+        <view class="shop-cart-list" hidden="{{hideCartPopup}}">
+            <view class="list-header">
+                <view class="title">购物车</view>
+                <text bindtap="onEmpty" class="empty">清空</text>
+            </view>
+            <view class="list-content">
+                <view class="shop-cart-goods" wx:for="{{shopCarInfo.shopList}}" wx:key="key">
+                    <view>
+                        <view class="title" style="line-height: normal" wx:if="{{item.propertyNames}}">{{item.title}}</view>
+                        <view class="title" wx:else>{{item.title}}</view>
+                        <view class="sub-title" wx:if="{{item.propertyNames}}">{{item.propertyNames}}</view>
+                    </view>
+                    <view class="price">
+                        <span>￥{{item.amount}}</span>
+                    </view>
+                    <view class="cart-control-wrapper" style="bottom:10px;">
+                        <view class="cart-control">
+                            <view name="fade" style="display: flex;">
+                                <view catchtap="onCartRreduce" class="cart-reduce" data-index="{{index}}"></view>
+                                <view class="cart-count">{{item.number}}</view>
+                                <view catchtap="onCartAdd" class="cart-add" data-index="{{index}}"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="property-popup" hidden="{{hidePropertyPopup}}">
+        <view bindtap="onTogglePopupProperty" class="popup-mask"></view>
+        <view class="popup-contents">
+            <view class="pop-goods-info">
+                <view class="pop-img-box">
+                    <image class="goods-thumbnail" src="{{goodsDetail.cover}}"></image>
+                </view>
+                <view class="pop-goods-des">
+                    <view class="pop-goods-title">{{goodsDetail.title}}</view>
+                    <view class="pop-goods-price">¥ {{goodsDetail.price}}</view>
+                </view>
+                <view bindtap="onTogglePopupProperty" class="pop-goods-close"></view>
+            </view>
+            <scroll-view scrollY="true" style="max-height: 600rpx">
+                <view class="size-label-box">
+                    <block wx:for="{{goodsDetail.properties}}" wx:for-index="idx" wx:for-item="property" wx:key="id">
+                        <view class="label">{{property.name}}</view>
+                        <view class="label-item-box">
+                            <view bindtap="onSelectPropertyItem" class="label-item {{item.active?'active':''}}" data-propertyCover="{{item.property_cover}}" data-propertychildid="{{item.id}}" data-propertychildindex="{{index}}" data-propertychildname="{{item.name}}" data-propertyid="{{property.id}}" data-propertyindex="{{idx}}" data-propertyname="{{property.name}}" wx:for="{{property.childs}}" wx:key="id">
+                {{item.name}}
+              </view>
+                        </view>
+                    </block>
+                </view>
+                <view class="diy-form-wrapper" wx:if="{{goodsDetail.diyForm.length>0}}">
+                    <block wx:for="{{goodsDetail.diyForm}}" wx:for-index="idx" wx:for-item="field" wx:key="key">
+                        <view class="diy-form-item-wrapper" wx:if="{{field.type==1}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <input bindinput="bindTextInput" data-index="{{idx}}" placeholder="{{field.placeholder?field.placeholder:'请输入'+field.name}}" value="{{field.value}}"></input>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==2}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <textarea bindinput="bindTextInput" data-index="{{idx}}" placeholder="{{field.placeholder?field.placeholder:'请输入'+field.name}}" style="height: 3.3em" value="{{field.value}}"></textarea>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==3}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <view bindtap="bindRadioTap" class="checkbox-wrapper" data-index="{{idx}}" data-value="{{item}}" wx:for="{{field.item}}" wx:key="key">
+                                    <icon size="20" type="success" wx:if="{{field.data==item}}"></icon>
+                                    <icon size="20" type="circle" wx:else></icon>{{item}}</view>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==4}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <view bindtap="bindCheckBoxTap" class="checkbox-wrapper" data-index="{{idx}}" data-value="{{item}}" wx:for="{{field.item}}" wx:for-index="itemIndex" wx:key="key">
+                                    <icon size="20" type="success" wx:if="{{item.checked}}"></icon>
+                                    <icon size="20" type="circle" wx:else></icon>{{item.value}}</view>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==5}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <picker bindchange="bindDateChange" data-index="{{idx}}" mode="date" value="{{field.data}}">
+                                    <view class="picker">
+                                        <block wx:if="{{field.data}}">{{field.data}}</block>
+                                        <block wx:else>{{field.placeholder?field.placeholder:'请选择日期'}}</block>
+                                    </view>
+                                </picker>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==6}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <picker bindchange="bindTimeChange" data-index="{{idx}}" mode="time" value="{{field.data}}">
+                                    <view class="picker">
+                                        <block wx:if="{{field.data}}">{{field.data}}</block>
+                                        <block wx:else>{{field.placeholder?field.placeholder:'请选择时间'}}</block>
+                                    </view>
+                                </picker>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==7}}">
+                            <view class="diy-form-item-label {{field.required==1?'required':''}}">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <view class="uploader-file" wx:for="{{field.item}}" wx:for-index="imageIndex" wx:key="imageKey">
+                                    <image bindtap="bindPreviewImage" class="uploader-img" data-src="{{item}}" mode="aspectFill" src="{{item}}"></image>
+                                    <view bindtap="bindDeleteImage" class="uploader-file-cancel" data-image-index="{{imageIndex}}" data-index="{{idx}}">
+                    删除
+                  </view>
+                                </view>
+                                <view>
+                                    <view class="uploader-box" style="display: {{field.item.length>=field.value?'none':'block'}};">
+                                        <view bindtap="bindChooseImage" class="uploader-input" data-index="{{idx}}"></view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <view class="buy-num-box">
+                    <view class="num-label">购买数量</view>
+                    <view class="num-box">
+                        <view bindtap="numJianTap" class="num-jian {{buyNumber==buyNumMin?'hui':''}}">-</view>
+                        <view class="num-input">
+                            <input bindinput="numChanageTap" type="number" value="{{buyNumber}}"></input>
+                        </view>
+                        <view bindtap="numJiaTap" class="num-jia {{buyNumber==buyNumMax?'hui':''}}">+</view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view bindtap="onAddGoods" class="popup-join-btn" style="background-color: {{themeColor}}">
+        加入购物车
+      </view>
+        </view>
+    </view>
+    <view bindtap="onTogglePopupCart" class="list-mask" hidden="{{hideCartPopup}}"></view>
+</view>

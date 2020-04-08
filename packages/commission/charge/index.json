@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "container-block": "./../../../../components/container-block/index",
+        "van-cell": "./../../../../components/cell/index",
+        "van-cell-group": "./../../../../components/cell-group/index",
+        "van-button": "./../../../../components/button/index"
+    }
+}

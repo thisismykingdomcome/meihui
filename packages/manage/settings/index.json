@@ -1,0 +1,13 @@
+{
+    "navigationBarTitleText": "店铺管理",
+    "usingComponents": {
+        "container-block": "./../../../../components/container-block/index",
+        "van-field": "./../../../../components/field/index",
+        "van-switch": "./../../../../components/switch/index",
+        "van-switch-cell": "./../../../../components/switch-cell/index",
+        "van-cell": "./../../../../components/cell/index",
+        "van-cell-group": "./../../../../components/cell-group/index",
+        "van-button": "./../../../../components/button/index",
+        "van-action-sheet": "./../../../../components/action-sheet/index"
+    }
+}

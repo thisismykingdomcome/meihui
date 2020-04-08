@@ -1,0 +1,54 @@
+@import "../../../components/checkbox-group/index.wxss";
+
+.search-wrapper {
+    background-color: #fff;
+    padding: 5px 0;
+}
+
+.goods-wrapper {
+    background-color: #fff;
+    padding: 15px 0;
+}
+
+.goods {
+    background-color: #fff!important;
+}
+
+.title {
+    font-size: 28rpx;
+}
+
+.price {
+    font-size: 28rpx;
+    color: #f44;
+}
+
+.desc {
+    color: #ff976a!important;
+}
+
+.margin-left-5 {
+    margin-left: 5px;
+}
+
+.toolbar {
+    width: 70rpx;
+    height: 70rpx;
+    position: fixed;
+    right: 40rpx;
+    padding: 10rpx;
+    background-color: #f44;
+    border-radius: 50%;
+}
+
+.toolbar image {
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.no-more {
+    text-align: center;
+    font-size: 24rpx;
+    padding: 15px 0;
+    color: #999;
+}

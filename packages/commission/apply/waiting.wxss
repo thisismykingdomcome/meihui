@@ -1,0 +1,12 @@
+page {
+    background-color: #fff;
+}
+
+.banner {
+    width: 750rpx;
+    margin-bottom: 10rpx;
+}
+
+.apply-btn {
+    margin-top: 10rpx;
+}

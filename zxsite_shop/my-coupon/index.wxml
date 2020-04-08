@@ -1,0 +1,32 @@
+<view class="container">
+    <view class="coupons-list">
+        <view class="coupons-item {{item.fecth_status}}" data-id="{{item.id}}" wx:for="{{couponList}}" wx:for-index="idx">
+            <view style="display: flex;justify-content: flex-end;">
+                <view style="display: flex;" wx:if="{{item.back_type==1}}">
+                    <text style="align-self: center;font-size: 40rpx;color: #fff;">￥</text>
+                </view>
+                <view style="display: flex;margin-right: 30rpx;" wx:if="{{item.back_type==1}}">
+                    <text style="align-self: center;font-size: 70rpx;color: #fff;">{{item.deduct}}元</text>
+                </view>
+                <view style="display: flex;margin-right: 30rpx;" wx:if="{{item.back_type==2}}">
+                    <text style="align-self: center;font-size: 70rpx;color: #fff;">{{item.discount}}折</text>
+                </view>
+                <view>
+                    <view style="font-size: 40rpx;" wx:if="{{item.back_type==1}}">满减券</view>
+                    <view style="font-size: 40rpx;" wx:if="{{item.back_type==2}}">折扣券</view>
+                    <view>满{{item.enough}}元使用</view>
+                </view>
+            </view>
+            <view style="display: flex;justify-content: space-between;font-size: 24rpx;">
+                <view style="color: #666666;">使用期限：{{item.start_date}} ~ {{item.end_date}}</view>
+                <view style="color: #666666;">{{item.fecth_status_str}}</view>
+            </view>
+        </view>
+    </view>
+    <view style="height:100rpx;background-color:#fff;width:100%;"></view>
+    <view class="bottom-box">
+        <view bindtap="toBuy" class="add-btn">立即前往下单</view>
+    </view>
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

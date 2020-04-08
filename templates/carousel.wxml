@@ -1,0 +1,12 @@
+<template name="carousel">
+    <view class="swiper-container">
+        <swiper autoplay="{{style.autoplay==1?true:false}}" bindchange="swiperchange" class="swiper-box" duration="1000" indicatorActiveColor="{{style.indicatorActiveColor}}" indicatorColor="{{style.indicatorColor}}" indicatorDots="{{style.indicator==1?true:false}}" interval="{{style.interval}}" style="height: {{style.height*2}}rpx;">
+            <swiper-item wx:for="{{data.list}}" wx:key="id">
+                <navigator appId="{{item.appid}}" openType="navigate" path="{{item.link_url}}" target="miniProgram" wx:if="{{item.link_type==5}}">
+                    <image binderror="loadImageError" class="slide-image" src="{{item.picture}}?time={{loadImageTime}}" style="height: {{style.height*2}}rpx;"></image>
+                </navigator>
+                <image binderror="loadImageError" bindtap="swiperTap" class="slide-image" data-appid="{{item.appid}}" data-id="{{item.businessId}}" data-link-type="{{item.link_type}}" data-link-url="{{item.link_url}}" src="{{item.picture}}?time={{loadImageTime}}" style="height: {{style.height*2}}rpx;" wx:else></image>
+            </swiper-item>
+        </swiper>
+    </view>
+</template>

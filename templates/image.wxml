@@ -1,0 +1,10 @@
+<template name="image">
+    <view class="image-wrapper">
+        <navigator appId="{{data.appid}}" openType="navigate" path="{{data.url}}" style="width: {{style.width*2}}rpx;height: {{style.height*2}}rpx;" target="miniProgram" wx:if="{{data.type==5}}">
+            <image binderror="loadImageError" lazyLoad="true" mode="aspectFill" src="{{data.image}}?time={{loadImageTime}}"></image>
+        </navigator>
+        <view bindtap="onImageTap" data-image="{{data.image}}" data-image-type="{{style.type}}" data-type="{{data.type}}" data-url="{{data.url}}" style="width: {{style.width*2}}rpx;height: {{style.height*2}}rpx;" wx:else>
+            <image binderror="loadImageError" lazyLoad="true" mode="aspectFill" src="{{data.image}}?time={{loadImageTime}}"></image>
+        </view>
+    </view>
+</template>

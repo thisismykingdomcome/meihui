@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "会员明细",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "van-panel": "./../../../../components/panel/index",
+        "van-cell": "./../../../../components/cell/index",
+        "van-dialog": "./../../../../components/dialog/index",
+        "van-field": "./../../../../components/field/index"
+    }
+}

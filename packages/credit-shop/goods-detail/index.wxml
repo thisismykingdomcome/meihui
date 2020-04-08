@@ -1,0 +1,148 @@
+<import src="./../../../wxParse/wxParse.wxml"></import>
+<view class="loading" hidden="{{hideLoading}}"></view>
+<official-account wx:if="{{isOfficialAccount==1}}"></official-account>
+<view class="container" style="background-color: {{backgroundColor}}">
+    <view class="swiper-container">
+        <swiper class="swiper_box" duration="1000" indicatorActiveColor="#FFFFFF" indicatorColor="rgba(255, 255, 255, .5)" indicatorDots="true" interval="3000">
+            <swiper-item wx:if="{{goodsDetail.video_url}}">
+                <video poster="{{goodsDetail.cover}}" src="{{goodsDetail.video_url}}" style="width:750rpx;height:750rpx"></video>
+            </swiper-item>
+            <swiper-item wx:for="{{goodsDetail.pictures}}" wx:key="id">
+                <image class="slide-image" lazyLoad="true" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="goods-info">
+        <view class="goods-title">{{goodsDetail.title}}</view>
+        <view class="goods-sub-title" wx:if="{{goodsDetail.sub_title}}">{{goodsDetail.sub_title}}</view>
+        <image bindtap="showMask" class="share" src="http://qn.zxsite.cn/zxsite_shop/share.png"></image>
+        <view class="goods-price">
+            <view>{{goodsDetail.credit}}<text style="font-size:24rpx"> 积分</text>
+                <block wx:if="{{goodsDetail.money>0}}"> + <text style="font-size:24rpx">¥ </text>{{goodsDetail.money}}</block>
+            </view>
+        </view>
+        <view class="goods-market-price">¥ {{goodsDetail.price}}</view>
+        <view class="goods-desc">
+            <view>运费 {{goodsDetail.template_is_free==1?'免运费':'按收货地区计算'}}</view>
+            <view>兑换 {{goodsDetail.sales}} 次</view>
+            <view>剩余 {{goodsDetail.stores}}</view>
+        </view>
+    </view>
+    <view class="goods-des-info">
+        <view class="label-title">商品详情</view>
+        <view style="background-color:#f8f8f8;height:20rpx;"></view>
+        <view class="goods-text">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+        </view>
+    </view>
+    <view class="footer-box">
+        <view bindtap="goHome" class="home">
+            <view style="position:absolute;bottom:10rpx;width:100%;"> 首页 </view>
+        </view>
+        <view wx:if="{{shop_service==1}}">
+            <view bindtap="toServerUrl" class="contact" data-link="{{shop_server_url}}" wx:if="{{shop_server_url}}">
+                <view style="position:absolute;bottom:10rpx;width:100%;"> 客服 </view>
+            </view>
+            <view class="contact" wx:else>
+                <button openType="contact" sessionFrom="{\"nickName\":\"{{userInfo.memberInfo.nickname}}\",\"avatarUrl\":\"{{userInfo.memberInfo.avatar}}\"}" style="opacity:0;position:absolute;" type="default"></button>
+                <view style="position:absolute;bottom:10rpx;width:100%;"> 客服 </view>
+            </view>
+        </view>
+        <view class="now-buy" style="width:{{shop_service!=1?650:550}}rpx;background-color:#cccccc;text-align:center;line-height:100rpx;" wx:if="{{goodsDetail.status==0}}">商品已下架</view>
+        <view class="now-buy" style="width:{{shop_service!=1?650:550}}rpx;background-color:#cccccc;text-align:center;line-height:100rpx;" wx:elif="{{goodsDetail.is_deleted==1}}">商品已删除</view>
+        <view class="now-buy" style="width:{{shop_service!=1?650:550}}rpx;background-color:#cccccc;text-align:center;line-height:100rpx;" wx:elif="{{goodsDetail.is_enough!=1}}">积分不足</view>
+        <view class="now-buy" style="width:{{shop_service!=1?650:550}}rpx;background-color:#cccccc;text-align:center;line-height:100rpx;" wx:elif="{{goodsDetail.limit!=0&&goodsDetail.exchange_count>=goodsDetail.limit}}">兑换次数达上限</view>
+        <view bindtap="tobuy" class="now-buy" style="width:{{shop_service!=1?650:550}}rpx;background-color:{{themeColor}};" wx:else>立即兑换</view>
+    </view>
+    <view class="show-popup" hidden="{{hideShopPopup}}">
+        <view bindtap="closePopupTap" class="popup-mask"></view>
+        <view class="popup-contents">
+            <view class="pop-goods-info">
+                <view class="pop-img-box">
+                    <image class="goods-thumbnail" src="{{goodsDetail.cover}}"></image>
+                </view>
+                <view class="pop-goods-des">
+                    <view class="pop-goods-title">{{goodsDetail.title}}</view>
+                    <view class="pop-goods-price">{{goodsDetail.credit}} 积分<block wx:if="{{goodsDetail.money>0}}"> + ¥ {{goodsDetail.money}}</block>
+                    </view>
+                </view>
+                <view bindtap="closePopupTap" class="pop-goods-close"></view>
+            </view>
+            <scroll-view scrollY="true" style="max-height: 600rpx">
+                <view class="diy-form-wrapper" wx:if="{{diyForm.length>0}}">
+                    <block wx:for="{{diyForm}}" wx:for-index="idx" wx:for-item="field" wx:key="key">
+                        <view class="diy-form-item-wrapper" wx:if="{{field.type==1}}">
+                            <view class="diy-form-item-label">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <input bindinput="bindTextInput" data-index="{{idx}}" placeholder="{{field.placeholder?field.placeholder:'请输入'+field.name}}" value="{{field.value}}"></input>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==2}}">
+                            <view class="diy-form-item-label">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <textarea bindinput="bindTextInput" data-index="{{idx}}" placeholder="{{field.placeholder?field.placeholder:'请输入'+field.name}}" style="height: 3.3em" value="{{field.value}}"></textarea>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==3}}">
+                            <view class="diy-form-item-label">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <view bindtap="bindRadioTap" class="checkbox-wrapper" data-index="{{idx}}" data-value="{{item}}" wx:for="{{field.item}}" wx:key="key">
+                                    <icon size="20" type="success" wx:if="{{field.value==item}}"></icon>
+                                    <icon size="20" type="circle" wx:else></icon>{{item}}</view>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==4}}">
+                            <view class="diy-form-item-label">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <view bindtap="bindCheckBoxTap" class="checkbox-wrapper" data-index="{{idx}}" data-value="{{item}}" wx:for="{{field.item}}" wx:for-index="itemIndex" wx:key="key">
+                                    <icon size="20" type="success" wx:if="{{item.checked}}"></icon>
+                                    <icon size="20" type="circle" wx:else></icon>{{item.value}}</view>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==5}}">
+                            <view class="diy-form-item-label">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <picker bindchange="bindDateChange" data-index="{{idx}}" mode="date" value="{{field.value}}">
+                                    <view class="picker">
+                                        <block wx:if="{{field.value}}">{{field.value}}</block>
+                                        <block wx:else>{{field.placeholder?field.placeholder:'请选择日期'}}</block>
+                                    </view>
+                                </picker>
+                            </view>
+                        </view>
+                        <view class="diy-form-item-wrapper" wx:elif="{{field.type==6}}">
+                            <view class="diy-form-item-label">{{field.name}}</view>
+                            <view class="diy-form-item-value">
+                                <picker bindchange="bindTimeChange" data-index="{{idx}}" mode="time" value="{{field.value}}">
+                                    <view class="picker">
+                                        <block wx:if="{{field.value}}">{{field.value}}</block>
+                                        <block wx:else>{{field.placeholder?field.placeholder:'请选择日期'}}</block>
+                                    </view>
+                                </picker>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <view class="buy-num-box">
+                    <view class="num-label">兑换数量</view>
+                    <view class="num-box">
+                        <view bindtap="numJianTap" class="num-jian {{buyNumber==buyNumMin?'hui':''}}">-</view>
+                        <view class="num-input">
+                            <input bindinput="numChanageTap" disabled="{{goodsDetail.seckill_status==1&&goodsDetail.seckill_surplus>0?true:false}}" type="number" value="{{buyNumber}}"></input>
+                        </view>
+                        <view bindtap="numJiaTap" class="num-jia {{buyNumber==buyNumMax?'hui':''}}">+</view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view bindtap="buyNow" class="popup-join-btn" style="background-color: {{themeColor}}">立即兑换</view>
+        </view>
+    </view>
+    <view class="mask" style="display:{{maskShow}}">
+        <view class="mask-info">
+            <button openType="share">发送给好友</button>
+            <button bindtap="cancelMask" class="cancel-btn">取消</button>
+        </view>
+    </view>
+</view>
+<import src="./../../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

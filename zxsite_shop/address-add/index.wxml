@@ -1,0 +1,86 @@
+<view class="container" style="background-color: {{backgroundColor}}">
+    <form bindsubmit="bindSave">
+        <view class="form-box">
+            <view class="row-wrap">
+                <view class="label">联系人</view>
+                <view class="label-right">
+                    <input class="input" name="name" placeholder="姓名" type="text" value="{{addressData.name}}{{wxaddress.userName}}"></input>
+                </view>
+            </view>
+            <view class="row-wrap">
+                <view class="label">手机号码</view>
+                <view class="label-right">
+                    <input class="input" maxlength="11" name="mobile" placeholder="11位手机号码" type="number" value="{{addressData.mobile}}{{wxaddress.telNumber}}"></input>
+                </view>
+            </view>
+            <view bindtap="selectCity" class="row-wrap">
+                <view class="label">选择地区</view>
+                <picker bindchange="bindPickerProvinceChange" range="{{provinces}}" value="{{selProvinceIndex}}">
+                    <view class="picker {{selProvince=='请选择'?'hui':''}}">
+                {{selProvince}}
+              </view>
+                </picker>
+                <picker bindchange="bindPickerCityChange" range="{{citys}}" value="{{selCityIndex}}">
+                    <view class="picker {{selCity=='请选择'?'hui':''}}">
+                {{selCity}}
+              </view>
+                </picker>
+                <picker bindchange="bindPickerDistrictChange" range="{{districts}}" value="{{selDistrictIndex}}">
+                    <view class="picker {{selDistrict=='请选择'?'hui':''}}">
+                {{selDistrict}}
+              </view>
+                </picker>
+            </view>
+            <view class="row-wrap" style="height: {{addressData.location_name||addressData.location_address?'176':'88'}}rpx" wx:if="{{settings.city_express_enabled==1}}">
+                <view class="label">位置</view>
+                <view bindtap="onChooseLocation" class="label-right" style="overflow: hidden;background: url(http://qn.zxsite.cn/zxsite_shop/arrow-right.png) no-repeat right center;background-size: 16rpx 24rpx;margin-right: 30rpx; height: {{addressData.location_name||addressData.location_address?'176':'88'}}rpx">
+                    <block wx:if="{{addressData.location_name||addressData.location_address}}">
+                        <view>{{addressData.location_name}}</view>
+                        <view>{{addressData.location_address}}</view>
+                    </block>
+                    <view style="color: #cccccc;" wx:else>小区/写字楼/学校等</view>
+                </view>
+            </view>
+            <view class="addr-details">
+                <view class="label">详细地址</view>
+                <view class="label-right">
+                    <textarea autoHeight name="address" placeholder="街道门牌信息" value="{{addressData.address}}{{wxaddress.detailInfo}}"></textarea>
+                </view>
+            </view>
+            <view class="row-wrap" wx:if="{{settings.overseas_agency==1}}">
+                <view class="label">身份证号</view>
+                <view class="label-right">
+                    <input class="input" name="identity_code" type="text" value="{{addressData.identity_code}}"></input>
+                </view>
+            </view>
+            <view class="uploader-wrap" wx:if="{{settings.overseas_agency==1}}">
+                <view class="label">身份证正面照片</view>
+                <view class="uploader-file" wx:if="{{identityPhotoFront}}">
+                    <image bindtap="previewImage" class="uploader-img" data-src="{{identityPhotoFront}}" mode="aspectFill" src="{{identityPhotoFront}}"></image>
+                    <view bindtap="deleteImage" class="uploader-file-cancel" data-type="front">
+                    删除
+                </view>
+                </view>
+                <view class="uploader-box" wx:else>
+                    <view bindtap="chooseImage" class="uploader-input" data-type="front"></view>
+                </view>
+            </view>
+            <view class="uploader-wrap" wx:if="{{settings.overseas_agency==1}}">
+                <view class="label">身份证反面照片</view>
+                <view class="uploader-file" wx:if="{{identityPhotoBack}}">
+                    <image bindtap="previewImage" class="uploader-img" data-src="{{identityPhotoBack}}" mode="aspectFill" src="{{identityPhotoBack}}"></image>
+                    <view bindtap="deleteImage" class="uploader-file-cancel" data-type="back">
+                    删除
+                </view>
+                </view>
+                <view class="uploader-box" wx:else>
+                    <view bindtap="chooseImage" class="uploader-input" data-type="back"></view>
+                </view>
+            </view>
+        </view>
+        <button class="save-btn" formType="submit" style="background-color: {{themeColor}}" type="warn">保存</button>
+        <button bindtap="readFromWx" class="save-btn" type="primary" wx:if="{{!addressData.id}}">从微信读取</button>
+        <button bindtap="deleteAddress" class="save-btn" data-id="{{addressData.id}}" type="default" wx:if="{{addressData.id}}">删除该地址</button>
+        <button bindtap="bindCancel" class="cancel-btn" type="default">取消</button>
+    </form>
+</view>

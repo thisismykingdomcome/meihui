@@ -1,0 +1,5 @@
+{
+    "usingComponents": {
+        "container-block": "./../../../../components/container-block/index"
+    }
+}

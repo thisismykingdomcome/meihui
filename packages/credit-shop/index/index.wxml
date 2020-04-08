@@ -1,0 +1,36 @@
+<container-block customClass="van-hairline--bottom">
+    <view class="swiper-container">
+        <swiper autoplay="true" class="swiper-box" duration="1000" indicatorActiveColor="#FFFFFF" indicatorColor="rgba(255, 255, 255, .3)" indicatorDots="true" interval="3000">
+            <swiper-item wx:for="{{carouselList}}" wx:key="id">
+                <navigator appId="{{item.appid}}" openType="navigate" path="{{item.link_url}}" target="miniProgram" wx:if="{{item.link_type==5}}">
+                    <image binderror="loadImageError" class="slide-image" height="562.5rpx" src="{{item.picture}}" width="750rpx"></image>
+                </navigator>
+                <image binderror="loadImageError" bindtap="swiperTap" class="slide-image" data-appid="{{item.appid}}" data-id="{{item.businessId}}" data-link-type="{{item.link_type}}" data-link-url="{{item.link_url}}" height="562.5rpx" src="{{item.picture}}?time={{loadImageTime}}" width="750rpx" wx:else></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <van-tabs active="{{tabActive}}" bind:change="onTabChange" color="{{themeColor}}">
+        <van-tab title="{{item.name}}" wx:for="{{categoryList}}" wx:key="key"></van-tab>
+    </van-tabs>
+    <view class="goods-container">
+        <view bindtap="onGoodsDetailTap" class="goods-box list-style-2" data-id="{{item.id}}" wx:for="{{goodsList}}" wx:key="{{index}}">
+            <view class="img-box">
+                <image binderror="loadImageError" class="image" lazyLoad="true" mode="aspectFill" src="{{item.cover}}"></image>
+            </view>
+            <view class="goods-title">{{item.title}}</view>
+            <view class="goods-bottom-wrapper">
+                <view class="goods-price">
+                    <text style="font-size:30rpx">{{item.credit}}</text>
+                    <text style="color:#aaa;"> 积分</text>
+                    <block wx:if="{{item.money>0}}">
+                        <text style="color:#aaa;"> + </text>¥ <text style="font-size:30rpx">{{item.money}}</text>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+</container-block>
+<view class="no-more" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+<view bindtap="toOrder" class="order" style="background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADd0lEQVRoQ9WZSagVVxCGv18Fh0hwJW5E3ThEHOI8j4kmcYqzWxeCiGsRRFAURPeiIrg1cYjGIZo4z/MQERdKECIioogEccJYUtAHns/uax+9z3tuwaP7vtt9bn1dfar+U0fUuanO/ScXwMxmAj2Bt4BlRz9v/Lnhd9W+rvFvPZN0sfEDLwLYCsxLLDp3JHUtC/ALMLeeAX4F5gD/Ap2BZg3+PGoNPzf1+SpgFBAVgW3AbAeQ1KmWkTCz34DpsQDbgVmJAOwCfo4F2AF4JkohAr8DU+sZYA8wJRZgJzAjkQjsBSbHAoSJ88ErZGZdgOvA11Wa3I+A7pKe5I1nZvuBn2IBwsTJA/gBOFAl58MwAyRdKQD4A/gxFmA3MC3vFTKz1sA6oFcVIFx+HJDk4+WamfnD8ocWVQfCzE8hC/0JTKhngL+A72MBQupKIQKHgO9iAULqSgHgCDAuFmAfMCmROnAUGBsLEHJvChE4BoyJBQi5NxfAzLpnarX5Z6ZST6NbJN2rkEaPA6OrBpDVAa+eX32m8+H2TZIWVgA4CYyMBQjFI68StwCeAS2rBLBS0ooKAKeAEbEAB4GJRZPYzNoDPSC/KRAB9h/wt6T/KwCcBobHAoTql8IkPgsMjQUI1S8FgHPAkFiAUP1SADgPDK5nAG9mDYwFOAyMT6QSXwIGxAIE/ZGXRr143fRVVES28Uuf+5OUdCvmPjO7DPSPBQj6Iw+gTVYHPqUxPEWS66zSZmZXgW9jAYL+KJISizIpEQPhr8IySa9Le++dZbNrQN9YgKA/UshC3kDoA9yW1K1sc/dE1o9MAcD7sx2Bs5K8Ir9nRe31JADMzBPGS8D113ZJ3nAuBRAUYE0jYGbDgDOZx6slLS8LEBRgrQHWAEszp4dK8qpcKgJBAdYMwMw6eOYB2gKPgfaSfAFUCsDD5uGrCYCZ+dz0NYlLerfFktbnpd+iSRwkbK0A1gJLModvAP2K1gxJAWRZZzMwP3P+hbcwJf1TVPyKAIIG/2IRyDLOBqB35qxvs86T5LtFhVYEEDT4wybcbm0F+P7bN1nnzY/BnvoOkSTXZBWtCOACMOhjNzfR966EF0i6W2b8IoCwiCgzRjWueQW44xsleVuztBUB9APaAV7KfR/Yjw3Pw/8aH2OueQM8AO4D5yR5qybaYuRw9OBf4oa6B3gHdsr6QB5f7dIAAAAASUVORK5CYII=) {{themeColor}} no-repeat center; background-size: 60rpx;"></view>
+<import src="./../../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

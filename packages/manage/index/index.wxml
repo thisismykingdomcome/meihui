@@ -1,0 +1,81 @@
+<container-block padding customClass="overview-wrapper">
+    <view class="overview">
+        <van-row>
+            <van-col span="24">今日成交额（元）</van-col>
+        </van-row>
+        <van-row customClass="overview-statistics">
+            <van-col span="24">{{statistics.today_amount}}</van-col>
+        </van-row>
+        <van-row>
+            <van-col span="8">今日成交量</van-col>
+            <van-col span="8">订单总数</van-col>
+            <van-col span="8">商品总数</van-col>
+            <van-col span="8">{{statistics.today_order_count}}</van-col>
+            <van-col span="8">{{statistics.order_count}}</van-col>
+            <van-col span="8">{{statistics.goods_count}}</van-col>
+        </van-row>
+    </view>
+</container-block>
+<view class="shortcut-wrapper">
+    <view class="shortcut">
+        <view bindtap="onShortcutOrder" class="item" data-status="2">
+            <view>待发货</view>
+            <view class="text">{{statistics.order_count_no_transfer}}</view>
+        </view>
+        <view class="middle"></view>
+        <view bindtap="onShortcutOrder" class="item" data-status="7">
+            <view>待维权</view>
+            <view class="text">{{statistics.order_count_refund}}</view>
+        </view>
+    </view>
+</view>
+<container-block customClass="grid-wrapper">
+    <van-row>
+        <navigator url="../settings/index">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/shop.png"></image>
+                </view>
+                <view>店铺管理</view>
+            </van-col>
+        </navigator>
+        <navigator url="../goods/index">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/goods.png"></image>
+                </view>
+                <view>商品管理</view>
+            </van-col>
+        </navigator>
+        <navigator url="../order/index">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/order.png"></image>
+                </view>
+                <view>订单管理</view>
+            </van-col>
+        </navigator>
+        <navigator url="../member/index">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/member.png"></image>
+                </view>
+                <view>会员管理</view>
+            </van-col>
+        </navigator>
+        <navigator url="../statistics/revenue">
+            <van-col span="8">
+                <view>
+                    <image mode="aspectFit" src="../images/statistics.png"></image>
+                </view>
+                <view>数据统计</view>
+            </van-col>
+        </navigator>
+        <van-col bindtap="onVerify" span="8">
+            <view>
+                <image mode="aspectFit" src="../images/scan.png"></image>
+            </view>
+            <view>扫码核销</view>
+        </van-col>
+    </van-row>
+</container-block>

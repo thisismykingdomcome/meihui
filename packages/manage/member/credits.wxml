@@ -1,0 +1,19 @@
+<van-panel customClass="credit" status="{{item.credittype=='credit1'?'积分':'余额'}}" title="操作员：{{item.clerk_type==1?'<无>':item.username}}" wx:for="{{creditsList}}" wx:key="key">
+    <van-cell title="备注：{{item.remark}}" value="{{item.num}}"></van-cell>
+    <van-cell title="时间：{{item.createtime}}"></van-cell>
+</van-panel>
+<view class="no-more" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+<view bindtap="onAdd" class="toolbar" data-type="credit1" style="bottom: 250rpx;">
+    <image mode="aspectFit" src="../images/integral.png"></image>
+</view>
+<view bindtap="onAdd" class="toolbar" data-type="credit2" style="bottom: 140rpx;">
+    <image mode="aspectFit" src="../images/balance.png"></image>
+</view>
+<van-dialog showCancelButton useSlot bind:cancel="onCreditsDialogCancel" bind:confirm="onCreditsDialogConfirm" show="{{creditsDialogShow}}" title="{{member.credittype=='credit1'?'积分':'余额'}}调整">
+    <van-cell title="会员昵称" value="{{member.nickname}}"></van-cell>
+    <van-cell title="当前积分" value="{{member.credit1}}" wx:if="{{member.credittype=='credit1'}}"></van-cell>
+    <van-cell title="当前余额" value="{{member.credit2}}" wx:if="{{member.credittype=='credit2'}}"></van-cell>
+    <van-field bind:change="onFieldChange" id="num" label="调整{{member.credittype=='credit1'?'积分':'余额'}}" placeholder="正数表示增加；负数则表示减少" type="digit" value="{{member.num}}"></van-field>
+    <van-cell border="{{false}}" customClass="no-bottom-title" title="备注"></van-cell>
+    <van-field bind:change="onFieldChange" id="remark" type="textarea" value="{{member.remark}}"></van-field>
+</van-dialog>

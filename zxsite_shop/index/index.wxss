@@ -1,0 +1,568 @@
+@import "../../templates/carousel.wxss";
+
+@import "../../templates/cube.wxss";
+
+@import "../../templates/navigation.wxss";
+
+@import "../../templates/notice.wxss";
+
+@import "../../templates/coupon.wxss";
+
+@import "../../templates/search.wxss";
+
+@import "../../templates/article.wxss";
+
+@import "../../templates/form.wxss";
+
+@import "../../templates/goods.wxss";
+
+@import "../../templates/video.wxss";
+
+@import "../../templates/line.wxss";
+
+@import "../../templates/white.wxss";
+
+.container {
+    background-color: #f8f8f8;
+    min-height: 100%;
+}
+
+.img-box {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.type-navbar {
+    white-space: nowrap;
+    height: 88rpx;
+    width: 100%;
+    background-color: #fff;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+.no-more-goods {
+    text-align: center;
+    font-size: 24rpx;
+    padding-bottom: 48rpx;
+    color: #999;
+}
+
+.service,.telphone {
+    width: 70rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    color: #fff;
+    position: fixed;
+    right: 40rpx;
+    bottom: 150rpx;
+    font-size: 30rpx;
+    padding: 10rpx;
+}
+
+.telphone {
+    bottom: 250rpx;
+}
+
+.service button[open-type=contact] {
+    opacity: 0;
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.seckill,.groups,.auction,.recommend,.allGoods {
+    width: 750rpx;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding-top: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.seckill-title,.groups-title,.auction-title,.recommend-title,.title-main {
+    width: 100%;
+    background: url("http://qn.zxsite.cn/zxsite_shop/seckill-title-bg.png") no-repeat center center;
+    background-size: 100%;
+    text-align: center;
+    padding-top: 20rpx;
+}
+
+.seckill-sub-title,.groups-sub-title,.auction-sub-title,.recommend-sub-title,.title-sub {
+    width: 100%;
+    text-align: center;
+    font-size: 26rpx;
+    color: #c2c2c2;
+    padding-bottom: 20rpx;
+}
+
+.seckill-goods,.groups-goods,.auction-goods {
+    display: flex;
+    margin: 0 20rpx;
+    padding: 10rpx 0;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.seckill-goods-cover,.groups-goods-cover,.auction-goods-cover {
+    position: relative;
+    width: 200rpx;
+    height: 200rpx;
+}
+
+.seckill-goods-cover image,.groups-goods-cover image,.auction-goods-cover image {
+    width: 200rpx;
+    height: 200rpx;
+}
+
+.seckill-goods-countdown {
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    background: url(http://qn.zxsite.cn/zxsite_shop/seckill-goods-countdown-bg.png);
+    background-size: 100%;
+    text-align: center;
+    font-size: 24rpx;
+    width: 200rpx;
+    height: 40rpx;
+}
+
+.seckill-goods-countdown view {
+    background: url(http://qn.zxsite.cn/zxsite_shop/seckill-icon-clock.png) no-repeat 30rpx center;
+    background-size: 25rpx;
+    padding-left: 30rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+}
+
+.seckill-goods-cover .icon {
+    width: 25rpx;
+    height: 25rpx;
+    margin-top: 5rpx;
+    margin-right: 10rpx;
+}
+
+.seckill-goods-content,.groups-goods-content,.auction-goods-content {
+    width: 500rpx;
+    padding: 0 20rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.seckill-goods-title,.groups-goods-title,.auction-goods-title {
+    font-size: 28rpx;
+    color: #575757;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.seckill-goods-progress-container {
+    background-color: #e7e7e7;
+    border-radius: 50rpx;
+    height: 15rpx;
+}
+
+.seckill-goods-progress {
+    background: url(http://qn.zxsite.cn/zxsite_shop/seckill-progress-front.png);
+    background-size: 100% 100%;
+    border-radius: 50rpx;
+    height: 15rpx;
+}
+
+.seckill-goods-stores-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24rpx;
+    color: #898989;
+    margin-top: 10rpx;
+}
+
+.seckill-goods-stores-container text,.groups-goods-stores-container text {
+    color: #e52c13;
+}
+
+.groups-goods-price-container,.groups-goods-price,.groups-goods-price-bottom {
+    display: flex;
+    font-size: 28rpx;
+    align-items: flex-end;
+    color: #e52c13;
+}
+
+.seckill-goods-price-container,.auction-goods-price-container {
+    display: flex;
+    font-size: 28rpx;
+    flex-direction: column;
+    color: #e52c13;
+}
+
+.auction-goods-price-bottom {
+    display: flex;
+}
+
+.seckill-goods-price-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.groups-goods-price-container {
+    flex-direction: column;
+}
+
+.groups-goods-price,.groups-goods-price-bottom,.auction-goods-price-bottom {
+    width: 100%;
+    color: #898989;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.groups-goods-price {
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.groups-goods-price text {
+    color: #e52c13;
+}
+
+.groups-goods-price-bottom {
+    margin-top: 20rpx;
+}
+
+.seckill-goods-price-container .goods-price {
+    font-size: 22rpx;
+    color: #898989;
+    text-decoration: line-through;
+    margin-left: 10rpx;
+}
+
+.skill-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.groups-person-number {
+    color: #fff;
+    background: #f44;
+    font-size: 26rpx;
+    padding: 8rpx 10rpx 8rpx 20rpx;
+    border-top-left-radius: 50rpx;
+    border-bottom-left-radius: 50rpx;
+    float: left;
+    margin-right: 5rpx;
+}
+
+.groups-goods-price-left,.auction-goods-price-left {
+    color: #f44;
+    font-size: 26rpx;
+    flex: 1;
+}
+
+.groups-ladder {
+    width: 30rpx;
+    height: 10rpx;
+}
+
+.begin-time {
+    color: #898989;
+    font-size: 22rpx;
+    margin-bottom: 10rpx;
+}
+
+.play-time {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.timePlay {
+    border-radius: 8rpx;
+    background-color: #e52c13;
+    border: 1rpx solid #e52c13;
+    color: #fff!important;
+    text-decoration: none!important;
+    padding: 2rpx 10rpx;
+}
+
+.button {
+    color: #fff;
+    padding: 9rpx 16rpx;
+    border-radius: 50rpx;
+    font-size: 22rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    line-height: normal;
+}
+
+.auction_begin_time {
+    border-radius: 8rpx;
+    background-color: #e52c13;
+    border: 1rpx solid #e52c13;
+    color: #fff!important;
+    text-decoration: none!important;
+    padding: 2rpx 10rpx;
+    font-size: 24rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.remind-set {
+    background-color: #2eb82e;
+}
+
+.remind-cancle {
+    padding: 8rpx 15rpx;
+    color: #2eb82e;
+    border: 1px solid #2eb82e;
+}
+
+.begin-style {
+    background-color: #f44;
+}
+
+.end-style {
+    color: #bdbdbd;
+    background-color: #f0f0f0;
+}
+
+.show-more {
+    display: flex;
+    margin: 0 20rpx;
+    padding: 10rpx 0;
+    justify-content: center;
+    font-size: 28rpx;
+    height: 60rpx;
+    color: #575757;
+    align-items: center;
+}
+
+.more {
+    background-image: url(http://qn.zxsite.cn/zxsite_shop/index-more.png);
+    background-repeat: no-repeat;
+    background-size: 33rpx;
+    background-position: center right;
+    width: 175rpx;
+    padding: 5rpx 2rpx;
+}
+
+.video-pane {
+    width: 750rpx;
+    height: 460rpx;
+    margin-top: 20rpx;
+}
+
+.video-pane video {
+    width: 100%;
+    height: 100%;
+}
+
+.line-wrapper .border-style-1 {
+    border-top-style: solid;
+}
+
+.line-wrapper .border-style-2 {
+    border-top-style: dashed;
+}
+
+.line-wrapper .border-style-3 {
+    border-top-style: dotted;
+}
+
+rich-img {
+    max-width: 750rpx;
+}
+
+.e-loading.fade-out {
+    transform: translate3d(0,0,0);
+    animation: fadeOut .2s ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.cmp {
+    position: absolute;
+}
+
+.cmp .animate-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.cmp.cmp-star .star-wrapper .star-list {
+    -webkit-box-flex: 1;
+    flex: 1;
+    flex-wrap: nowrap;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: .1rem 25% .1rem .1rem;
+    width: 100%;
+}
+
+@keyframes rotate2d {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.bgmusic.stopped .control {
+    background: none;
+}
+
+.bgmusic.stopped .control .control-after {
+    animation: none;
+}
+
+.animation-none {
+    animation: none!important;
+}
+
+.gif-none {
+    background: none!important;
+}
+
+.shape {
+    width: 100%;
+    height: 100%;
+}
+
+.shape,.shape svg {
+    overflow: visible;
+}
+
+@-webkit-keyframes tgtipsafter {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes tgtipsafter {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes tgtipsbefore {
+    20% {
+        transform: scale(1);
+    }
+
+    60% {
+        transform: scale(1.13);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes tgtipsbefore {
+    20% {
+        transform: scale(1);
+    }
+
+    60% {
+        transform: scale(1.13);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.cmp {
+    transform: rotate(0deg);
+    width: 80rpx;
+    height: 80rpx;
+    right: 40rpx;
+    top: 40rpx;
+    z-index: 200;
+    position: fixed;
+}
+
+.cmp .animate-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bgmusic,.bgmusic .control {
+    width: 100%;
+    height: 100%;
+}
+
+.bgmusic .control {
+    background: url(http://qn.zxsite.cn/zxsite_shop/music.gif) transparent no-repeat 50%;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.bgmusic .control .control-after {
+    position: absolute;
+    background: url(http://qn.zxsite.cn/zxsite_shop/music-control.png) transparent no-repeat 50%;
+    background-size: 100% 100%;
+    animation: rotate2d 1.2s linear infinite;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+.commission-charge {
+    position: absolute;
+    bottom: 24rpx;
+    right: 0;
+    color: #fff;
+    background: #f44;
+    font-size: 26rpx;
+    padding: 8rpx 10rpx 8rpx 20rpx;
+    border-top-left-radius: 50rpx;
+    border-bottom-left-radius: 50rpx;
+}
+
+.van-cell.location .location-name {
+    flex: 0 1 auto;
+}

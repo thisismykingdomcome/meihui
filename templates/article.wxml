@@ -1,0 +1,18 @@
+<template name="article">
+    <view bindtap="onArticleDetailTap" class="article-wrapper van-hairline--bottom" data-id="{{item.id}}" wx:for="{{data.list}}" wx:for-index="idx" wx:key="key">
+        <view class="van-card">
+            <view class="van-card__content">
+                <view class="van-card__left">
+                    <view class="van-card__title van-multi-ellipsis--l2">{{item.title}}</view>
+                    <view class="van-card__desc van-ellipsis">
+                        <view>{{item.view}}次浏览</view>
+                        <view>{{item.date}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="van-card__thumb">
+                <image class="van-card__img thumb-class" mode="scaleToFill" src="{{item.cover}}"></image>
+            </view>
+        </view>
+    </view>
+</template>

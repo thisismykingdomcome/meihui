@@ -1,0 +1,308 @@
+<view class="loading" hidden="{{hideLoading}}"></view>
+<van-cell isLink arrowDirection="down" border="{{false}}" clickable="{{false}}" customClass="location" customStyle="color: {{navigationBarBackgroundColor=='#ffffff'||navigationBarBackgroundColor=='#FFFFFF'?'#999':'#fff'}};background-color: {{navigationBarBackgroundColor}}" icon="location" title="{{shopStore.name}}" titleClass="location-name" url="/packages/store/index/index" wx:if="{{homeShopStoreShow==1&&shopStore.name}}"></van-cell>
+<collect-tip show="{{isCollectTip==1}}" text="{{textCollectTip}}"></collect-tip>
+<official-account wx:if="{{isOfficialAccount==1}}"></official-account>
+<view bindtap="setPlayStatus" class="cmp cmp-bgmusic" data-play-status="{{playStatus}}" data-type="bgmusic" style="top: {{isCollectTip==1?200:40}}rpx" wx:if="{{audioUrl}}">
+    <view class="animate-wrapper">
+        <view class="bgmusic">
+            <view class="control {{playStatus==true?'':'gif-none'}}">
+                <view class="control-after {{playStatus==true?'':'animation-none'}}"></view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- asdfasdf -->
+<block wx:if="{{diyPage.id}}">
+    <import src="../../templates/title.wxml"></import>
+    <import src="../../templates/search.wxml"></import>
+    <import src="../../templates/carousel.wxml"></import>
+    <import src="../../templates/notice.wxml"></import>
+    <import src="../../templates/navigation.wxml"></import>
+    <import src="../../templates/coupon.wxml"></import>
+    <import src="../../templates/seckill.wxml"></import>
+    <import src="../../templates/groups.wxml"></import>
+    <import src="../../templates/auction.wxml"></import>
+    <import src="../../templates/goods.wxml"></import>
+    <import src="../../templates/video.wxml"></import>
+    <import src="../../templates/line.wxml"></import>
+    <import src="../../templates/white.wxml"></import>
+    <import src="../../templates/cube.wxml"></import>
+    <import src="../../templates/rich-text.wxml"></import>
+    <import src="../../templates/article.wxml"></import>
+    <import src="../../templates/form.wxml"></import>
+    <import src="../../wxParse/wxParse.wxml"></import>
+    <view class="container" style="background-color: {{backgroundColor}};background-image: url({{backgroundImage}});background-repeat: no-repeat;background-size: 100% auto;">
+        <block wx:for="{{diyPage.design}}" wx:key="key">
+            <template is="title" data="{{data:item.data,style:item.style}}" wx:if="{{item.name=='title'}}"></template>
+            <template is="search" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='search'}}"></template>
+            <template is="carousel" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='carousel'}}"></template>
+            <template is="notice" data="{{data:item.data,style:item.style}}" wx:if="{{item.name=='notice'}}"></template>
+            <template is="navigation" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='navigation'}}"></template>
+            <template is="coupon" data="{{data:item.data,style:item.style}}" wx:if="{{item.name=='coupon'}}"></template>
+            <template is="seckill" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='seckill'}}"></template>
+            <template is="groups" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='groups'}}"></template>
+            <template is="auction" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style,textCurrentPrice:textCurrentPrice,textCompletePrice:textCompletePrice}}" wx:if="{{item.name=='auction'}}"></template>
+            <template is="goods" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style,agent:agent,textCharge:textCharge,textUnion:textUnion}}" wx:if="{{item.name=='goods'}}"></template>
+            <template is="video" data="{{style:item.style,data:item.data,hideLoading:hideLoading}}" wx:if="{{item.name=='video'}}"></template>
+            <template is="line" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='line'}}"></template>
+            <template is="white" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='white'}}"></template>
+            <template is="cube" data="{{loadImageTime:loadImageTime,style:item.style,data:item.data}}" wx:if="{{item.name=='cube'}}"></template>
+            <template is="rich-text" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='rich-text'}}"></template>
+            <template is="article" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='article'}}"></template>
+            <template is="form" data="{{style:item.style,data:item.data,list:diyFormField}}" wx:if="{{item.name=='form'}}"></template>
+        </block>
+    </view>
+</block>
+<view class="container" style="background-color: {{backgroundColor}}" wx:else>
+    <view class="search-view" style="background: rgba(255, 255, 255, 0);">
+        <view class="serarch-content">
+            <image binderror="loadImageError" class="search-icon" src="http://qn.zxsite.cn/zxsite_shop/search-pic.png?time={{loadImageTime}}"></image>
+            <input bindconfirm="toSearch" bindinput="listenerSearchInput" class="search-input" confirmType="search" maxlength="30" placeholder="请输入搜索商品"></input>
+            <button bindtap="toSearch" class="search-btn" style="background: {{themeColor}}">搜索</button>
+        </view>
+    </view>
+    <view class="swiper-container">
+        <swiper autoplay="{{autoplay}}" bindchange="swiperchange" class="swiper-box" duration="{{duration}}" interval="{{interval}}">
+            <swiper-item wx:for="{{banners}}" wx:key="id">
+                <navigator appId="{{item.appid}}" openType="navigate" path="{{item.link_url}}" target="miniProgram" wx:if="{{item.link_type==5}}">
+                    <image binderror="loadImageError" class="slide-image" height="562.5rpx" src="{{item.picture}}?time={{loadImageTime}}" width="750rpx"></image>
+                </navigator>
+                <image binderror="loadImageError" bindtap="swiperTap" class="slide-image" data-appid="{{item.appid}}" data-id="{{item.businessId}}" data-link-type="{{item.link_type}}" data-link-url="{{item.link_url}}" height="562.5rpx" src="{{item.picture}}?time={{loadImageTime}}" width="750rpx" wx:else></image>
+            </swiper-item>
+        </swiper>
+        <view class="dots">
+            <view class="dot{{index==swiperCurrent?' active':''}}" wx:for="{{banners}}" wx:key="key"></view>
+        </view>
+    </view>
+    <view class="notice" wx:if="{{noticeList}}">
+        <view class="notice-item-left">公告：</view>
+        <swiper autoplay="true" circular="true" class="notice-swiper" interval="3000" vertical="true" wx:if="{{noticeList}}">
+            <navigator openType="navigate" url="/zxsite_shop/notice/show?id={{item.id}}" wx:for="{{noticeList}}" wx:key="id">
+                <swiper-item>
+                    <view class="notice-item-right">{{item.title}}</view>
+                </swiper-item>
+            </navigator>
+        </swiper>
+    </view>
+    <view class="video-pane" wx:if="{{videoUrl&&hideLoading}}">
+        <video loop="true" showCenterPlayBtn="false" src="{{videoUrl}}"></video>
+    </view>
+    <view class="navigation" style="margin-top: 20rpx;" wx:if="{{navigationList}}">
+        <block wx:for="{{navigationList}}" wx:for-index="idx" wx:key="id">
+            <navigator appId="{{item.appid}}" class="navigation-box list-style-{{lineNumber}}" openType="navigate" path="{{item.url}}" target="miniProgram" wx:if="{{item.type==5}}">
+                <view class="img-box">
+                    <image binderror="loadImageError" src="{{item.icon}}?time={{loadImageTime}}"></image>
+                </view>
+                <view class="navigation-title">{{item.name}}</view>
+            </navigator>
+            <view bindtap="toNavigationTap" class="navigation-box list-style-{{lineNumber}}" data-id="{{item.id}}" data-type="{{item.type}}" data-url="{{item.url}}" wx:else>
+                <view class="img-box">
+                    <image binderror="loadImageError" src="{{item.icon}}?time={{loadImageTime}}"></image>
+                </view>
+                <view class="navigation-title">{{item.name}}</view>
+            </view>
+        </block>
+    </view>
+    <view class="coupons" wx:if="{{couponList}}">
+        <scroll-view class="coupons-scroll" scrollX="true">
+            <view class="coupons-item" style="background-image: url({{item.background}});" wx:for="{{couponList}}" wx:for-index="idx" wx:key="id">
+                <form bindsubmit="fecthCoupon" data-id="{{item.id}}" data-index="{{idx}}" reportSubmit="true">
+                    <view style="display: flex;justify-content: space-between;position:relative;">
+                        <view style="padding-bottom: 20rpx;">
+                            <view style="display: flex;padding-bottom: 22rpx; justify-content:center;">
+                                <view style="font-size: 60rpx;display: flex;">
+                                    <block wx:if="{{item.numLength==1||item.numLength==2}}">
+                                        <text style="align-self: center;padding-right: 10rpx; " wx:if="{{item.back_type==1}}">{{item.deduct}}</text>
+                                    </block>
+                                    <block wx:if="{{item.numLength==3}}">
+                                        <text style="align-self: center;padding-left:15rpx;padding-right:3rpx;" wx:if="{{item.back_type==1}}">{{item.deduct}}</text>
+                                    </block>
+                                    <block wx:if="{{item.numLength==4}}">
+                                        <text style="align-self: center;padding-left:15rpx;padding-right:0rpx;" wx:if="{{item.back_type==1}}">{{item.deduct}}</text>
+                                    </block>
+                                    <text style="align-self: center;padding-left:15rpx;padding-right: 6rpx;" wx:if="{{item.back_type==2}}">{{item.discount}}</text>
+                                </view>
+                                <view>
+                                    <view style="font-size: 18rpx;">满{{item.enough}}元使用</view>
+                                    <view style="font-size: 30rpx;font-weight:bold;" wx:if="{{item.back_type==1}}">元满减券</view>
+                                    <view style="font-size: 30rpx;font-weight:bold;" wx:if="{{item.back_type==2}}">折扣券</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view style="display: flex;position:absolute;width:100%;height:100%;">
+                            <button disabled="true" size="mini" style="width:100%;height:100%;" wx:if="{{item.disabled}}">领取</button>
+                            <button formType="submit" size="mini" style="width:100%;height:100%;" wx:else>领取</button>
+                        </view>
+                    </view>
+                </form>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="seckill" wx:if="{{seckillShowList.length>0}}">
+        <view class="seckill-title">整 点 秒 杀</view>
+        <view class="seckill-sub-title">BUY NOW</view>
+        <view class="seckill-goods" wx:for="{{seckillShowList}}" wx:key="key">
+            <view bindtap="toSeckillDetailsTap" class="seckill-goods-cover" data-id="{{item.id}}" data-seckill-date="{{item.seckillDate}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}">
+                <image binderror="loadImageError" lazyLoad="true" mode="aspectFill" src="{{item.cover}}?time={{loadImageTime}}"></image>
+                <view class="seckill-goods-countdown" wx:if="{{item.seckill_status==1}}">
+                    <view>{{item.countdown}}</view>
+                </view>
+            </view>
+            <view class="seckill-goods-content">
+                <view bindtap="toSeckillDetailsTap" class="seckill-goods-title" data-id="{{item.id}}" data-seckill-date="{{item.seckillDate}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}">{{item.goods_title}}</view>
+                <view wx:if="{{item.seckill_status==1}}">
+                    <view class="seckill-goods-progress-container">
+                        <view class="seckill-goods-progress" style="width: {{item.surplus*100/item.seckill_stores}}%;"></view>
+                    </view>
+                    <view class="seckill-goods-stores-container">
+                        <view>已抢购 {{item.seckill_stores-item.surplus}} 件</view>
+                        <view>仅剩<text> {{item.surplus}} </text>件</view>
+                    </view>
+                </view>
+                <view class="seckill-goods-price-container">
+                    <view class="play-time" wx:if="{{item.seckill_status==2}}">
+                        <view class="begin-time">
+                            <text class="timePlay">{{item.time}}:00 场</text>
+                        </view>
+                        <view class="begin-time">距开始:<text style="color:#e52c13; text-decoration:none;">{{item.countdown}}</text>
+                        </view>
+                    </view>
+                    <view class="skill-bottom">
+                        <view>￥<text style="font-size:38rpx;">{{item.seckill_price}}</text>
+                            <text class="goods-price">￥{{item.price}}</text>
+                        </view>
+                        <view bindtap="toSeckillDetailsTap" class="button begin-style" data-id="{{item.id}}" data-seckill-date="{{item.seckillDate}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}" wx:if="{{item.seckill_status==1}}">
+                            <view>立即抢购</view>
+                        </view>
+                        <form bindsubmit="setSeckillRemind" data-index="{{index}}" data-seckill-date="{{item.seckillDate}}" data-seckill-id="{{item.seckill_id}}" data-time="{{item.time}}" reportSubmit="true" wx:if="{{item.seckill_status==2&&item.remind==0}}">
+                            <button class="button remind-set" formType="submit">
+                                <view>设置提醒</view>
+                            </button>
+                        </form>
+                        <form bindsubmit="cancleSeckillRemind" data-index="{{index}}" data-seckill-remind-id="{{item.remind_id}}" data-time="{{item.time}}" reportSubmit="true" wx:if="{{item.seckill_status==2&&item.remind==1}}">
+                            <button class="button remind-cancle" formType="submit">取消提醒</button>
+                        </form>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="toSeckillList" class="show-more">
+            <text class="more">查 看 更 多</text>
+        </view>
+    </view>
+    <view class="groups" wx:if="{{groupsList}}">
+        <view class="groups-title">拼  团  购</view>
+        <view class="groups-sub-title">GROUP PURCHASE</view>
+        <view bindtap="toGroupsDetailsTap" class="groups-goods" data-id="{{item.id}}" wx:for="{{groupsList}}" wx:key="key">
+            <view class="groups-goods-cover">
+                <image binderror="loadImageError" lazyLoad="true" mode="aspectFill" src="{{item.cover}}?time={{loadImageTime}}"></image>
+            </view>
+            <view class="groups-goods-content">
+                <view class="groups-goods-title">{{item.goods_title}}</view>
+                <view class="groups-goods-price-container">
+                    <view class="groups-goods-price">
+                        <view class="groups-person-number" wx:if="{{item.is_ladder!=1}}">{{item.person_number}}人拼团价</view>
+                        <view class="groups-goods-price-left" wx:if="{{item.is_ladder!=1}}">￥<text style="font-size:38rpx;">{{item.price}}</text>
+                        </view>
+                        <view class="groups-goods-price-left" wx:else>￥<text style="font-size:38rpx;">{{item.price_max}}</text>
+                            <image class="groups-ladder" mode="scaleToFill" src="http://qn.zxsite.cn/zxsite_shop/groups-ladder.png"></image>￥<text style="font-size:38rpx;">{{item.price_min}}</text>
+                        </view>
+                        <view style="margin-top:16rpx">
+                            <text>{{item.process_person_number}}</text>人已参团</view>
+                    </view>
+                    <view class="groups-goods-price-bottom">
+                        <view>
+                            <text>单独购买￥{{item.goods_price}}</text>
+                        </view>
+                        <view class="button begin-style">立即参与</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="toGroupsList" class="show-more">
+            <text class="more">查 看 更 多</text>
+        </view>
+    </view>
+    <view class="auction" wx:if="{{auctionShowList}}">
+        <view class="auction-title">{{textAuction}}</view>
+        <view class="auction-sub-title">AUCTION NOW</view>
+        <view class="auction-goods" wx:for="{{auctionShowList}}" wx:key="key">
+            <view bindtap="toAuctionDetailsTap" class="auction-goods-cover" data-id="{{item.id}}">
+                <image binderror="loadImageError" lazyLoad="true" mode="aspectFill" src="{{item.cover}}?time={{loadImageTime}}"></image>
+            </view>
+            <view class="auction-goods-content">
+                <view bindtap="toAuctionDetailsTap" class="auction-goods-title" data-id="{{item.id}}">{{item.goods_title}}</view>
+                <view class="auction-goods-price-container">
+                    <view style="display:flex;">
+                        <view bindtap="toAuctionDetailsTap" class="auction_begin_time" data-id="{{item.id}}" wx:if="{{item.start_time>item.now_time}}">{{item.start_time_format}}</view>
+                        <view></view>
+                    </view>
+                    <view class="auction-goods-price-bottom">
+                        <view>{{item.end_time>=item.now_time?textCurrentPrice:textCompletePrice}}<text class="auction-goods-price-left">￥<text style="font-size:38rpx;">{{item.current_price}}</text>
+                            </text>
+                        </view>
+                        <view bindtap="toAuctionDetailsTap" class="button begin-style" data-id="{{item.id}}" wx:if="{{item.start_time<=item.now_time&&item.end_time>=item.now_time}}">立即参与</view>
+                        <view bindtap="toAuctionDetailsTap" class="button end-style" data-id="{{item.id}}" wx:if="{{item.end_time<item.now_time}}">下次再来</view>
+                        <form bindsubmit="setAuctionRemind" data-auction-id="{{item.id}}" data-index="{{index}}" reportSubmit="true" wx:if="{{item.start_time>item.now_time&&item.remind!=1}}">
+                            <button class="button remind-set" formType="submit">
+                                <view>设置提醒</view>
+                            </button>
+                        </form>
+                        <form bindsubmit="cancleAuctionRemind" data-auction-remind-id="{{item.remind_id}}" data-index="{{index}}" reportSubmit="true" wx:if="{{item.start_time>item.now_time&&item.remind==1}}">
+                            <button class="button remind-cancle" formType="submit">取消提醒</button>
+                        </form>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="toAuctionList" class="show-more">
+            <text class="more">查 看 更 多</text>
+        </view>
+    </view>
+    <view class="recommend" wx:if="{{goodsRecommendList}}">
+        <view class="recommend-title">推荐商品</view>
+        <view class="recommend-sub-title">RECOMMEND</view>
+        <view class="goods-container">
+            <view bindtap="onGoodsDetailTap" class="goods-box list-style-2" data-id="{{item.id}}" wx:for="{{goodsRecommendList}}" wx:key="{{index}}">
+                <view class="img-box">
+                    <image binderror="loadImageError" class="image" lazyLoad="true" mode="aspectFill" src="{{item.cover}}?time={{loadImageTime}}"></image>
+                    <view class="commission-charge" wx:if="{{agent&&item.commission_charge>0}}">{{textCharge}} {{item.commission_charge}}{{textUnion}}</view>
+                </view>
+                <view class="goods-title">{{item.title}}</view>
+                <view class="goods-bottom-wrapper">
+                    <view class="goods-price">¥ <text style="font-size:30rpx">{{item.price}}</text>
+                    </view>
+                    <view class="goods-price" style="color:#aaa;">{{item.sales}}人已{{item.type==3?'预约':'购买'}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="allGoods">
+        <view class="recommend-title">全部商品</view>
+        <view class="recommend-sub-title">ALL PRODUCTS</view>
+        <view class="goods-container">
+            <view bindtap="onGoodsDetailTap" class="goods-box list-style-2" data-id="{{item.id}}" wx:for="{{goodsList}}" wx:key="{{index}}">
+                <view class="img-box">
+                    <image binderror="loadImageError" class="image" lazyLoad="true" mode="aspectFill" src="{{item.cover}}?time={{loadImageTime}}"></image>
+                    <view class="commission-charge" wx:if="{{agent&&item.commission_charge>0}}">{{textCharge}} {{item.commission_charge}}{{textUnion}}</view>
+                </view>
+                <view class="goods-title">{{item.title}}</view>
+                <view class="goods-bottom-wrapper">
+                    <view class="goods-price">¥ <text style="font-size:30rpx;">{{item.price}}</text>
+                    </view>
+                    <view class="goods-price" style="color:#aaa;">{{item.sales}}人已{{item.type==3?'预约':'购买'}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="no-more-goods" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+</view>
+<view class="service" style=" background:url({{shopServiceIcon}}) no-repeat center;  background-size: contain" wx:if="{{shopService==1}}">
+    <view bindtap="toServerUrl" data-link="{{shopServerUrl}}" style="height:100%;" wx:if="{{shopServerUrl}}"></view>
+    <view bindtap="toService" wx:else>
+        <button openType="contact" sessionFrom="{\"nickName\":\"{{userInfo.memberInfo.nickname}}\",\"avatarUrl\":\"{{userInfo.memberInfo.avatar}}\"}" size="30" type="default"></button>
+    </view>
+</view>
+<view bindtap="toTelphone" class="telphone" style="background: url({{shopTelphoneIcon}}) no-repeat center; background-size: contain" wx:if="{{shopServiceTelphone==1}}"></view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

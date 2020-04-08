@@ -1,0 +1,18 @@
+<template name="list-navigation">
+    <van-cell-group style="width:750rpx">
+        <block wx:if="{{item.url!='/packages/manage/index/index'||userId}}" wx:for="{{data.list}}" wx:key="key">
+            <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" target="miniProgram" wx:if="{{item.type==5}}">
+                <van-cell isLink customStyle="background-color: {{style.backgroundColor}}" icon="{{item.icon}}" value="{{item.prompt}}">
+                    <view slot="title">
+                        <view class="van-cell-text">{{item.name}}</view>
+                    </view>
+                </van-cell>
+            </navigator>
+            <van-cell isLink bind:click="toNavigationTap" customStyle="background-color: {{style.backgroundColor}}" data-type="{{item.type}}" data-url="{{item.url}}" icon="{{item.icon}}" value="{{item.prompt}}" wx:else>
+                <view slot="title">
+                    <view class="van-cell-text">{{item.name}}</view>
+                </view>
+            </van-cell>
+        </block>
+    </van-cell-group>
+</template>

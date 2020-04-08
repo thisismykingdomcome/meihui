@@ -1,0 +1,5 @@
+<template name="line">
+    <view class="line-wrapper" style="background-color: {{style.backgroundColor}}">
+        <view class="{{style.type}}" style="width: {{750-style.padding*4}}rpx;border-top-width:1px;border-top-color:{{style.color}}"></view>
+    </view>
+</template>

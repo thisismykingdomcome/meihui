@@ -1,0 +1,11 @@
+.header .van-cell__title {
+    flex: 4;
+}
+
+.header .van-cell__value {
+    flex: 1;
+}
+
+.footer {
+    text-align: right;
+}

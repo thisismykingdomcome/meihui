@@ -1,0 +1,12 @@
+<template name="notice">
+    <view class="notice" style="background-color: {{style.backgroundColor}}" wx:if="{{data.list}}">
+        <view class="notice-item-left" style="color: {{style.textColor}}">公告：</view>
+        <swiper autoplay="true" circular="true" class="notice-swiper" interval="3000" vertical="true">
+            <navigator openType="navigate" url="/zxsite_shop/notice/show?id={{item.id}}" wx:for="{{data.list}}" wx:key="id">
+                <swiper-item>
+                    <view class="notice-item-right" style="color: {{style.textColor}}">{{item.title}}</view>
+                </swiper-item>
+            </navigator>
+        </swiper>
+    </view>
+</template>

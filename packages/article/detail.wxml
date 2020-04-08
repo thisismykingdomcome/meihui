@@ -1,0 +1,23 @@
+<import src="./../../templates/rich-text.wxml"></import>
+<import src="./../../templates/goods.wxml"></import>
+<import src="./../../templates/video.wxml"></import>
+<import src="./../../templates/image.wxml"></import>
+<import src="./../../templates/form.wxml"></import>
+<import src="./../../templates/line.wxml"></import>
+<import src="./../../templates/white.wxml"></import>
+<view class="title">{{article.title}}</view>
+<view class="meta">{{article.date}}  {{article.author}}</view>
+<block wx:for="{{article.content}}" wx:key="key">
+    <template is="rich-text" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='rich-text'}}"></template>
+    <template is="goods" data="{{loadImageTime:loadImageTime,style:item.style,data:item.data}}" wx:if="{{item.name=='goods'}}"></template>
+    <template is="video" data="{{hideLoading:hideLoading,style:item.style,data:item.data}}" wx:if="{{item.name=='video'}}"></template>
+    <template is="image" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='image'}}"></template>
+    <template is="form" data="{{style:item.style,data:item.data,list:diyFormField}}" wx:if="{{item.name=='form'}}"></template>
+    <template is="line" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='line'}}"></template>
+    <template is="white" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='white'}}"></template>
+</block>
+<view class="bottom" wx:if="{{article.view}}">
+    <view>阅读 {{article.view}}</view>
+    <view bindtap="onPraise" style="color: #607fa6;display: flex;">
+        <view class="icon-praise {{article.is_praised?'icon-praised':''}}"></view> {{article.praise>0?article.praise:'赞'}}</view>
+</view>

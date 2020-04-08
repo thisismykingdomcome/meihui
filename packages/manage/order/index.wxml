@@ -1,0 +1,46 @@
+<container-block customClass="search-wrapper">
+    <van-search showAction bind:cancel="onSearchCancel" bind:search="onSearch" placeholder="请输入订单编号" value="{{searchValue}}"></van-search>
+</container-block>
+<van-tabs active="{{statusActive}}" bind:change="onTabChange">
+    <van-tab title="全部"></van-tab>
+    <van-tab title="待付款"></van-tab>
+    <van-tab title="待发货"></van-tab>
+    <van-tab title="待收货"></van-tab>
+    <van-tab title="待评价"></van-tab>
+    <van-tab title="退/换货"></van-tab>
+</van-tabs>
+<van-panel useFooterSlot footerClass="footer" headerClass="header" status="{{item.status_text}}" title="下单时间：{{item.create_time}}" wx:for="{{orderList}}" wx:for-index="idx" wx:key="key">
+    <van-cell customClass="header" title="订单编号：{{item.sn}}" value="{{item.send_type==1?'快递':'自提'}}单" wx:if="{{item.module!='book'}}"></van-cell>
+    <van-cell customClass="header" title="订单编号：{{item.sn}}" value="预约单" wx:if="{{item.module=='book'}}"></van-cell>
+    <view bindtap="onDetail" class="content" data-id="{{item.id}}">
+        <image mode="scaleToFill" src="{{goods.cover}}" wx:for="{{item.goods_list}}" wx:for-item="goods" wx:key="key"></image>
+    </view>
+    <view slot="footer">
+        <view class="price">合计：¥{{item.total_amount}}</view>
+        <van-button bind:click="onPrice" customClass="margin-left-5" data-id="{{item.id}}" data-index="{{idx}}" size="small" type="primary" wx:if="{{item.status==1}}">改价</van-button>
+        <van-button bind:click="onPay" customClass="margin-left-5" data-id="{{item.id}}" data-index="{{idx}}" size="small" type="warning" wx:if="{{item.status==1}}">支付</van-button>
+        <van-button bind:click="onShipping" customClass="margin-left-5" data-id="{{item.id}}" data-index="{{idx}}" size="small" type="primary" wx:if="{{item.status==2&&item.send_type==1&&item.module!='book'}}">发货</van-button>
+        <van-button bind:click="onRefundRecord" customClass="margin-left-5" data-id="{{item.id}}" data-index="{{idx}}" size="small" type="default" wx:if="{{item.is_refund==1}}">退款记录</van-button>
+        <van-button bind:click="onRefundItem" customClass="margin-left-5" data-id="{{item.id}}" data-index="{{idx}}" size="small" type="default" wx:if="{{item.order_refund_status==1}}">维权处理</van-button>
+        <van-button bind:click="onClose" customClass="margin-left-5" data-id="{{item.id}}" data-index="{{idx}}" size="small" type="danger" wx:if="{{(item.status==1||item.status==2)&&!item.groups_order_id}}">关闭</van-button>
+        <van-button bind:click="onDelete" customClass="margin-left-5" data-id="{{item.id}}" data-index="{{idx}}" size="small" type="danger" wx:if="{{item.status==0&&!item.groups_order_id}}">删除</van-button>
+    </view>
+</van-panel>
+<view class="no-more" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+<van-dialog showCancelButton useSlot bind:cancel="onPriceDialogCancel" bind:confirm="onPriceDialogConfirm" show="{{priceDialogShow}}" title="改价">
+    <van-field bind:change="onAmountChange" label="价格" type="digit" value="{{order.amount}}"></van-field>
+</van-dialog>
+<van-dialog showCancelButton useSlot bind:cancel="onShippingDialogCancel" bind:confirm="onShippingDialogConfirm" show="{{shippingDialogShow}}" title="发货">
+    <van-cell isLink title="物流公司">
+        <picker bindchange="onExpressPickerChange" range="{{expressList}}" rangeKey="name" value="{{expressIndex}}">
+            <view>
+        {{expressText}}
+      </view>
+        </picker>
+    </van-cell>
+    <van-field useButtonSlot bind:change="onFieldChange" id="shipping_sn" label="物流订单" placeholder="请输入发货订单号" value="{{order.shipping_sn}}">
+        <van-button bind:click="onKdniaoShipping" size="small" slot="button" type="primary" wx:if="{{order.shipping_kdniao}}">快递鸟发货</van-button>
+        <van-button bind:click="onScanShipping" size="small" slot="button" type="primary" wx:else>扫码发货</van-button>
+    </van-field>
+    <van-field autosize bind:change="onFieldChange" id="shipping_remark" label="发货备注" placeholder="请输入发货备注信息(选填)" type="textarea" value="{{order.shipping_remark}}"></van-field>
+</van-dialog>

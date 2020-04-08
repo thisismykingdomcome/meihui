@@ -1,0 +1,30 @@
+<view class="container" style="background-color: {{backgroundColor}}">
+    <view class="status-box">
+        <view bindtap="statusTap" class="status-label {{index==currentType?'active':''}}" data-index="{{index}}" style="border-bottom-color: {{index==currentType?themeColor:'#fff'}};color: {{index==currentType?themeColor:'#353535'}};width: {{statusTypeItemWitdh}}" wx:for="{{statusType}}" wx:key="{{index}}">
+            {{item.name}}({{item.count}})
+            <view class="{{tabClass[index]}}"></view>
+        </view>
+    </view>
+    <view class="no-order" hidden="{{memberList?true:false}}">
+        <image class="no-order-img" src="http://qn.zxsite.cn/zxsite_shop/no-order.png"></image>
+        <view class="text">暂无记录</view>
+    </view>
+</view>
+<container-block customClass="member-wrapper van-hairline--bottom" wx:for="{{memberList}}" wx:for-index="idx">
+    <view class="member van-card">
+        <view class="van-card__thumb">
+            <image class="van-card__img thumb-class" mode="scaleToFill" src="{{item.avatar}}"></image>
+        </view>
+        <view class="van-card__content">
+            <view class="van-card__left">
+                <view class="van-card__title van-multi-ellipsis--l2">{{item.nickname}}<block wx:if="{{item.agent_nickname}}"> [{{item.agent_nickname}}]</block>
+                </view>
+                <view class="van-card__desc van-ellipsis">{{item.create_time}}</view>
+            </view>
+            <view class="van-card__right">
+                <view class="van-card__title van-card__level">+{{item.amount}}</view>
+            </view>
+        </view>
+    </view>
+</container-block>
+<view class="no-more-goods" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>

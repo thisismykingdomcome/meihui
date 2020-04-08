@@ -1,0 +1,42 @@
+<view class="loading" hidden="{{hideLoading}}"></view>
+<import src="../../templates/title.wxml"></import>
+<import src="../../templates/search.wxml"></import>
+<import src="../../templates/carousel.wxml"></import>
+<import src="../../templates/notice.wxml"></import>
+<import src="../../templates/navigation.wxml"></import>
+<import src="../../templates/coupon.wxml"></import>
+<import src="../../templates/seckill.wxml"></import>
+<import src="../../templates/groups.wxml"></import>
+<import src="../../templates/auction.wxml"></import>
+<import src="../../templates/goods.wxml"></import>
+<import src="../../templates/video.wxml"></import>
+<import src="../../templates/line.wxml"></import>
+<import src="../../templates/white.wxml"></import>
+<import src="../../templates/cube.wxml"></import>
+<import src="../../templates/rich-text.wxml"></import>
+<import src="../../templates/article.wxml"></import>
+<import src="../../templates/form.wxml"></import>
+<import src="../../wxParse/wxParse.wxml"></import>
+<view class="container" style="background-color: {{backgroundColor}};background-image: url({{backgroundImage}});background-repeat: no-repeat;background-size: 100% auto;">
+    <block wx:for="{{diyPage.design}}" wx:key="key">
+        <template is="title" data="{{data:item.data,style:item.style}}" wx:if="{{item.name=='title'}}"></template>
+        <template is="search" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='search'}}"></template>
+        <template is="carousel" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='carousel'}}"></template>
+        <template is="notice" data="{{data:item.data,style:item.style}}" wx:if="{{item.name=='notice'}}"></template>
+        <template is="navigation" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='navigation'}}"></template>
+        <template is="coupon" data="{{data:item.data,style:item.style}}" wx:if="{{item.name=='coupon'}}"></template>
+        <template is="seckill" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='seckill'}}"></template>
+        <template is="groups" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='groups'}}"></template>
+        <template is="auction" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style,textCurrentPrice:textCurrentPrice,textCompletePrice:textCompletePrice}}" wx:if="{{item.name=='auction'}}"></template>
+        <template is="goods" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style,agent:agent,textCharge:textCharge,textUnion:textUnion}}" wx:if="{{item.name=='goods'}}"></template>
+        <template is="video" data="{{style:item.style,data:item.data,hideLoading:hideLoading}}" wx:if="{{item.name=='video'}}"></template>
+        <template is="line" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='line'}}"></template>
+        <template is="white" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='white'}}"></template>
+        <template is="cube" data="{{loadImageTime:loadImageTime,style:item.style,data:item.data}}" wx:if="{{item.name=='cube'}}"></template>
+        <template is="rich-text" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='rich-text'}}"></template>
+        <template is="article" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='article'}}"></template>
+        <template is="form" data="{{style:item.style,data:item.data,list:diyFormField}}" wx:if="{{item.name=='form'}}"></template>
+    </block>
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

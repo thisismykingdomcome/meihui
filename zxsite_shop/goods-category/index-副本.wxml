@@ -1,0 +1,54 @@
+<view class="has-child" wx:if="{{categoryLevel==2}}">
+    <scroll-view scrollY class="category-left">
+        <view bindtap="getChildProperties" class="parent-item {{activeCategoryId==index?'active-item':''}}" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{categories}}" wx:key="{{index}}">
+            <text class="name" style="color: {{activeCategoryId==index?themeColor:''}}">{{item.name}}</text>
+        </view>
+    </scroll-view>
+    <scroll-view scrollY class="category-right">
+        <view class="category-container">
+            <view bindtap="toGoodsListTap" class="category-item" data-id="{{item.id}}" wx:for="{{childCategories}}" wx:key="{{index}}">
+                <view>
+                    <image class="image" src="{{item.icon}}"></image>
+                </view>
+                <text class="name">{{item.name}}</text>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<view wx:else>
+    <view class="has-child" wx:if="{{categoryStyle==2}}">
+        <scroll-view scrollY class="category-left">
+            <view bindtap="getGoodsList" class="parent-item {{activeCategoryId==item.id?'active-item':''}}" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{childCategories}}" wx:key="{{index}}">
+                <text class="name" style="color: {{activeCategoryId==item.id?themeColor:''}}">{{item.name}}</text>
+            </view>
+        </scroll-view>
+        <scroll-view scrollY class="category-right">
+            <view class="category-container">
+                <view bindtap="toDetailsTap" class="goods-item" data-id="{{item.id}}" wx:for="{{goods}}" wx:key="{{index}}">
+                    <view class="goods-item-cover">
+                        <image class="image" lazyLoad="true" mode="aspectFill" src="{{item.cover}}"></image>
+                    </view>
+                    <view class="goods-item-content">
+                        <view class="goods-item-title">
+	          		{{item.title}}
+	          	</view>
+                        <view class="goods-item-price">
+	          		¥ <text style="font-size:30rpx">{{item.price}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="no-more-goods" hidden="{{loadingMoreHidden?true:false}}">没有更多啦</view>
+        </scroll-view>
+    </view>
+    <view class="category-container}}" wx:else>
+        <view bindtap="toGoodsListTap" class="category-item" data-id="{{item.id}}" wx:for="{{childCategories}}" wx:key="{{index}}">
+            <view>
+                <image class="image" src="{{item.icon}}"></image>
+            </view>
+            <text class="name">{{item.name}}</text>
+        </view>
+    </view>
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

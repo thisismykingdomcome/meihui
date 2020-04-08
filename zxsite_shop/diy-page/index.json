@@ -1,0 +1,6 @@
+{
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "collect-tip": "./../../components/collect-tip/index"
+    }
+}

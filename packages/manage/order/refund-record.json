@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "退款记录",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "van-button": "./../../../../components/button/index",
+        "van-panel": "./../../../../components/panel/index",
+        "van-cell": "./../../../../components/cell/index"
+    }
+}

@@ -1,0 +1,92 @@
+<template name="cube">
+    <view class="cube-wrapper" style="width: 750rpx;" wx:if="{{style.template==1}}">
+        <block wx:if="{{idx<2}}" wx:for="{{data}}" wx:for-index="idx" wx:key="key">
+            <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" style="float: left;width: {{375-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" target="miniProgram" wx:if="{{item.type==5}}">
+                <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+            </navigator>
+            <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" style="float: left;width: {{375-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" wx:else>
+                <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+            </view>
+        </block>
+    </view>
+    <view class="cube-wrapper" style="width: 750rpx;" wx:elif="{{style.template==2}}">
+        <block wx:if="{{idx<3}}" wx:for="{{data}}" wx:for-index="idx" wx:key="key">
+            <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" style="float: left;width: {{250-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" target="miniProgram" wx:if="{{item.type==5}}">
+                <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+            </navigator>
+            <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" style="float: left;width: {{250-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" wx:else>
+                <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+            </view>
+        </block>
+    </view>
+    <view class="cube-wrapper" style="width: 750rpx;" wx:elif="{{style.template==3}}">
+        <block wx:if="{{idx<4}}" wx:for="{{data}}" wx:for-index="idx" wx:key="key">
+            <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" style="float: left;width: {{187.5-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" target="miniProgram" wx:if="{{item.type==5}}">
+                <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+            </navigator>
+            <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" style="float: left;width: {{187.5-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" wx:else>
+                <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+            </view>
+        </block>
+    </view>
+    <view class="cube-wrapper" style="width: 750rpx;" wx:elif="{{style.template==4}}">
+        <block wx:if="{{idx<4}}" wx:for="{{data}}" wx:for-index="idx" wx:key="key">
+            <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" style="float: left;width: {{375-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" target="miniProgram" wx:if="{{item.type==5}}">
+                <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+            </navigator>
+            <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" style="float: left;width: {{375-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" wx:else>
+                <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+            </view>
+        </block>
+    </view>
+    <view class="cube-wrapper" style="width: 750rpx;" wx:elif="{{style.template==5}}">
+        <block wx:if="{{idx<3}}" wx:for="{{data}}" wx:for-index="idx" wx:key="key">
+            <block wx:if="{{idx==0}}">
+                <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" style="float: left;width: {{375-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" target="miniProgram" wx:if="{{item.type==5}}">
+                    <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+                </navigator>
+                <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" style="float: left;width: {{375-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" wx:else>
+                    <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+                </view>
+            </block>
+            <block wx:else>
+                <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" style="float: left;width: {{375-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" target="miniProgram" wx:if="{{item.type==5}}">
+                    <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+                </navigator>
+                <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" style="float: left;width: {{375-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" wx:else>
+                    <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+                </view>
+            </block>
+        </block>
+    </view>
+    <view class="cube-wrapper" style="width: 750rpx;" wx:elif="{{style.template==6}}">
+        <block wx:if="{{idx<3}}" wx:for="{{data}}" wx:for-index="idx" wx:key="key">
+            <block wx:if="{{idx==0}}">
+                <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" style="float: left;width: {{750-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" target="miniProgram" wx:if="{{item.type==5}}">
+                    <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+                </navigator>
+                <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" style="float: left;width: {{750-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" wx:else>
+                    <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+                </view>
+            </block>
+            <block wx:else>
+                <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" style="float: left;width: {{375-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" target="miniProgram" wx:if="{{item.type==5}}">
+                    <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+                </navigator>
+                <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" style="float: left;width: {{375-style.space*4}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" wx:else>
+                    <image binderror="loadImageError" lazyLoad="true" mode="widthFix" src="{{item.image}}?time={{loadImageTime}}"></image>
+                </view>
+            </block>
+        </block>
+    </view>
+    <view class="cube-wrapper" style="width: 750rpx;" wx:elif="{{style.template==7}}">
+        <block wx:if="{{idx<1}}" wx:for="{{data}}" wx:for-index="idx" wx:key="key">
+            <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" style="width: {{750-style.space*4}}rpx;height: {{style.height*2}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" target="miniProgram" wx:if="{{item.type==5}}">
+                <image binderror="loadImageError" lazyLoad="true" src="{{item.image}}?time={{loadImageTime}}" style="height: 100%"></image>
+            </navigator>
+            <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" style="width: {{750-style.space*4}}rpx;height: {{style.height*2}}rpx;margin: {{style.space*2}}rpx;line-height: 0;" wx:else>
+                <image binderror="loadImageError" lazyLoad="true" src="{{item.image}}?time={{loadImageTime}}" style="height: 100%"></image>
+            </view>
+        </block>
+    </view>
+</template>

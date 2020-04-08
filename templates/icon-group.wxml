@@ -1,0 +1,38 @@
+<template name="icon-group">
+    <van-row customClass="icon-group-wrapper" style="background-color: {{style.backgroundColor}};" wx:if="{{style.listStyle=='list-style-3'}}">
+        <van-col span="8" wx:for="{{data.list}}" wx:key="key">
+            <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" target="miniProgram" wx:if="{{item.type==5}}">
+                <van-icon info="{{item.info}}" name="{{item.icon}}"></van-icon>
+                <span>{{item.name}}</span>
+            </navigator>
+            <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" wx:else>
+                <van-icon info="{{item.info}}" name="{{item.icon}}"></van-icon>
+                <span>{{item.name}}</span>
+            </view>
+        </van-col>
+    </van-row>
+    <van-row customClass="icon-group-wrapper" style="background-color: {{style.backgroundColor}};" wx:elif="{{style.listStyle=='list-style-4'}}">
+        <van-col span="6" wx:for="{{data.list}}" wx:key="key">
+            <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" target="miniProgram" wx:if="{{item.type==5}}">
+                <van-icon info="{{item.info}}" name="{{item.icon}}"></van-icon>
+                <span>{{item.name}}</span>
+            </navigator>
+            <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" wx:else>
+                <van-icon info="{{item.info}}" name="{{item.icon}}"></van-icon>
+                <span>{{item.name}}</span>
+            </view>
+        </van-col>
+    </van-row>
+    <view class="icon-group-wrapper van-row van-row--flex van-row--justify-space-around" style="background-color: {{style.backgroundColor}};" wx:if="{{style.listStyle=='list-style-5'}}">
+        <view class="van-col" wx:for="{{data.list}}" wx:key="key">
+            <navigator appId="{{item.appid}}" openType="navigate" path="{{item.url}}" target="miniProgram" wx:if="{{item.type==5}}">
+                <van-icon info="{{item.info}}" name="{{item.icon}}"></van-icon>
+                <span>{{item.name}}</span>
+            </navigator>
+            <view bindtap="toNavigationTap" data-type="{{item.type}}" data-url="{{item.url}}" wx:else>
+                <van-icon info="{{item.info}}" name="{{item.icon}}"></van-icon>
+                <span>{{item.name}}</span>
+            </view>
+        </view>
+    </view>
+</template>

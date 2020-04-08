@@ -1,0 +1,92 @@
+<container-block customClass="form-wrapper">
+    <van-cell-group>
+        <van-field bind:change="onFieldChange" border="true" id="title" label="商品标题" placeholder="请输入商品标题" value="{{goods.title}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="sub_title" label="副标题" placeholder="请输入商品副标题，在商品详情页标题下面展示副标题，建议100字以内" value="{{goods.sub_title}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="sn" label="商品编号" placeholder="请输入商品编号" value="{{goods.sn}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="bar_code" label="商品条码" placeholder="请输入商品条码" value="{{goods.bar_code}}"></van-field>
+        <van-cell isLink title="商品分类">
+            <picker bindchange="onCategoryPickerChange" range="{{categoryMulti[0]}}" rangeKey="name" value="{{categoryMultiIndex[0]}}" wx:if="{{settings.category_level==1}}">
+                <view>
+          {{categoryText}}
+        </view>
+            </picker>
+            <picker bindchange="onCategoryMultiPickerChange" bindcolumnchange="onCategoryMultiPickerColumnChange" mode="multiSelector" range="{{categoryMulti}}" rangeKey="name" value="{{categoryMultiIndex}}" wx:elif="{{settings.category_level==2}}">
+                <view class="picker">
+          {{categoryText}}
+        </view>
+            </picker>
+        </van-cell>
+        <van-field bind:change="onFieldChange" border="true" id="price" label="商品价格" placeholder="请输入商品价格" type="digit" value="{{goods.price}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="market_price" label="商品原价" placeholder="请输入商品原价" type="digit" value="{{goods.market_price}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="cost_price" label="商品成本" placeholder="请输入商品成本" type="digit" value="{{goods.cost_price}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="weight" label="重量" placeholder="请输入重量" type="digit" value="{{goods.weight}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="stores" label="库存" placeholder="请输入库存" type="number" value="{{goods.stores}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="sales" label="已售" placeholder="请输入已售件数" type="number" value="{{goods.sales}}"></van-field>
+        <van-field bind:change="onFieldChange" border="true" id="integral_give" label="赠送积分" placeholder="请输入赠送积分数" type="number" value="{{goods.integral_give}}"></van-field>
+        <van-cell isLink title="运费模板">
+            <picker bindchange="onTemplatePickerChange" range="{{templateList}}" rangeKey="name" value="{{templateIndex}}">
+                <view>
+          {{templateText}}
+        </view>
+            </picker>
+        </van-cell>
+        <van-switch-cell bind:change="onSwitchChange" border="true" checked="{{goods.is_cash==1}}" id="is_cash" size="20px" title="货到付款"></van-switch-cell>
+        <van-cell isLink bind:click="onLabelClick" title="标签" value="{{labelText}}"></van-cell>
+        <van-field bind:change="onFieldChange" border="true" id="sort" label="排序" placeholder="数字越大，排名越靠前" type="number" value="{{goods.sort}}"></van-field>
+        <van-switch-cell bind:change="onSwitchChange" border="true" checked="{{goods.is_recommend==1}}" id="is_recommend" size="20px" title="是否推荐"></van-switch-cell>
+        <van-switch-cell bind:change="onSwitchChange" border="true" checked="{{goods.status==1}}" id="status" size="20px" title="是否上架"></van-switch-cell>
+        <van-cell border="{{false}}" customClass="no-bottom-title" title="封面图片"></van-cell>
+        <van-cell>
+            <view class="uploader-file" wx:if="{{goods.cover}}">
+                <image bindtap="previewImage" class="uploader-img" data-src="{{goods.cover_url}}" mode="aspectFill" src="{{goods.cover_url}}"></image>
+                <view bindtap="deleteImage" class="uploader-file-cancel" data-type="cover">
+              删除
+          </view>
+            </view>
+            <view class="uploader-box" wx:else>
+                <view bindtap="chooseImage" class="uploader-input" data-type="cover"></view>
+            </view>
+        </van-cell>
+        <van-cell border="{{false}}" customClass="no-bottom-title" title="商品图片"></van-cell>
+        <view class="multi-uploader-wrapper">
+            <view class="uploader-file" wx:for="{{goods.pictures_url}}" wx:key="key">
+                <image bindtap="previewImage" class="uploader-img" data-src="{{item}}" mode="aspectFill" src="{{item}}"></image>
+                <view bindtap="deleteImage" class="uploader-file-cancel" data-index="{{index}}" data-type="pictures">
+            删除
+        </view>
+            </view>
+            <view class="uploader-box">
+                <view bindtap="chooseImage" class="uploader-input" data-type="pictures"></view>
+            </view>
+        </view>
+        <van-cell border="{{false}}" customClass="no-bottom-title" title="分享图片"></van-cell>
+        <van-cell>
+            <view class="uploader-file" wx:if="{{goods.share_image}}">
+                <image bindtap="previewImage" class="uploader-img" data-src="{{goods.share_image_url}}" mode="aspectFill" src="{{goods.share_image_url}}"></image>
+                <view bindtap="deleteImage" class="uploader-file-cancel" data-type="share_image">
+              删除
+          </view>
+            </view>
+            <view class="uploader-box" wx:else>
+                <view bindtap="chooseImage" class="uploader-input" data-type="share_image"></view>
+            </view>
+        </van-cell>
+        <van-field bind:change="onFieldChange" border="true" id="video" label="视频地址" placeholder="请上传视频或输入视频地址（支持腾讯视频地址）" titleWidth="100px" value="{{goods.video}}"></van-field>
+    </van-cell-group>
+</container-block>
+<container-block customClass="form-bottom">
+    <van-row>
+        <van-col span="24">
+            <van-button bind:click="onSave" block="true" type="primary">保存</van-button>
+        </van-col>
+    </van-row>
+</container-block>
+<van-dialog showCancelButton useSlot bind:cancel="onLabelDialogCancel" bind:confirm="onLabelDialogConfirm" show="{{labelDialogShow}}" title="选择标签">
+    <van-checkbox-group bind:change="onLabelChange" value="{{labelValue}}">
+        <van-cell-group customClass="label-group">
+            <van-cell clickable bind:click="onLabelToggle" data-name="{{item.id}}" title="{{item.name}}" wx:for="{{labelList}}" wx:key="{{index}}">
+                <van-checkbox catch:tap="noop" checkedColor="#4b0" class="label-{{item.id}}" name="{{item.id}}"></van-checkbox>
+            </van-cell>
+        </van-cell-group>
+    </van-checkbox-group>
+</van-dialog>

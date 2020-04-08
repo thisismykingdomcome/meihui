@@ -1,0 +1,190 @@
+<view class="loading" hidden="{{hideLoading}}"></view>
+<block wx:if="{{diyPage.id}}">
+    <import src="../../templates/rich-text.wxml"></import>
+    <import src="../../templates/carousel.wxml"></import>
+    <import src="../../templates/icon-group.wxml"></import>
+    <import src="../../templates/list-navigation.wxml"></import>
+    <import src="../../templates/goods.wxml"></import>
+    <import src="../../templates/cube.wxml"></import>
+    <import src="../../templates/coupon.wxml"></import>
+    <import src="../../templates/notice.wxml"></import>
+    <import src="../../templates/video.wxml"></import>
+    <import src="../../templates/line.wxml"></import>
+    <import src="../../templates/white.wxml"></import>
+    <view class="container" style="background-color: {{backgroundColor}}">
+        <block wx:for="{{diyPage.design}}" wx:key="key">
+            <view class="userinfo-wrap" style="height: 330rpx; background-color: {{item.style.backgroundColor}}" wx:if="{{item.name=='userinfo'}}">
+                <view class="credit" wx:if="{{item.style.isRecharge==1}}">
+                    <view class="credit-title" style="color: {{item.style.color}}">余额</view>
+                    <view class="credit-value" style="color: {{item.style.highlightColor}}">{{member.credit2}}</view>
+                    <view bindtap="toRecharge" class="credit-button" style="color: {{item.style.color}}; border-color: {{item.style.color}};" wx:if="{{settings.member_recharge_show==1}}">充值</view>
+                </view>
+                <view class="userinfo" wx:if="{{canIUse}}">
+                    <open-data class="userinfo-avatar {{item.style.avatarStyle==1?'circle':'radius'}}" type="userAvatarUrl"></open-data>
+                    <open-data class="userinfo-nickname" lang="zh_CN" style="color: {{item.style.color}}" type="userNickName"></open-data>
+                    <view bindtap="userinfoLevelDesc" class="userinfo-level userinfo-level-desc" style="color: {{item.style.color}}" wx:if="{{member.level_name}}">{{member.level_name}}</view>
+                    <view class="userinfo-level" style="color: {{item.style.color}}" wx:else>无会员等级</view>
+                </view>
+                <view class="userinfo" wx:else>
+                    <text class="userinfo-nickname" style="color: {{item.style.color}}">微信版本过低，无法获取头像</text>
+                </view>
+                <view class="credit" wx:if="{{item.style.isCredit==1}}">
+                    <view class="credit-title" style="color: {{item.style.color}}">积分</view>
+                    <view class="credit-value" style="color: {{item.style.highlightColor}}">{{member.credit1}}</view>
+                    <view bindtap="toIntegralLog" class="credit-button" style="color: {{item.style.color}}; border-color: {{item.style.color}};">查看</view>
+                </view>
+            </view>
+            <template is="rich-text" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='rich-text'}}"></template>
+            <template is="carousel" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style}}" wx:if="{{item.name=='carousel'}}"></template>
+            <template is="icon-group" data="{{data:item.data,style:item.style,userId:member.user_id}}" wx:if="{{item.name=='icon-group'}}"></template>
+            <template is="list-navigation" data="{{data:item.data,style:item.style,userId:member.user_id}}" wx:if="{{item.name=='list-navigation'}}"></template>
+            <template is="goods" data="{{loadImageTime:loadImageTime,data:item.data,style:item.style,agent:agent,textCharge:textCharge,textUnion:textUnion}}" wx:if="{{item.name=='goods'}}"></template>
+            <template is="cube" data="{{loadImageTime:loadImageTime,style:item.style,data:item.data}}" wx:if="{{item.name=='cube'}}"></template>
+            <template is="coupon" data="{{data:item.data,style:item.style}}" wx:if="{{item.name=='coupon'}}"></template>
+            <template is="notice" data="{{data:item.data,style:item.style}}" wx:if="{{item.name=='notice'}}"></template>
+            <template is="video" data="{{style:item.style,data:item.data,hideLoading:hideLoading}}" wx:if="{{item.name=='video'}}"></template>
+            <template is="line" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='line'}}"></template>
+            <template is="white" data="{{style:item.style,data:item.data}}" wx:if="{{item.name=='white'}}"></template>
+        </block>
+        <navigator class="all-hover" style="width: 750rpx;" url="/zxsite_shop/technical-support/index" wx:if="{{settings.shop_support}}">
+            <view class="version">
+                <view>技术支持：{{settings.shop_support}}</view>
+                <image class="technical-href" src="http://qn.zxsite.cn/zxsite_shop/arrow_up.png" wx:if="{{settings.shop_support}}"></image>
+            </view>
+        </navigator>
+    </view>
+</block>
+<view class="container" style="background-color: {{backgroundColor}}" wx:else>
+    <view class="userinfo-wrap" style="background-color: {{themeColor}}">
+        <view class="credit">
+            <view class="credit-title">余额</view>
+            <view class="credit-value">{{member.credit2}}</view>
+            <view bindtap="toRecharge" class="credit-button" wx:if="{{settings.member_recharge_show==1}}">充值</view>
+        </view>
+        <view class="userinfo" wx:if="{{canIUse}}">
+            <open-data class="userinfo-avatar circle" type="userAvatarUrl"></open-data>
+            <open-data class="userinfo-nickname" lang="zh_CN" type="userNickName"></open-data>
+            <view bindtap="userinfoLevelDesc" class="userinfo-level userinfo-level-desc" style="color: {{item.style.color}}" wx:if="{{member.level_name}}">{{member.level_name}}</view>
+            <view class="userinfo-level" style="color: {{item.style.color}}" wx:else>无会员等级</view>
+        </view>
+        <view class="userinfo" wx:else>
+            <text class="userinfo-nickname">微信版本过低，无法获取头像</text>
+        </view>
+        <view class="credit">
+            <view class="credit-title">积分</view>
+            <view class="credit-value">{{member.credit1}}</view>
+            <view bindtap="toIntegralLog" class="credit-button">查看</view>
+        </view>
+    </view>
+    <view style="height:20rpx;background: #eee;width:100%;"></view>
+    <view class="wrap flex">
+        <view class="box-shadow first">
+            <view class="all-order">
+                <navigator class="all-hover top-nav" url="/zxsite_shop/order-list/index">
+                    <text class="">全部订单</text>
+                    <view class="more-order">查看更多订单</view>
+                    <view class="dir"></view>
+                </navigator>
+            </view>
+            <view class="flex" style="justify-content:space-around;">
+                <view class="five-item">
+                    <navigator class="all-hover" url="/zxsite_shop/order-list/index?currentType=1">
+                        <view class="{{tabClass[1]}}"></view>
+                        <view class="repay"></view>
+                        <view>
+                待付款
+              </view>
+                    </navigator>
+                </view>
+                <view class="five-item">
+                    <navigator class="all-hover" url="/zxsite_shop/order-list/index?currentType=2">
+                        <view class="{{tabClass[2]}}"></view>
+                        <view class="pending"></view>
+                        <view>
+                待发货
+              </view>
+                    </navigator>
+                </view>
+                <view class="five-item">
+                    <navigator class="all-hover" url="/zxsite_shop/order-list/index?currentType=3">
+                        <view class="{{tabClass[3]}}"></view>
+                        <view class="to-reveived"></view>
+                        <view>
+                待收货
+              </view>
+                    </navigator>
+                </view>
+                <view class="five-item">
+                    <navigator class="all-hover" url="/zxsite_shop/order-list/index?currentType=4">
+                        <view class="{{tabClass[4]}}"></view>
+                        <view class="to-evaluated"></view>
+                        <view>
+                待评价
+              </view>
+                    </navigator>
+                </view>
+                <view class="five-item">
+                    <navigator class="all-hover" url="/zxsite_shop/order-list/index?currentType=5">
+                        <view class="{{tabClass[5]}}"></view>
+                        <view class="to-refund"></view>
+                        <view>
+                退/换货
+              </view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+        <view class="box-shadow second" style="margin-bottom: {{tabBarExist?154:30}}rpx;">
+            <view class="my-item">
+                <navigator class="all-hover flex" url="/zxsite_shop/address-select/index">
+                    <view class="title">我的收货地址</view>
+                    <view class="dir"></view>
+                </navigator>
+            </view>
+            <view class="my-item">
+                <navigator class="all-hover flex" url="/zxsite_shop/my-coupon/index">
+                    <view class="title">我的优惠券</view>
+                    <view class="dir"></view>
+                </navigator>
+            </view>
+            <view class="my-item">
+                <navigator class="all-hover flex" url="/packages/book/order/index">
+                    <view class="title">我的预约</view>
+                    <view class="dir"></view>
+                </navigator>
+            </view>
+            <view class="my-item" wx:if="{{settings.is_wechat_review==0&&settings.commission_level>0}}">
+                <navigator class="all-hover flex" url="/packages/commission/index/index">
+                    <view class="title">{{settings.commission_text_center?settings.commission_text_center:'分销中心'}}</view>
+                    <view class="dir"></view>
+                </navigator>
+            </view>
+            <view class="my-item" wx:if="{{settings.member_auction_show==1}}">
+                <navigator class="all-hover flex" url="/zxsite_shop/my-auction/index">
+                    <view class="title">我的{{textAuction}}</view>
+                    <view class="dir"></view>
+                </navigator>
+            </view>
+            <view class="my-item">
+                <navigator class="all-hover flex" url="/zxsite_shop/about-us/index">
+                    <text class="title">关于我们</text>
+                    <view class="dir"></view>
+                </navigator>
+            </view>
+            <view class="my-item" wx:if="{{member.user_id}}">
+                <navigator class="all-hover flex" url="/packages/manage/index/index">
+                    <text class="title">商家管理</text>
+                    <view class="dir"></view>
+                </navigator>
+            </view>
+            <navigator class="all-hover" url="/zxsite_shop/technical-support/index" wx:if="{{settings.shop_support}}">
+                <view class="version">
+                    <view>技术支持：{{settings.shop_support}}</view>
+                    <image class="technical-href" src="http://qn.zxsite.cn/zxsite_shop/arrow_up.png" wx:if="{{settings.shop_support}}"></image>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>
+<import src="../../zxsite/pages/templates/footer.wxml"></import>
+<template is="footerWx" data="{{...tabBar}}"></template>

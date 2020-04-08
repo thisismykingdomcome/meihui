@@ -1,0 +1,30 @@
+page {
+    background-color: #ffffff;
+}
+
+.container {
+    width: 750rpx;
+    font-size: 28rpx;
+    position: relative;
+}
+
+.save-pic {
+    position: absolute;
+    bottom: -40rpx;
+    border-radius: 60rpx;
+    overflow: hidden;
+    width: 300rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    margin-left: -150rpx;
+    left: 50%;
+    text-align: center;
+    color: #fff;
+}
+
+.tip {
+    color: #cccccc;
+    margin-top: 70rpx;
+    font-size: 28rpx;
+    text-align: center;
+}
